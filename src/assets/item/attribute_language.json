@@ -1,0 +1,25 @@
+{
+  "attirbute_list": [
+    { "attribute_en": "PHYSICAL POWER", "attribute_kr": "물리 공격력" },
+    { "attribute_en": "PHYSICAL PENETRATION", "attribute_kr": "물리 관통력" },
+    { "attribute_en": "NULLIFIED PHYSICAL DEFENSE", "attribute_kr": "물리 방어력 무효화" },
+    { "attribute_en": "MAGICAL POWER", "attribute_kr": "마법 공격력" },
+    { "attribute_en": "NULLIFIED MAGICAL DEFENSE", "attribute_kr": "마법 관통력" },
+    { "attribute_en": "MAGICAL ", "attribute_kr": "마법 방어력 무효화" },
+    { "attribute_en": "CRITICAL RATE", "attribute_kr": "치명타 확률" },
+    { "attribute_en": "ATTACK SPEED", "attribute_kr": "공격 속도" },
+    { "attribute_en": "LIFE STEAL", "attribute_kr": "생명력 흡수" },
+    { "attribute_en": "PHYSICAL VAMP", "attribute_kr": "물리 피해 흡혈" },
+    { "attribute_en": "MAGICAL VAMP", "attribute_kr": "마법 피해 흡혈" },
+    { "attribute_en": "ALL VAMP", "attribute_kr": "모든 피해 흡혈" },
+    { "attribute_en": "PHYSICAL DEFENSE", "attribute_kr": "물리 방어력" },
+    { "attribute_en": "MAGICAL DEFENSE", "attribute_kr": "마법 방어력" },
+    { "attribute_en": "HEALTH", "attribute_kr": "체력" },
+    { "attribute_en": "MANA", "attribute_kr": "마나" },
+    { "attribute_en": "HEALTH REGEN", "attribute_kr": "체력 재생" },
+    { "attribute_en": "MANA REGEN", "attribute_kr": "마나 재생" },
+    { "attribute_en": "TENACITY", "attribute_kr": "군중 제어 저항" },
+    { "attribute_en": "COOLDOWN REDUCTION", "attribute_kr": "재사용 대기 시간 감소" },
+    { "attribute_en": "MOVEMENT SPEED", "attribute_kr": "이동 속도" }
+  ]
+}
