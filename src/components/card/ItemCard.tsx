@@ -43,7 +43,7 @@ export default function ItemCard({ item }: IItemCardProps) {
       <CardContent>
         <Grid container spacing={1}>
           <Grid xs='auto'>
-            <img src={currentImage} alt={item['name']} loading='lazy' width={70} height={70} />
+            <img src={currentImage} alt={item['name']} loading='lazy' width={60} height={60} />
           </Grid>
           <Grid container spacing={0}>
             <Grid xs={12}>
