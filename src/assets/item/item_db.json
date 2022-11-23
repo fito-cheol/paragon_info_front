@@ -112,7 +112,7 @@
   },
   {
     "이름": "감시자의 눈",
-    "name": "WATCHERS' EYE",
+    "name": "WATCHER'S EYE",
     "카테고리A": "시작",
     "일회성": "TRUE",
     "가격": 50,
@@ -630,7 +630,7 @@
   },
   {
     "이름": "데키마 에너지 환류기",
-    "name": "DEKIMA EVERGY REFLUX",
+    "name": "DEKIMA ENERGY REFLUX",
     "카테고리A": "일반",
     "일회성": "FALSE",
     "가격": 350,
@@ -815,7 +815,7 @@
   },
   {
     "이름": "흑해석 팔찌",
-    "name": "BLACK SEA STONE BRACLELET",
+    "name": "BLACK SEA STONE BRACELET",
     "카테고리A": "일반",
     "일회성": "FALSE",
     "가격": 500,
@@ -1074,7 +1074,7 @@
   },
   {
     "이름": "바람 원소 포집기",
-    "name": "WIND ELEMENT CONLLECTOR",
+    "name": "WIND ELEMENT COLLECTOR",
     "카테고리A": "희귀",
     "일회성": "FALSE",
     "가격": 750,
@@ -1222,7 +1222,7 @@
   },
   {
     "이름": "방어의 타투",
-    "name": "TATTOO OF DEFENCSE",
+    "name": "TATTOO OF DEFENSE",
     "카테고리A": "희귀",
     "일회성": "FALSE",
     "가격": 825,
@@ -1666,7 +1666,7 @@
   },
   {
     "이름": "제식 소총",
-    "name": "FEATHER OF PROTECTION",
+    "name": "DRILL RIFLE",
     "카테고리A": "희귀",
     "일회성": "FALSE",
     "가격": 1000,
@@ -1703,7 +1703,7 @@
   },
   {
     "이름": "플라즈마 채찍",
-    "name": "RESERVIST'S POSTOL",
+    "name": "PLASMA WHIP",
     "카테고리A": "희귀",
     "일회성": "FALSE",
     "가격": 1000,
@@ -1740,7 +1740,7 @@
   },
   {
     "이름": "수호의 깃털",
-    "name": "DRILL RIFLE",
+    "name": "FEATHER OF PROTECTION",
     "카테고리A": "희귀",
     "일회성": "FALSE",
     "가격": 1000,
