@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import './App.scoped.scss';
 import ItemList from './pages/Item/List';
+import HeroList from './pages/Hero/List';
 import AppBar from './components/appBar/appBar';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -41,7 +43,13 @@ function App() {
         <AppBar />
         <div className='container'>
           <div className={`labeling__wrapper labeling__wrapper--${theme.palette.mode}`}>
-            <ItemList />
+            <BrowserRouter>
+              <Routes>
+                <Route path='/item' element={<ItemList />}></Route>
+                <Route path='/hero' element={<HeroList />}></Route>
+                <Route path='*' element={<ItemList />}></Route>
+              </Routes>
+            </BrowserRouter>
             <ToggleColorMode />
           </div>
         </div>

@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Link } from 'react-router-dom';
 
 export default function ButtonAppBar() {
   return (
@@ -15,8 +16,12 @@ export default function ButtonAppBar() {
           <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }}>
             <MenuIcon />
           </IconButton>
-          <Button color='inherit'>아이템</Button>
-          <Button color='inherit'>영웅</Button>
+          <Button href='/item' color='inherit'>
+            아이템
+          </Button>
+          <Button href='/hero' color='inherit'>
+            영웅
+          </Button>
           <Typography sx={{ flexGrow: 1 }}></Typography>
           <Button color='inherit'>Login</Button>
         </Toolbar>
