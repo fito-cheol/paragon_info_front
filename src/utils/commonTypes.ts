@@ -39,7 +39,7 @@ type Item = {
   '물리 공격력': number | string;
   '물리 관통력': number | string;
   '물리 방어력 무효화': number | string;
-  마법공격력: number | string;
+  '마법 공격력': number | string;
   '마법 관통력': number | string;
   '마법 방어력 무효화': number | string;
   '치명타 확률': number | string;
