@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import './App.scoped.scss';
 import ItemList from './pages/Item/List';
+import AppBar from './components/appBar/appBar';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -37,6 +38,7 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+        <AppBar />
         <div className='container'>
           <div className={`labeling__wrapper labeling__wrapper--${theme.palette.mode}`}>
             <ItemList />
