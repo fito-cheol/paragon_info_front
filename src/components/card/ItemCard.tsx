@@ -4,6 +4,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 import { Item, AttributeArray } from '../../utils/commonTypes';
 import attributeList from '../../assets/item/attribute_language.json';
+import './ItemCard.scoped.scss';
 
 export interface IItemCardProps {
   item: Item;
@@ -16,7 +17,7 @@ export default function ItemCard({ item }: IItemCardProps) {
   const attributesHTML = attribueArray.map(attribute => {
     if (item[attribute.attribute_kr]) {
       return (
-        <Grid container spacing={0} xs={12}>
+        <Grid container spacing={0.5} xs={12}>
           <Grid xs='auto'>
             <img
               src={`ITEM_OPTION_IMAGE/${attribute.attribute_en}.png`}
@@ -64,16 +65,20 @@ export default function ItemCard({ item }: IItemCardProps) {
           {attributesHTML}
         </Grid>
         {item['지속 효과'] ? (
-          <Typography variant='body2' color='text.secondary'>
-            지속 효과: {item['지속 효과']} {item['지속 효과 쿨타임'] ? `(${item['지속 효과 쿨타임']}초)` : ''}
-          </Typography>
+          <Grid container spacing={0} alignItems='center' marginTop={1}>
+            <Typography variant='body2' color='text.secondary'>
+              지속 효과: {item['지속 효과']} {item['지속 효과 쿨타임'] ? `(${item['지속 효과 쿨타임']}초)` : ''}
+            </Typography>
+          </Grid>
         ) : (
           <React.Fragment />
         )}
         {item['사용 효과'] ? (
-          <Typography variant='body2' color='text.secondary'>
-            사용 효과: {item['사용 효과']} {item['사용 효과 쿨타임'] ? `(${item['사용 효과 쿨타임']}초)` : ''}
-          </Typography>
+          <Grid container spacing={0} alignItems='center' marginTop={1}>
+            <Typography variant='body2' color='text.secondary'>
+              사용 효과: {item['사용 효과']} {item['사용 효과 쿨타임'] ? `(${item['사용 효과 쿨타임']}초)` : ''}
+            </Typography>
+          </Grid>
         ) : (
           <React.Fragment />
         )}
