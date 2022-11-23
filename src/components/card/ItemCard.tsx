@@ -17,7 +17,7 @@ export default function ItemCard({ item }: IItemCardProps) {
   const attributesHTML = attribueArray.map(attribute => {
     if (item[attribute.attribute_kr]) {
       return (
-        <Grid container spacing={0.5} xs={12}>
+        <Grid container spacing={0.5} xs={12} key={item.name + attribute.attribute_en}>
           <Grid xs='auto'>
             <img
               src={`ITEM_OPTION_IMAGE/${attribute.attribute_en}.png`}
@@ -28,7 +28,7 @@ export default function ItemCard({ item }: IItemCardProps) {
             />
           </Grid>
           <Grid xs='auto'>
-            <Typography variant='body2' color='text.secondary' key={attribute.attribute_en}>
+            <Typography variant='body2' color='text.secondary'>
               {item[attribute.attribute_kr]} {attribute.attribute_kr}
             </Typography>
           </Grid>
