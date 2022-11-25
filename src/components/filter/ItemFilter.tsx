@@ -8,14 +8,9 @@ interface ItemFilterProps {
   onUpdate: (value: AttributeCheck) => void;
 }
 
-const attributeList = [];
-for (const attribueObject of attributeLanguage) {
-  attributeList.push(attribueObject.attribute_en);
-}
-
 const initChecker = {} as AttributeCheck;
-for (const attribute of attributeList) {
-  initChecker[attribute as Attributes] = false;
+for (const attribueObject of attributeLanguage) {
+  initChecker[attribueObject.attribute_en as Attributes] = false;
 }
 
 export default function ItemFilter({ onUpdate }: ItemFilterProps) {

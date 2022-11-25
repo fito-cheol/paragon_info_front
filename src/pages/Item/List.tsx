@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 
-import itemJson from '../../assets/item/item_db.json';
 import { Item, ItemArray, Attributes, AttributeCheck } from '../../utils/commonTypes';
 import ItemCard from '../../components/card/ItemCard';
-
 import ItemFilter from '../../components/filter/ItemFilter';
+
+import itemJson from '../../assets/item/item_db.json';
+import attributeList from '../../assets/item/attribute_language.json';
+
+type LangConverter = {
+  [key: string]: string;
+};
+const langConverter = {} as LangConverter;
+for (const attributeObject of attributeList) {
+  langConverter[attributeObject.attribute_en] = attributeObject.attribute_kr;
+}
 
 export default function List() {
   const [itemList, setItemList] = useState<ItemArray>(itemJson);
@@ -18,8 +27,9 @@ export default function List() {
       }
     }
     const filteredItems = itemJson.filter((item: Item) => {
-      for (const attribute of checkList) {
-        const canFindValue = item[attribute];
+      for (const attribute_en of checkList) {
+        const attribute_kr = langConverter[attribute_en];
+        const canFindValue = item[attribute_kr];
         if (!canFindValue) return false;
       }
       return true;
