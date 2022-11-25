@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import Checkbox from '@mui/material/Checkbox';
 import attributeLanguage from '../../assets/item/attribute_language.json';
@@ -15,12 +15,17 @@ for (const attribueObject of attributeLanguage) {
 
 export default function ItemFilter({ onUpdate }: ItemFilterProps) {
   const [checker, setChecker] = useState<AttributeCheck>(initChecker);
+
+  useEffect(() => {
+    onUpdate(checker);
+  }, [checker]);
+
   function handleChange(isChecked: boolean, location: string) {
     setChecker(prev => {
       return { ...prev, [location]: isChecked };
     });
-    onUpdate(checker);
   }
+
   return (
     <Grid container className='filterWrapper'>
       <Grid xs={2} className='category'>

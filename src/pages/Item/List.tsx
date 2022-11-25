@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 
-import { Item, ItemArray, Attributes, AttributeCheck } from '../../utils/commonTypes';
+import { Item, ItemArray, Attributes, AttributeCheck, PageInfo } from '../../utils/commonTypes';
 import ItemCard from '../../components/card/ItemCard';
 import ItemFilter from '../../components/filter/ItemFilter';
 
@@ -17,7 +17,14 @@ for (const attributeObject of attributeList) {
 }
 
 export default function List() {
-  const [itemList, setItemList] = useState<ItemArray>(itemJson);
+  const [itemList, setItemList] = useState<ItemArray>([]);
+  const [itemElements, setItemElements] = useState<JSX.Element[]>([<></>]);
+  useEffect(() => {
+    setItemList(itemJson);
+  }, []);
+  useEffect(() => {
+    setItemElements(itemList.map(item => <ItemCard key={item.name} item={item} />));
+  }, [itemList]);
 
   const updateCheck = (checkObject: AttributeCheck) => {
     const checkList: Attributes[] = [];
@@ -34,19 +41,17 @@ export default function List() {
       }
       return true;
     });
-    console.log(filteredItems);
-    // setItemList(filteredItems);
+    console.log(checkObject, checkList, filteredItems);
+
+    setItemList(filteredItems);
   };
+
   return (
     <Grid container>
       <Grid xs={12}>
-        <ItemFilter onUpdate={updateCheck} />
+        <ItemFilter onUpdate={checkObject => updateCheck(checkObject)} />
       </Grid>
-      <Grid xs={12}>
-        {itemList.map(item => (
-          <ItemCard key={item.name} item={item} />
-        ))}
-      </Grid>
+      <Grid xs={12}>{itemElements}</Grid>
     </Grid>
   );
 }
