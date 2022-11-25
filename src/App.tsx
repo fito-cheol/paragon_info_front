@@ -8,7 +8,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import merge from 'ts-deepmerge';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
+import { createTheme, ThemeProvider, responsiveFontSizes, Theme } from '@mui/material/styles';
 import { getDesignTokens, getThemedComponents } from './theme/Theme';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ColorModeContext } from './context/ColorModeContext';
@@ -26,7 +26,7 @@ function App() {
     [],
   );
 
-  let theme = useMemo(() => createTheme(merge(getDesignTokens(mode), getThemedComponents(mode))), [mode]);
+  let theme: Theme = useMemo(() => createTheme(merge(getDesignTokens(mode), getThemedComponents(mode))), [mode]);
   theme = responsiveFontSizes(theme);
 
   useEffect(() => {

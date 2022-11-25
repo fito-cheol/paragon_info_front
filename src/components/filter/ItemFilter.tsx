@@ -1,15 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import attributeLanguage from '../../assets/item/attribute_language.json';
+import { Attributes, AttributeCheck } from '../../utils/commonTypes';
 
 interface ItemFilterProps {
-  onUpdate: (key: string, value: boolean) => void;
+  onUpdate: (value: AttributeCheck) => void;
+}
+
+const attributeList = [];
+for (const attribueObject of attributeLanguage) {
+  attributeList.push(attribueObject.attribute_en);
+}
+
+const initChecker = {} as AttributeCheck;
+for (const attribute of attributeList) {
+  initChecker[attribute as Attributes] = false;
 }
 
 export default function ItemFilter({ onUpdate }: ItemFilterProps) {
+  const [checker, setChecker] = useState<AttributeCheck>(initChecker);
   function handleChange(isChecked: boolean, location: string) {
-    onUpdate(location, isChecked);
+    setChecker(prev => {
+      return { ...prev, [location]: isChecked };
+    });
+    onUpdate(checker);
   }
   return (
     <Grid container className='filterWrapper'>

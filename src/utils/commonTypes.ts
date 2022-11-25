@@ -1,3 +1,5 @@
+import attributeLanguage from '../assets/item/attribute_language.json';
+
 interface Category {
   name: string;
   value: string;
@@ -69,4 +71,25 @@ interface Attribute {
 }
 type AttributeArray = Array<Attribute>;
 
-export type { CategoryArray, MetaData, Conversation, ConversationArray, PageInfo, Item, ItemArray, AttributeArray };
+const attributeList = [];
+for (const attribueObject of attributeLanguage) {
+  attributeList.push(attribueObject.attribute_en);
+}
+type Attributes = typeof attributeList[number];
+
+type AttributeCheck = {
+  [key in Attributes]: boolean;
+};
+
+export type {
+  CategoryArray,
+  MetaData,
+  Conversation,
+  ConversationArray,
+  PageInfo,
+  Item,
+  ItemArray,
+  AttributeArray,
+  Attributes,
+  AttributeCheck,
+};
