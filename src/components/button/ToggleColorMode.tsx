@@ -25,10 +25,14 @@ export default function ToggleColorMode() {
       onClick={colorMode.toggleColorMode}
       className='button__wrapper'
     >
-      {theme.palette.mode} mode
+      {capitalizeFirstLetter(theme.palette.mode)} Mode
       <IconButton sx={{ ml: 1 }} color='inherit'>
         {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
       </IconButton>
     </Box>
   );
+}
+
+function capitalizeFirstLetter(word: string) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
 }

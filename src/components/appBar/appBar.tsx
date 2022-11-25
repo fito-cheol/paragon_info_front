@@ -3,10 +3,12 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
+import Button from '../button/ColoredButton';
+import ToggleColorMode from '../button/ToggleColorMode';
 
 export default function ButtonAppBar() {
   return (
@@ -16,14 +18,14 @@ export default function ButtonAppBar() {
           <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }}>
             <MenuIcon />
           </IconButton>
-          <Button href='/item' color='inherit'>
-            아이템
-          </Button>
-          <Button href='/hero' color='inherit'>
-            영웅
-          </Button>
+          <Link to='/item'>
+            <Button>아이템</Button>
+          </Link>
+          <Link to='/hero'>
+            <Button>영웅</Button>
+          </Link>
           <Typography sx={{ flexGrow: 1 }}></Typography>
-          <Button color='inherit'>Login</Button>
+          <ToggleColorMode />
         </Toolbar>
       </AppBar>
     </Box>

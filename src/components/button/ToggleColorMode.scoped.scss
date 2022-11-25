@@ -1,3 +1,5 @@
-.button__wrapper{
+.button__wrapper {
   @include disableTxtDrag;
+  width: auto;
+  padding-left: 9px;
 }
