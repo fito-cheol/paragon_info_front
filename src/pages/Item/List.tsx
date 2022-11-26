@@ -18,7 +18,7 @@ for (const attributeObject of attributeList) {
 
 export default function List() {
   const [itemList, setItemList] = useState<ItemArray>([]);
-  const [itemElements, setItemElements] = useState<JSX.Element[]>([<></>]);
+  const [itemElements, setItemElements] = useState<JSX.Element[]>([<div key={1}></div>]);
   useEffect(() => {
     setItemList(itemJson);
   }, []);
@@ -41,7 +41,6 @@ export default function List() {
       }
       return true;
     });
-    console.log(checkObject, checkList, filteredItems);
 
     setItemList(filteredItems);
   };
