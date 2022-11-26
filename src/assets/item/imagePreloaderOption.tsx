@@ -11,5 +11,5 @@ function importAll(imageContext: __WebpackModuleApi.RequireContext) {
 }
 
 const images = importAll(require.context('./ITEM_OPTION_IMAGE', false, /.png/));
-console.log(images);
+
 export default images;

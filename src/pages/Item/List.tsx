@@ -23,7 +23,13 @@ export default function List() {
     setItemList(itemJson);
   }, []);
   useEffect(() => {
-    setItemElements(itemList.map(item => <ItemCard key={item.name} item={item} />));
+    setItemElements(
+      itemList.map(item => (
+        <Grid xs={6} key={item.name}>
+          <ItemCard item={item} />{' '}
+        </Grid>
+      )),
+    );
   }, [itemList]);
 
   const updateCheck = (checkObject: AttributeCheck) => {
@@ -50,7 +56,9 @@ export default function List() {
       <Grid xs={12}>
         <ItemFilter onUpdate={checkObject => updateCheck(checkObject)} />
       </Grid>
-      <Grid xs={12}>{itemElements}</Grid>
+      <Grid xs={12} container>
+        {itemElements}
+      </Grid>
     </Grid>
   );
 }
