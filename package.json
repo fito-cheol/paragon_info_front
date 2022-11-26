@@ -15,6 +15,7 @@
     "@types/jest": "^27.4.1",
     "@types/node": "^16.11.26",
     "@types/react": "^17.0.44",
+    "@types/webpack-env": "^1.18.0",
     "craco-alias": "^3.0.1",
     "craco-plugin-scoped-css": "^1.1.1",
     "eslint": "^8.13.0",
