@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 
-import { Item, ItemArray, Attributes, AttributeCheck, PageInfo } from '../../utils/commonTypes';
+import { Item, ItemArray, Attributes, AttributeCheck } from '../../utils/commonTypes';
 import ItemCard from '../../components/card/ItemCard';
 import ItemFilter from '../../components/filter/ItemFilter';
 
@@ -25,7 +25,7 @@ export default function List() {
   useEffect(() => {
     setItemElements(
       itemList.map(item => (
-        <Grid xs={6} key={item.name}>
+        <Grid xs={6} md={4} xl={3} key={item.name}>
           <ItemCard item={item} />{' '}
         </Grid>
       )),
