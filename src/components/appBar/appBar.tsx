@@ -24,6 +24,9 @@ export default function ButtonAppBar() {
           <Link to='/hero'>
             <Button>영웅</Button>
           </Link>
+          <Link to='/Walkthrough'>
+            <Button>공략 쓰기</Button>
+          </Link>
           <Typography sx={{ flexGrow: 1 }}></Typography>
           <ToggleColorMode />
         </Toolbar>
