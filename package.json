@@ -30,6 +30,8 @@
   },
   "scripts": {
     "start": "craco start",
+    "winstart": "set \"GENERATE_SOURCEMAP=false\" && craco start",
+    "macstart": "GENERATE_SOURCEMAP=false craco start",
     "build": "craco build",
     "test": "craco test",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --quiet",

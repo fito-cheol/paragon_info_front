@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent, Avatar, Typography } from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 
 import { Item, AttributeArray } from '../../utils/commonTypes';
@@ -13,9 +13,8 @@ export interface IItemCardProps {
 }
 
 export default function ItemCard({ item }: IItemCardProps) {
-  const [currentImage, setCurrentImage] = React.useState<string>();
   const [atrritbuteElements, setAtrritbuteElements] = useState<JSX.Element[]>();
-  const [attributeArray, setAttributeArray] = React.useState<AttributeArray>(attributeList);
+  const [attributeArray] = React.useState<AttributeArray>(attributeList);
 
   useEffect(() => {
     const attributesHTML = attributeArray.map(attribute => {

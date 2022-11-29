@@ -1,5 +1,5 @@
 interface ImageStorage {
-  [key: string]: any;
+  [key: string]: string;
 }
 
 function importAll(imageContext: __WebpackModuleApi.RequireContext) {
