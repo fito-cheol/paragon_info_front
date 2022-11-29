@@ -13,19 +13,19 @@ import ToggleColorMode from '../button/ToggleColorMode';
 export default function ButtonAppBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='static'>
+      <AppBar position='static' color='inherit'>
         <Toolbar>
           <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }}>
             <MenuIcon />
           </IconButton>
-          <Link to='/item'>
+          <Link to='/item' style={{ textDecoration: 'none' }}>
             <Button>아이템</Button>
           </Link>
-          <Link to='/hero'>
+          <Link to='/hero' style={{ textDecoration: 'none' }}>
             <Button>영웅</Button>
           </Link>
-          <Link to='/Walkthrough'>
-            <Button>공략 쓰기</Button>
+          <Link to='/Walkthrough' style={{ textDecoration: 'none' }}>
+            <Button>공략</Button>
           </Link>
           <Typography sx={{ flexGrow: 1 }}></Typography>
           <ToggleColorMode />
