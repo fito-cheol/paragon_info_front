@@ -1,0 +1,14 @@
+.skillTree__img {
+  background-color: #aaaaaa;
+  border: 2px solid;
+  border-radius: 2px;
+  margin: 2px;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    background-color: rgba(100, 255, 200, 0.5) !important;
+  }
+  &:active {
+    background-color: rgba(200, 200, 200, 0.5) !important;
+  }
+}
