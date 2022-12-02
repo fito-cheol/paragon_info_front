@@ -4,17 +4,14 @@ import IconButton from '@mui/material/IconButton';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
 import AddIcon from '@mui/icons-material/Add';
-import ClearIcon from '@mui/icons-material/Clear';
 
 import { Item, ItemList, AttributeCheck } from '../../utils/commonTypes';
 import EditorWrite from '../../components/post/EditorWrite';
 import AutoHero from '../../components/input/autocompleteHero';
 import SkillTree from '../../components/image/SkillTree';
-import ImageItem from '../../components/image/Item';
 import ImageItemList from '../../components/image/ItemList';
 import ItemListWithFilter from '../../components/combined/ItemListWithFilter';
 
-import itemJson from '../../assets/item/item_db.json';
 import './Write.scoped.scss';
 
 type SkillTreeType = 'Q' | 'E' | 'R' | 'Right' | 'None';
@@ -22,8 +19,6 @@ type SkillTreeType = 'Q' | 'E' | 'R' | 'Right' | 'None';
 export default function Write() {
   const [skillTreeArray, setSkillTreeArray] = useState<SkillTreeType[]>([]);
   const [skillTreeElements, setSkillTreeElements] = useState<JSX.Element[]>([<div key={1}></div>]);
-  const [itemList, setItemList] = useState<ItemList>([]);
-  const [itemListElements, setItemListElements] = useState<JSX.Element[]>([<div key={1}></div>]);
   const [clickedRow, setClickedRow] = useState<number>(-1);
   const [show, setShow] = useState<boolean>(false);
   const [selectedItemList, setSelectedItemList] = useState<ItemList[]>([[], [], []]);
@@ -34,7 +29,6 @@ export default function Write() {
   useEffect(() => {
     const initialArray = Array(18).fill('None');
     setSkillTreeArray(initialArray);
-    setItemList(itemJson);
   }, []);
 
   // computed
@@ -47,29 +41,8 @@ export default function Write() {
   }, [skillTreeArray]);
 
   useEffect(() => {
-    setItemListElements(
-      itemList.map((item, index) => {
-        return (
-          <div
-            key={index}
-            onClick={() => {
-              selectItem(item);
-            }}
-          >
-            <ImageItem item={item} />
-          </div>
-        );
-      }),
-    );
-  }, [itemListElements]);
-
-  useEffect(() => {
     setShow(clickedRow >= 0);
   }, [clickedRow]);
-
-  useEffect(() => {
-    console.log(selectedItemList);
-  }, [selectedItemList]);
 
   // method
   const addSkillTree = (skillType: SkillTreeType) => {
@@ -109,8 +82,8 @@ export default function Write() {
 
   return (
     <div>
-      <h2> 공략 쓰기페이지 작업중 </h2>
-      <h2> 영웅 선택 </h2>
+      <h2> 공략 작성 </h2>
+      <h2> 1. 영웅 선택 </h2>
       <AutoHero />
       <h2> 스킬트리 선택 </h2>
       <Grid container>
@@ -159,19 +132,6 @@ export default function Write() {
         <AddIcon />
       </IconButton>
       <ImageItemList itemList={selectedItemList[2]} />
-      <Grid className={show ? undefined : 'hidden'} container>
-        <IconButton
-          size='large'
-          edge='start'
-          color='error'
-          aria-label='menu'
-          sx={{ mr: 2 }}
-          onClick={() => closeItemSelect()}
-        >
-          <ClearIcon />
-        </IconButton>
-        {itemListElements}
-      </Grid>
       <Dialog
         onClose={() => {
           closeItemSelect();
@@ -183,7 +143,6 @@ export default function Write() {
             selectItem(item);
           }}
           onFilterUpdate={filter => {
-            console.log('filter update Write');
             setFilter(filter);
           }}
           onOptionUpdate={isSmall => {
