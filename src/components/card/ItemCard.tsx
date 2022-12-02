@@ -10,9 +10,10 @@ import itemImages from '../../assets/item/imagePreloaderItem';
 
 export interface IItemCardProps {
   item: Item;
+  onClick?: (item: Item) => void;
 }
 
-export default function ItemCard({ item }: IItemCardProps) {
+export default function ItemCard({ item, onClick }: IItemCardProps) {
   const [atrritbuteElements, setAtrritbuteElements] = useState<JSX.Element[]>();
   const [attributeArray] = React.useState<AttributeArray>(attributeList);
 
@@ -45,11 +46,18 @@ export default function ItemCard({ item }: IItemCardProps) {
   }, [attributeArray]);
 
   return (
-    <Card className='itemCard'>
+    <Card
+      className='itemCard'
+      onClick={() => {
+        if (onClick) {
+          onClick(item);
+        }
+      }}
+    >
       <CardContent>
         <Grid container spacing={1}>
           <Grid xs='auto'>
-            <img src={itemImages[item.name]} alt={item['name']} loading='lazy' width={60} height={60} />
+            <img src={itemImages[item.name]} alt={item['이름']} loading='lazy' width={60} height={60} />
           </Grid>
           <Grid container spacing={0}>
             <Grid xs={12}>

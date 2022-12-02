@@ -1,0 +1,11 @@
+.hidden {
+  display: none;
+}
+.wrapper {
+  &--light {
+    background-color: #eee;
+  }
+  &--dark {
+    background-color: #222;
+  }
+}

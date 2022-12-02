@@ -63,7 +63,7 @@ type Item = {
   하위템_List: string;
   '이미지 path': string;
 };
-type ItemArray = Array<Item>;
+type ItemList = Array<Item>;
 
 interface Attribute {
   attribute_en: string;
@@ -88,7 +88,7 @@ export type {
   ConversationArray,
   PageInfo,
   Item,
-  ItemArray,
+  ItemList,
   AttributeArray,
   Attributes,
   AttributeCheck,
