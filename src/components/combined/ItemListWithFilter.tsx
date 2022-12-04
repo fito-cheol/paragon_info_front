@@ -86,7 +86,7 @@ export default function itemListWithFilter({
           control={
             <Checkbox
               checked={isSmall}
-              onChange={e => {
+              onChange={() => {
                 setIsSmall(!isSmall);
               }}
             />
