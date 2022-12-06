@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 
-import { Item, AttributeArray } from '../../utils/commonTypes';
 import attributeList from '../../assets/item/attribute_language.json';
 import './ItemCard.scoped.scss';
 import optionImages from '../../assets/item/imagePreloaderOption';
@@ -15,10 +14,10 @@ export interface IItemCardProps {
 
 export default function ItemCard({ item, onClick }: IItemCardProps) {
   const [atrritbuteElements, setAtrritbuteElements] = useState<JSX.Element[]>();
-  const [attributeArray] = React.useState<AttributeArray>(attributeList);
+  const [attributeArray] = React.useState<Attribute[]>(attributeList);
 
   useEffect(() => {
-    const attributesHTML = attributeArray.map(attribute => {
+    const attributesHTML = attributeArray.map((attribute: Attribute) => {
       if (item[attribute.attribute_kr]) {
         return (
           <Grid container spacing={0.5} xs={12} key={item.name + attribute.attribute_en}>

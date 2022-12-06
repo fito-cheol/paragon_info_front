@@ -4,7 +4,6 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useTheme } from '@mui/material/styles';
 
-import { Item, ItemList, Attributes, AttributeCheck } from '../../utils/commonTypes';
 import ItemCardList from '../card/ItemCardList';
 import ItemImageList from '../image/ItemList';
 import ItemFilter from '../filter/ItemFilter';
@@ -35,7 +34,7 @@ export default function itemListWithFilter({
   defaultFilter,
   defaultIsSmall,
 }: itemListWithFilterProps) {
-  const [itemList, setItemList] = useState<ItemList>([]);
+  const [itemList, setItemList] = useState<Item[]>([]);
   const [isSmall, setIsSmall] = useState<boolean>(defaultIsSmall || true);
   const [filter, setFilter] = useState<AttributeCheck | undefined>(defaultFilter || undefined);
 

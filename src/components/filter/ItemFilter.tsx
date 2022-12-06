@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import Checkbox from '@mui/material/Checkbox';
 import attributeLanguage from '../../assets/item/attribute_language.json';
-import { Attributes, AttributeCheck } from '../../utils/commonTypes';
 
 interface ItemFilterProps {
   onUpdate: (value: AttributeCheck) => void;

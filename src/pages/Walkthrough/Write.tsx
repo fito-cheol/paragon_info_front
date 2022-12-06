@@ -3,8 +3,8 @@ import Grid from '@mui/material/Unstable_Grid2';
 import IconButton from '@mui/material/IconButton';
 import Dialog from '@mui/material/Dialog';
 import AddIcon from '@mui/icons-material/Add';
+import TextField from '@mui/material/TextField';
 
-import { Item, ItemList, AttributeCheck } from '../../utils/commonTypes';
 import EditorWrite from '../../components/post/EditorWrite';
 import AutoHero from '../../components/input/autocompleteHero';
 import SkillTree from '../../components/image/SkillTree';
@@ -20,7 +20,7 @@ export default function Write() {
   const [skillTreeElements, setSkillTreeElements] = useState<JSX.Element[]>([<div key={1}></div>]);
   const [clickedRow, setClickedRow] = useState<number>(-1);
   const [show, setShow] = useState<boolean>(false);
-  const [selectedItemList, setSelectedItemList] = useState<ItemList[]>([[], [], []]);
+  const [selectedItemList, setSelectedItemList] = useState<Item[][]>([[], [], []]);
   const [isSmall, setIsSmall] = useState<boolean>(true);
   const [filter, setFilter] = useState<AttributeCheck | undefined>(undefined);
 

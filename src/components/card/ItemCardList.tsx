@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 
-import { Item, ItemList } from '../../utils/commonTypes';
 import ItemCard from '../../components/card/ItemCard';
 
 interface ItemCardListProps {
-  itemList: ItemList;
+  itemList: Item[];
   onClick?: (item: Item) => void;
 }
 
