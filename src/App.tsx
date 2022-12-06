@@ -3,6 +3,7 @@ import './App.scoped.scss';
 import ItemList from './pages/Item/List';
 import HeroList from './pages/Hero/List';
 import HomeMain from './pages/Home/Main';
+import TestPage from './pages/Test';
 import WalkthroughWrite from './pages/Walkthrough/Write';
 import AppBar from './components/appBar/appBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -46,6 +47,7 @@ function App() {
                 <Route path='item' element={<ItemList />} />
                 <Route path='hero' element={<HeroList />} />
                 <Route path='Walkthrough' element={<WalkthroughWrite />} />
+                <Route path='Test' element={<TestPage />} />
                 <Route path='*' element={<HomeMain />} />
               </Routes>
             </div>

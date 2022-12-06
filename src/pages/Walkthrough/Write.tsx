@@ -82,6 +82,11 @@ export default function Write() {
   return (
     <div>
       <h2> 공략 작성 </h2>
+      <Grid container>
+        <Grid xs={6} md={4} lg={3}>
+          <TextField fullWidth id='outlined-basic' label='제목 *필수*' variant='outlined' />
+        </Grid>
+      </Grid>
       <h2> 1. 영웅 선택 </h2>
       <AutoHero />
       <h2> 스킬트리 선택 </h2>
