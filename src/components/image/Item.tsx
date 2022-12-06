@@ -3,7 +3,6 @@ import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 
 import itemImages from '../../assets/item/imagePreloaderItem';
-import { Item } from '../../utils/commonTypes';
 import ItemCard from '../card/ItemCard';
 import './Item.scoped.scss';
 
