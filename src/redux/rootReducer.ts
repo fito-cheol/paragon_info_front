@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import user from './module/user';
-import counter from './module/counter';
+import user from './module/exampleUser';
+import counter from './module/exampleCounter';
 
 // 만들어 놓은 리듀서들을 합친다.
 const reducer = combineReducers({
