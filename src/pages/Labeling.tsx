@@ -1,18 +1,18 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import './Labeling.scoped.scss';
-import { MetaData, ConversationArray, PageInfo } from '../utils/commonTypes';
+import { MetaData, ConversationArray, PageInfo } from 'utils/commonTypes';
 
 import { Grid, Button, Checkbox, FormControlLabel, TextField } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import SendIcon from '@mui/icons-material/Send';
 import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
-import Title from '../components/text/Title';
-import Description from '../components/text/Description';
-import Pagination from '../components/viewer/Pagination';
-import { Viewer } from '../components/viewer/Viewer';
-import ToggleButton from '../components/button/ToggleButton';
-import { parsingTsvFile } from '../utils/parsing';
-import { mergeConversationArray } from '../utils/export';
+import Title from 'components/text/Title';
+import Description from 'components/text/Description';
+import Pagination from 'components/viewer/Pagination';
+import { Viewer } from 'components/viewer/Viewer';
+import ToggleButton from 'components/button/ToggleButton';
+import { parsingTsvFile } from 'utils/parsing';
+import { mergeConversationArray } from 'utils/export';
 
 function Labeling() {
   // global props

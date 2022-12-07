@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import EditorWrite from '../../components/post/EditorWrite';
+import EditorWrite from 'components/post/EditorWrite';
 import { TextField } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
-import heroList from '../../assets/hero/DB_Hero.json';
+import heroList from 'assets/hero/DB_Hero.json';
 
 export default function autocompleteHero() {
   const [value, setValue] = React.useState<string | null>(null);

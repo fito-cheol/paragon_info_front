@@ -1,4 +1,4 @@
-import customAxios from '../customAxios';
+import customAxios from 'api/customAxios';
 
 interface uploadForamt {
   file: Blob | File;

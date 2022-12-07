@@ -1,5 +1,3 @@
-import attributeLanguage from '../assets/item/attribute_language.json';
-
 interface Category {
   name: string;
   value: string;

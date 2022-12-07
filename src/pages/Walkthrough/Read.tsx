@@ -1,5 +1,5 @@
 import React from 'react';
-import EditorRead from '../../components/post/EditorRead';
+import EditorRead from 'components/post/EditorRead';
 
 export default function Read() {
   return (

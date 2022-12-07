@@ -4,7 +4,7 @@
 // Create a global.d.ts file and declare types in the global namespace.
 // Add types or interfaces that need to be globally accessible.
 // Make the file a module by using export {}.
-import attributeLanguage from '../assets/item/attribute_language.json';
+import attributeLanguage from 'assets/item/attribute_language.json';
 
 export {};
 

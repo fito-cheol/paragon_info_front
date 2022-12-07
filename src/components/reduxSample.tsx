@@ -1,7 +1,7 @@
 import React from 'react';
-import type { RootState } from '../redux/store';
-import { decrement, increment } from '../redux/module/exampleCounter';
-import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import type { RootState } from 'redux/store';
+import { decrement, increment } from 'redux/module/exampleCounter';
+import { useAppSelector, useAppDispatch } from 'redux/hooks';
 
 export default function Counter() {
   // 1번에서 언급했던 RootState가 useSelector에서 state의 타입으로 사용된 것을 볼 수 있다

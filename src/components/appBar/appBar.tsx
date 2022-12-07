@@ -7,8 +7,8 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
-import Button from '../button/ColoredButton';
-import ToggleColorMode from '../button/ToggleColorMode';
+import Button from 'components/button/ColoredButton';
+import ToggleColorMode from 'components/button/ToggleColorMode';
 
 export default function ButtonAppBar() {
   return (

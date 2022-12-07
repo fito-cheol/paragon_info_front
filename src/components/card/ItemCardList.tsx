@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 
-import ItemCard from '../../components/card/ItemCard';
+import ItemCard from 'components/card/ItemCard';
 
 interface ItemCardListProps {
   itemList: Item[];

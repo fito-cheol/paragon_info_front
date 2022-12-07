@@ -1,5 +1,5 @@
 import React, { createRef, MutableRefObject, useEffect } from 'react';
-import { upload } from '../../api/s3/index';
+import { upload } from 'api/s3/index';
 
 // https://www.npmjs.com/package/@toast-ui/react-editor
 import '@toast-ui/editor/dist/toastui-editor.css';

@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import { ColorModeContext } from '../../context/ColorModeContext';
+import { ColorModeContext } from 'context/ColorModeContext';
 import './ToggleColorMode.scoped.scss';
 
 export default function ToggleColorMode() {

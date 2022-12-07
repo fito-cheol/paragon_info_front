@@ -4,13 +4,13 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useTheme } from '@mui/material/styles';
 
-import ItemCardList from '../card/ItemCardList';
-import ItemImageList from '../image/ItemList';
-import ItemFilter from '../filter/ItemFilter';
+import ItemCardList from 'components/card/ItemCardList';
+import ItemImageList from 'components/image/ItemList';
+import ItemFilter from 'components/filter/ItemFilter';
 import './ItemListWithFilter.scoped.scss';
 
-import itemJson from '../../assets/item/item_db.json';
-import attributeList from '../../assets/item/attribute_language.json';
+import itemJson from 'assets/item/item_db.json';
+import attributeList from 'assets/item/attribute_language.json';
 
 type LangConverter = {
   [key: string]: string;

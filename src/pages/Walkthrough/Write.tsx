@@ -5,11 +5,11 @@ import Dialog from '@mui/material/Dialog';
 import AddIcon from '@mui/icons-material/Add';
 import TextField from '@mui/material/TextField';
 
-import EditorWrite from '../../components/post/EditorWrite';
-import AutoHero from '../../components/input/autocompleteHero';
-import SkillTree from '../../components/image/SkillTree';
-import ImageItemList from '../../components/image/ItemList';
-import ItemListWithFilter from '../../components/combined/ItemListWithFilter';
+import EditorWrite from 'components/post/EditorWrite';
+import AutoHero from 'components/input/autocompleteHero';
+import SkillTree from 'components/image/SkillTree';
+import ImageItemList from 'components/image/ItemList';
+import ItemListWithFilter from 'components/combined/ItemListWithFilter';
 
 import './Write.scoped.scss';
 

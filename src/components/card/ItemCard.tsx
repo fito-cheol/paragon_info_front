@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 
-import attributeList from '../../assets/item/attribute_language.json';
+import attributeList from 'assets/item/attribute_language.json';
 import './ItemCard.scoped.scss';
-import optionImages from '../../assets/item/imagePreloaderOption';
-import itemImages from '../../assets/item/imagePreloaderItem';
+import optionImages from 'assets/item/imagePreloaderOption';
+import itemImages from 'assets/item/imagePreloaderItem';
 
 export interface IItemCardProps {
   item: Item;
