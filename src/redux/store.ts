@@ -1,8 +1,10 @@
 import { configureStore, MiddlewareArray } from '@reduxjs/toolkit';
 import reducer from './rootReducer';
 import logger from 'redux-logger';
+import ReduxThunk from 'redux-thunk';
+import * as reduxThunk from 'redux-thunk/extend-redux';
 
-const middleware = new MiddlewareArray().concat(logger);
+const middleware = new MiddlewareArray().concat(logger, ReduxThunk);
 const store = configureStore({
   reducer,
   middleware,

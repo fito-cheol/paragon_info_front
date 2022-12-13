@@ -3,9 +3,14 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 import ImageItem from './Item';
 
+interface ClickedItem {
+  index: number;
+  item: Item;
+}
+
 interface ImageItemListProps {
   itemList: Item[];
-  onClick?: (item: Item) => void;
+  onClick?: (clickedItem: ClickedItem) => void;
 }
 
 export default function ImageItemList({ itemList, onClick }: ImageItemListProps) {
@@ -19,7 +24,7 @@ export default function ImageItemList({ itemList, onClick }: ImageItemListProps)
           <ImageItem
             item={item}
             onClick={item => {
-              if (onClick) onClick(item);
+              if (onClick) onClick({ index, item });
             }}
           />
         </Grid>

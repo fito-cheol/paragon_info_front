@@ -4,6 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import Dialog from '@mui/material/Dialog';
 import AddIcon from '@mui/icons-material/Add';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 import EditorWrite from 'components/post/EditorWrite';
 import AutoHero from 'components/input/autocompleteHero';
@@ -16,6 +17,7 @@ import './Write.scoped.scss';
 type SkillTreeType = 'Q' | 'E' | 'R' | 'Right' | 'None';
 
 export default function Write() {
+  const [title, setTitle] = useState<string>('');
   const [skillTreeArray, setSkillTreeArray] = useState<SkillTreeType[]>([]);
   const [skillTreeElements, setSkillTreeElements] = useState<JSX.Element[]>([<div key={1}></div>]);
   const [clickedRow, setClickedRow] = useState<number>(-1);
@@ -23,6 +25,8 @@ export default function Write() {
   const [selectedItemList, setSelectedItemList] = useState<Item[][]>([[], [], []]);
   const [isSmall, setIsSmall] = useState<boolean>(true);
   const [filter, setFilter] = useState<AttributeCheck | undefined>(undefined);
+  const [editorData, setEditorData] = useState<string>('');
+  const [selectedHeroName, setSelectedHeroName] = useState<string | null>(null);
 
   // onMount
   useEffect(() => {
@@ -75,8 +79,60 @@ export default function Write() {
     setSelectedItemList(copyList);
     closeItemSelect();
   };
+  const removeItem = (rowIndex: number, index: number) => {
+    const copiedItemList = [...selectedItemList];
+    const copiedRowList = [...selectedItemList[rowIndex]];
+    if (index > -1) {
+      copiedRowList.splice(index, 1);
+    }
+    copiedItemList[rowIndex] = copiedRowList;
+    setSelectedItemList(copiedItemList);
+  };
   const closeItemSelect = () => {
     setClickedRow(-1);
+  };
+  const saveData = () => {
+    // FIXME: form validation check 할것
+    if (selectedHeroName == null) {
+      console.warn('선택된 영웅이 없습니다');
+    }
+    const exportData = {
+      heroName: selectedHeroName,
+      skillTree: skillTreeArray,
+      startItems: selectedItemList[0],
+      endItems: selectedItemList[1],
+      text: editorData,
+      title: title,
+    };
+    console.log('내보낼 데이터', exportData);
+    skillTreeArray;
+  };
+
+  const ItemAdder = (rowIndex: number) => {
+    return (
+      <Grid container>
+        <Grid>
+          <ImageItemList
+            itemList={selectedItemList[rowIndex]}
+            onClick={({ index }) => {
+              removeItem(rowIndex, index);
+            }}
+          />
+        </Grid>
+        <Grid>
+          <IconButton
+            size='large'
+            edge='start'
+            color='inherit'
+            aria-label='menu'
+            sx={{ mr: 2 }}
+            onClick={() => addItemButtonHandler(rowIndex)}
+          >
+            <AddIcon />
+          </IconButton>
+        </Grid>
+      </Grid>
+    );
   };
 
   return (
@@ -84,11 +140,20 @@ export default function Write() {
       <h2> 공략 작성 </h2>
       <Grid container>
         <Grid xs={6} md={4} lg={3}>
-          <TextField fullWidth id='outlined-basic' label='제목 *필수*' variant='outlined' />
+          <TextField
+            fullWidth
+            id='outlined-basic'
+            label='제목 *필수*'
+            variant='outlined'
+            value={title}
+            onChange={event => {
+              setTitle(event.target.value);
+            }}
+          />
         </Grid>
       </Grid>
       <h2> 1. 영웅 선택 </h2>
-      <AutoHero />
+      <AutoHero onChange={setSelectedHeroName} />
       <h2> 스킬트리 선택 </h2>
       <Grid container>
         <Grid xs={12}>
@@ -101,41 +166,11 @@ export default function Write() {
       </Grid>
       <h2> 아이템 선택 </h2>
       <h3> 시작 아이템</h3>
-      <IconButton
-        size='large'
-        edge='start'
-        color='inherit'
-        aria-label='menu'
-        sx={{ mr: 2 }}
-        onClick={() => addItemButtonHandler(0)}
-      >
-        <AddIcon />
-      </IconButton>
-      <ImageItemList itemList={selectedItemList[0]} />
+      {ItemAdder(0)}
       <h3> 최종 아이템</h3>
-      <IconButton
-        size='large'
-        edge='start'
-        color='inherit'
-        aria-label='menu'
-        sx={{ mr: 2 }}
-        onClick={() => addItemButtonHandler(1)}
-      >
-        <AddIcon />
-      </IconButton>
-      <ImageItemList itemList={selectedItemList[1]} />
+      {ItemAdder(1)}
       <h3> 핵심 아이템</h3>
-      <IconButton
-        size='large'
-        edge='start'
-        color='inherit'
-        aria-label='menu'
-        sx={{ mr: 2 }}
-        onClick={() => addItemButtonHandler(2)}
-      >
-        <AddIcon />
-      </IconButton>
-      <ImageItemList itemList={selectedItemList[2]} />
+      {ItemAdder(2)}
       <Dialog
         onClose={() => {
           closeItemSelect();
@@ -156,7 +191,13 @@ export default function Write() {
           defaultIsSmall={isSmall}
         />
       </Dialog>
-      <EditorWrite></EditorWrite>
+      <Grid>
+        <EditorWrite onChange={setEditorData}></EditorWrite>
+      </Grid>
+
+      <Button variant='contained' onClick={() => saveData()}>
+        저장
+      </Button>
     </div>
   );
 }

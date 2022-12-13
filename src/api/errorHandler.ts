@@ -1,4 +1,4 @@
-import { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
+import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import { isObject, isEmpty } from 'lodash';
 
@@ -19,15 +19,20 @@ const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
   return config;
 };
 
+const onResponseSuccess = (response: AxiosResponse): any => {
+  return response.data;
+};
+
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {
   handleError(error?.response?.data);
+  console.warn(error?.response?.status);
   return Promise.reject(error);
 };
 
 export default function setupInterceptorsTo(axiosInstance: AxiosInstance): AxiosInstance {
   axiosInstance.interceptors.request.use(onRequest, undefined);
 
-  axiosInstance.interceptors.response.use(undefined, onResponseError);
+  axiosInstance.interceptors.response.use(onResponseSuccess, onResponseError);
 
   return axiosInstance;
 }
