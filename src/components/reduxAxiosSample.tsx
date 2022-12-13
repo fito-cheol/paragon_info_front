@@ -7,7 +7,16 @@ export default function Counter() {
   const error = useAppSelector((state: RootState) => state.post.error);
   const dispatch = useAppDispatch();
   const buttonEvent = async () => {
-    dispatch(action.uploadPost(1));
+    const mockData = {
+      heroName: 'gideon',
+      skillTree: ['Q', 'E', 'R'],
+      startItems: ['potion', 'ward'],
+      endItems: ['ward', 'potion'],
+      possibleItems: ['gun', 'hat'],
+      text: '공략 내용',
+      title: '공략 제목',
+    };
+    dispatch(action.uploadPost(mockData));
   };
   return (
     <div>

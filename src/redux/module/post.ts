@@ -11,23 +11,23 @@ type SuccessReturn = string;
 interface ErrorReturn {
   errorMessage: string;
 }
+interface UploadForamt {
+  heroName: string;
+  skillTree: string[];
+  startItems: string[];
+  endItems: string[];
+  possibleItems: string[];
+  text: string;
+  title: string;
+}
 
 const uploadPost = createAsyncThunk<
   SuccessReturn, // 성공 시 리턴 타입
-  number, // First argument to the payload creator
+  UploadForamt, // First argument to the payload creator
   { rejectValue: ErrorReturn } // thunkApi 정의({dispatch?, state?, extra?, rejectValue?})
->('todos/uploadPost', async (userId, { rejectWithValue }) => {
+>('todos/uploadPost', async (postInfo, { rejectWithValue }) => {
   try {
-    const mockData = {
-      heroName: 'gideon',
-      skillTree: ['Q', 'E', 'R'],
-      startItems: ['potion', 'ward'],
-      endItems: ['ward', 'potion'],
-      text: '공략 내용',
-      title: '공략 제목',
-    };
-
-    const result = await upload(mockData);
+    const result = await upload(postInfo);
     return result as any;
   } catch (error) {
     const { message } = error as unknown as AxiosError;

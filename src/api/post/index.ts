@@ -1,14 +1,15 @@
 import customAxios from 'api/customAxios';
 
-interface uploadForamt {
+interface UploadForamt {
   heroName: string;
   skillTree: string[];
   startItems: string[];
   endItems: string[];
+  possibleItems: string[];
   text: string;
   title: string;
 }
 
-export async function upload(data: uploadForamt) {
-  return await customAxios.post('/post/upload', data);
+export async function upload(data: UploadForamt) {
+  return await customAxios.post('/post/uploadPost', data);
 }

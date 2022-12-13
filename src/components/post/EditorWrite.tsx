@@ -9,21 +9,23 @@ import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import 'tui-color-picker/dist/tui-color-picker.css';
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
 import '@toast-ui/editor/dist/i18n/ko-kr';
+import '@toast-ui/editor/dist/theme/toastui-editor-dark.css';
 
 import { uploadImage } from 'api/s3/index';
 
 interface Props {
+  initialValue?: string;
   onChange?: (text: string) => void;
 }
 
-export default function EditorWrite({ onChange }: Props) {
+export default function EditorWrite({ initialValue, onChange }: Props) {
   const editorRef = createRef() as MutableRefObject<Editor>;
   const clickHandler = () => {
-    console.log('Utube upload link button');
+    const markDownData = editorRef.current.getInstance().getMarkdown();
+    console.log('markDownData', markDownData);
   };
   const onChangeHandler = () => {
     if (onChange) {
-      //  editorRef.current.getInstance().getHTML();
       const markDownData = editorRef.current.getInstance().getMarkdown();
       onChange(markDownData);
     }
@@ -33,15 +35,39 @@ export default function EditorWrite({ onChange }: Props) {
     <>
       <Editor
         ref={editorRef}
-        initialValue='hello react editor world!'
+        initialValue={initialValue ? initialValue : ' '}
         previewStyle='vertical'
         height='600px'
         initialEditType='wysiwyg' // wysiwyg
+        theme='dark'
         hideModeSwitch={true}
         useCommandShortcut={true}
         plugins={[colorSyntax]}
         language='ko-KR'
         onChange={onChangeHandler}
+        customHTMLRenderer={{
+          htmlBlock: {
+            iframe(node: any) {
+              return [
+                {
+                  type: 'openTag',
+                  tagName: 'iframe',
+                  outerNewLine: true,
+                  attributes: node.attrs,
+                },
+                { type: 'html', content: node.childrenHTML },
+                { type: 'closeTag', tagName: 'iframe', outerNewLine: true },
+              ];
+            },
+          },
+          htmlInline: {
+            big(node, { entering }) {
+              return entering
+                ? { type: 'openTag', tagName: 'big', attributes: node.attrs }
+                : { type: 'closeTag', tagName: 'big' };
+            },
+          },
+        }}
         hooks={{
           addImageBlobHook: async (blob, callback) => {
             console.log(blob); // File {name: '카레유.png', ... }
@@ -57,8 +83,6 @@ export default function EditorWrite({ onChange }: Props) {
             } catch (error) {
               console.error(error);
             }
-
-            // 2. 첨부된 이미지를 화면에 표시(경로는 임의로 넣었다.)
           },
         }}
       />

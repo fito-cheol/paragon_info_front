@@ -13,6 +13,8 @@ import ImageItemList from 'components/image/ItemList';
 import ItemListWithFilter from 'components/combined/ItemListWithFilter';
 
 import './Write.scoped.scss';
+import { action } from 'redux/module/post';
+import { useAppDispatch } from 'redux/hooks';
 
 type SkillTreeType = 'Q' | 'E' | 'R' | 'Right' | 'None';
 
@@ -25,8 +27,10 @@ export default function Write() {
   const [selectedItemList, setSelectedItemList] = useState<Item[][]>([[], [], []]);
   const [isSmall, setIsSmall] = useState<boolean>(true);
   const [filter, setFilter] = useState<AttributeCheck | undefined>(undefined);
-  const [editorData, setEditorData] = useState<string>('');
+  const [editorData, setEditorData] = useState<string>(' ');
   const [selectedHeroName, setSelectedHeroName] = useState<string | null>(null);
+
+  const dispatch = useAppDispatch();
 
   // onMount
   useEffect(() => {
@@ -95,17 +99,20 @@ export default function Write() {
     // FIXME: form validation check 할것
     if (selectedHeroName == null) {
       console.warn('선택된 영웅이 없습니다');
+      return;
+    } else {
+      const exportData = {
+        heroName: selectedHeroName,
+        skillTree: skillTreeArray,
+        startItems: selectedItemList[0].map(item => item.name),
+        endItems: selectedItemList[1].map(item => item.name),
+        possibleItems: selectedItemList[2].map(item => item.name),
+        text: editorData,
+        title: title,
+      };
+      console.log('내보낼 데이터', exportData);
+      dispatch(action.uploadPost(exportData));
     }
-    const exportData = {
-      heroName: selectedHeroName,
-      skillTree: skillTreeArray,
-      startItems: selectedItemList[0],
-      endItems: selectedItemList[1],
-      text: editorData,
-      title: title,
-    };
-    console.log('내보낼 데이터', exportData);
-    skillTreeArray;
   };
 
   const ItemAdder = (rowIndex: number) => {
@@ -192,7 +199,7 @@ export default function Write() {
         />
       </Dialog>
       <Grid>
-        <EditorWrite onChange={setEditorData}></EditorWrite>
+        <EditorWrite initialValue={editorData} onChange={setEditorData}></EditorWrite>
       </Grid>
 
       <Button variant='contained' onClick={() => saveData()}>
