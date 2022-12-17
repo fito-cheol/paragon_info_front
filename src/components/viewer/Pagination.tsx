@@ -1,40 +1,31 @@
-import React, { useMemo } from 'react';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { IconButton } from '@mui/material';
-import './Pagination.scoped.scss';
+import React, { useState } from 'react';
+import Pagination from 'react-js-pagination';
+import './Paging.css';
 
-export interface IPaginationProps {
-  total: number;
-  current: number;
-  onClick: (direction: number) => void;
+interface Props {
+  itemsCountPerPage: number;
+  totalItemsCount: number;
+  pageRangeDisplayed: number;
+  onPageChange?: (page: number) => void;
 }
 
-export default function Pagination({ total, current, onClick }: IPaginationProps) {
-  const { canClickLeft, canClickRight } = useMemo(() => {
-    const canClickLeft = current > 0;
-    const canClickRight = total != current + 1;
-    return { canClickLeft, canClickRight };
-  }, [total, current]);
+export default function Paging({ itemsCountPerPage, totalItemsCount, pageRangeDisplayed, onPageChange }: Props) {
+  const [page, setPage] = useState<number>(1);
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+    if (onPageChange) onPageChange(newPage);
+  };
+
   return (
-    <div className='pagination'>
-      <IconButton
-        onClick={() => {
-          onClick(-1);
-        }}
-        disabled={!canClickLeft}
-      >
-        <ArrowBackIosNewIcon />
-      </IconButton>
-      {current + 1} / {total}
-      <IconButton
-        onClick={() => {
-          onClick(1);
-        }}
-        disabled={!canClickRight}
-      >
-        <ArrowForwardIosIcon />
-      </IconButton>
-    </div>
+    <Pagination
+      activePage={page}
+      itemsCountPerPage={itemsCountPerPage}
+      totalItemsCount={totalItemsCount}
+      pageRangeDisplayed={pageRangeDisplayed}
+      prevPageText={'‹'}
+      nextPageText={'›'}
+      onChange={handlePageChange}
+    />
   );
 }

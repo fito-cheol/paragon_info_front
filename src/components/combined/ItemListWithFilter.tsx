@@ -104,7 +104,7 @@ export default function itemListWithFilter({
       <Grid xs={12} container className={isSmall ? undefined : 'hidden'}>
         <ItemImageList
           itemList={itemList}
-          onClick={({ item, index }) => {
+          onClick={({ item }) => {
             if (onItemSelect) onItemSelect(item);
           }}
         />

@@ -18,10 +18,18 @@ export default function Counter() {
     };
     dispatch(action.uploadPost(mockData));
   };
+  const buttonEvent2 = async () => {
+    const mockData = {
+      page: 3,
+      pageSize: 1,
+    };
+    dispatch(action.listPost(mockData));
+  };
   return (
     <div>
       <div>
         <button onClick={() => buttonEvent()}>Test Posting</button>
+        <button onClick={() => buttonEvent2()}>Test Listting</button>
         <span>{error}</span>
       </div>
     </div>

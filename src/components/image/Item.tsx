@@ -1,6 +1,5 @@
 import React from 'react';
 import Popover from '@mui/material/Popover';
-import Typography from '@mui/material/Typography';
 
 import itemImages from 'assets/item/imagePreloaderItem';
 import ItemCard from 'components/card/ItemCard';

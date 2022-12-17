@@ -6,8 +6,6 @@
 // Make the file a module by using export {}.
 import attributeLanguage from 'assets/item/attribute_language.json';
 
-export {};
-
 const attributeList: string[] = [];
 for (const attribueObject of attributeLanguage) {
   attributeList.push(attribueObject.attribute_en);
@@ -63,4 +61,48 @@ declare global {
   type AttributeCheck = {
     [key in Attributes]: boolean;
   };
+
+  // API Format
+  interface UploadForamt {
+    heroName: string;
+    skillTree: string[];
+    startItems: string[];
+    endItems: string[];
+    possibleItems: string[];
+    text: string;
+    title: string;
+  }
+
+  interface ListFormat {
+    page: number;
+    pageSize: number;
+  }
+
+  interface Post {
+    id: number;
+    user_FK: number;
+    content_FK: number;
+    title: string;
+    create_date: string;
+    click_cnt: number;
+    delete: string;
+  }
+
+  interface GetContentFormat {
+    content_FK: number;
+  }
+
+  interface Content {
+    id: number;
+    hero_FK: string;
+    skill_list: string;
+    start_item_list: string;
+    end_item_list: string;
+    possible_item_list: string;
+    text: string;
+  }
+
+  interface ReturnCount {
+    totalCount: number;
+  }
 }

@@ -5,6 +5,7 @@ import HeroList from './pages/Hero/List';
 import HomeMain from './pages/Home/Main';
 import TestPage from './pages/Test';
 import WalkthroughWrite from './pages/Walkthrough/Write';
+import List from './pages/Walkthrough/List';
 import AppBar from './components/appBar/appBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import merge from 'ts-deepmerge';
@@ -47,6 +48,7 @@ function App() {
                 <Route path='item' element={<ItemList />} />
                 <Route path='hero' element={<HeroList />} />
                 <Route path='Walkthrough' element={<WalkthroughWrite />} />
+                <Route path='list' element={<List />} />
                 <Route path='Test' element={<TestPage />} />
                 <Route path='*' element={<HomeMain />} />
               </Routes>
