@@ -31,11 +31,6 @@ export default function PostTable({ posts }: Props) {
 
     posts.map(post => {
       const postDate: Date = new Date(Date.parse(post.create_date));
-      console.log(Date.parse(post.create_date));
-      console.log(postDate);
-      console.log(`${postDate.getHours()}:${postDate.getMinutes()}`);
-      console.log(isToday(postDate));
-      console.log(`${postDate.getMonth() + 1}.${postDate.getDay()}`);
 
       let dateString = `${postDate.getHours()}:${postDate.getMinutes()}`;
       if (isToday(postDate)) {
@@ -59,9 +54,6 @@ export default function PostTable({ posts }: Props) {
 
   function isToday(date: Date) {
     const today = new Date();
-
-    // 👇️ Today's date
-    console.log(today);
 
     if (today.toDateString() === date.toDateString()) {
       return true;
