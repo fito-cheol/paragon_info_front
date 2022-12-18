@@ -1,22 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import Pagination from 'components/viewer/Pagination';
-import PostTable from 'components/viewer/PostTable';
+import { useSearchParams } from 'react-router-dom';
 
 import type { RootState } from 'redux/store';
 import { action, cleanContent } from 'redux/module/post';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 
+import Pagination from 'components/viewer/Pagination';
+import PostTable from 'components/viewer/PostTable';
+
 export default function List() {
-  const [pageSize, setPageSize] = useState<number>(10);
-  const [page, setPage] = useState<number>(1);
+  // router 관련
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queryPage: string | null = searchParams.get('page');
+  const queryPageSize = searchParams.get('pageSize');
+
+  const [pageSize, setPageSize] = useState<number>(queryPageSize ? Number(queryPageSize) : 10);
+  const [page, setPage] = useState<number>(queryPage ? Number(queryPage) : 1);
   const totalCount = useAppSelector((state: RootState) => state.post.totalCount);
   const postList = useAppSelector((state: RootState) => state.post.postList);
   const content = useAppSelector((state: RootState) => state.post.content);
 
   const dispatch = useAppDispatch();
 
-  console.log(totalCount, postList);
   // onMount
+  useEffect(() => {
+    updateUrl();
+  }, []);
+
   useEffect(() => {
     // post 총 갯수 가져오기
     dispatch(action.getPostCount(null));
@@ -27,15 +37,18 @@ export default function List() {
       pageSize,
     };
     dispatch(action.listPost(pageInfo));
+    updateUrl();
   }, [page, pageSize]);
 
   const onPageChange = (page: number, pageSize: number) => {
     // content 비우기
     dispatch(cleanContent());
-    // page, pageSize set하기
+
     setPageSize(pageSize);
     setPage(page);
-    // TODO: url 바꿔두기 + url에 parameter 있으면 세팅하기
+  };
+  const updateUrl = () => {
+    setSearchParams({ page: page.toString(), pageSize: pageSize.toString() });
   };
 
   return (
