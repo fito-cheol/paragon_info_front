@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
-import * as moment from 'moment';
+import Link from '@mui/material/Link';
 
 interface Props {
   posts: Post[];
+  onClick?: (content_FK: number) => void;
 }
 
-export default function PostTable({ posts }: Props) {
+export default function PostTable({ posts, onClick }: Props) {
   const [postElements, setPostElements] = useState<JSX.Element[]>();
 
   useEffect(() => {
@@ -42,7 +43,18 @@ export default function PostTable({ posts }: Props) {
       newPostElements.push(
         <>
           <Grid xs={2}>{post.id}</Grid>
-          <Grid xs={6}>{post.title}</Grid>
+          <Grid xs={6}>
+            <Link
+              href='#'
+              onClick={() => {
+                if (onClick) {
+                  onClick(post.content_FK);
+                }
+              }}
+            >
+              {post.title}
+            </Link>
+          </Grid>
           <Grid xs={2}>{dateString}</Grid>
           <Grid xs={2}>{post.click_cnt}</Grid>
         </>,

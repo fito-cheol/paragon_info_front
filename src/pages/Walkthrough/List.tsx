@@ -7,6 +7,8 @@ import { useAppSelector, useAppDispatch } from 'redux/hooks';
 
 import Pagination from 'components/viewer/Pagination';
 import PostTable from 'components/viewer/PostTable';
+import PostContent from 'components/viewer/PostContent';
+import { getContent } from 'api/post';
 
 export default function List() {
   // router 관련
@@ -50,10 +52,19 @@ export default function List() {
   const updateUrl = () => {
     setSearchParams({ page: page.toString(), pageSize: pageSize.toString() });
   };
+  const getContent = (content_FK: number) => {
+    dispatch(action.getPostContent({ content_FK: content_FK }));
+  };
 
   return (
     <>
-      <PostTable posts={postList} />
+      {content ? <PostContent content={content}></PostContent> : <></>}
+      <PostTable
+        posts={postList}
+        onClick={content_FK => {
+          getContent(content_FK);
+        }}
+      />
       <Pagination
         itemsCountPerPage={pageSize}
         totalItemsCount={totalCount}
