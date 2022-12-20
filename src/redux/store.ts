@@ -8,7 +8,7 @@ const middleware = new MiddlewareArray().concat(logger, ReduxThunk);
 const store = configureStore({
   reducer,
   middleware,
-  devTools: process.env.NODE_ENV !== 'production',
+  devTools: process.env.NODE_ENV == 'test',
 });
 
 // useSelector 사용시 타입으로 사용하기 위함

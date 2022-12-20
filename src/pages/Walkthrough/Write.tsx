@@ -16,11 +16,9 @@ import './Write.scoped.scss';
 import { action } from 'redux/module/post';
 import { useAppDispatch } from 'redux/hooks';
 
-type SkillTreeType = 'Q' | 'E' | 'R' | 'Right' | 'None';
-
 export default function Write() {
   const [title, setTitle] = useState<string>('');
-  const [skillTreeArray, setSkillTreeArray] = useState<SkillTreeType[]>([]);
+  const [skillTreeArray, setSkillTreeArray] = useState<SkillTree[]>([]);
   const [skillTreeElements, setSkillTreeElements] = useState<JSX.Element[]>([<div key={1}></div>]);
   const [clickedRow, setClickedRow] = useState<number>(-1);
   const [show, setShow] = useState<boolean>(false);
@@ -52,7 +50,7 @@ export default function Write() {
   }, [clickedRow]);
 
   // method
-  const addSkillTree = (skillType: SkillTreeType) => {
+  const addSkillTree = (skillType: SkillTree) => {
     // none이 아닌 가장 첫번 째 element에 넣고 탈출
     const newSkillTreeArray = [...skillTreeArray];
     for (let index = 0; index < newSkillTreeArray.length; index++) {

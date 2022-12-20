@@ -4,10 +4,8 @@ import { useTheme } from '@mui/material';
 import './SkillTree.scoped.scss';
 import images from 'assets/hero/imagePreloaderSkillTree';
 
-type SkillTreeType = 'Q' | 'E' | 'R' | 'Right' | 'None';
-
 interface SKILL_TREE_IMAGE_PROPS {
-  type: SkillTreeType;
+  type: SkillTree;
   size?: number;
   onClick?: () => void;
 }

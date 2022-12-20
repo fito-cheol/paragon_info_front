@@ -14,9 +14,5 @@ export default function EditorRead({ content }: ReadProps) {
   useEffect(() => {
     editorRef.current?.getInstance().setMarkdown(content);
   }, [content]);
-  return (
-    <>
-      <Viewer ref={editorRef} initialValue={content || ' '} theme='dark' />
-    </>
-  );
+  return <Viewer ref={editorRef} initialValue={content || ' '} theme='dark' />;
 }

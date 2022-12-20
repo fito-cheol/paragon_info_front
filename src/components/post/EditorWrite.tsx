@@ -1,4 +1,4 @@
-import React, { createRef, MutableRefObject, useEffect } from 'react';
+import React, { createRef, MutableRefObject } from 'react';
 import Button from '@mui/material/Button';
 
 // https://www.npmjs.com/package/@toast-ui/react-editor
@@ -20,9 +20,9 @@ interface Props {
 
 export default function EditorWrite({ initialValue, onChange }: Props) {
   const editorRef = createRef() as MutableRefObject<Editor>;
+
   const clickHandler = () => {
     const markDownData = editorRef.current.getInstance().getMarkdown();
-    console.log('markDownData', markDownData);
   };
   const onChangeHandler = () => {
     if (onChange) {

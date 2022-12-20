@@ -10,6 +10,11 @@ export async function list(data: ListFormat) {
 export async function getTotalCount() {
   return await customAxios.get('/post/totalCount');
 }
+
+export async function getPost(data: GetPostFormat) {
+  return await customAxios.get('/post/getPost', { params: data });
+}
+
 export async function getContent(data: GetContentFormat) {
   return await customAxios.get('/post/getContent', { params: data });
 }

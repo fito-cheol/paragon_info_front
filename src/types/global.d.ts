@@ -50,7 +50,48 @@ declare global {
     하위템_List: string;
     '이미지 path': string;
   };
-
+  interface Hero {
+    이름: string;
+    name: string;
+    TITLE_Q: string;
+    TITLE_E: string;
+    TITLE_R: string;
+    TITLE_RIGHT: string;
+    TITLE_LEFT: string;
+    DETAIL_Q_SIMPLE: string;
+    DETAIL_E_SIMPLE: string;
+    DETAIL_R_SIMPLE: string;
+    DETAIL_RIGHT_SIMPLE: string;
+    DETAIL_LEFT_SIMPLE: string;
+    DETAIL_Q: string;
+    DETAIL_E: string;
+    DETAIL_R: string;
+    DETAIL_RIGHT: string;
+    DETAIL_LEFT: string;
+    Q0: string;
+    Q1: string;
+    Q2: string;
+    Q3: string;
+    Q4: string;
+    Q5: string;
+    E0: string;
+    E1: string;
+    E2: string;
+    E3: string;
+    E4: string;
+    E5: string;
+    R0: string;
+    R1: string;
+    R2: string;
+    R3: string;
+    RIGHT0: string;
+    RIGHT1: string;
+    RIGHT2: string;
+    RIGHT3: string;
+    RIGHT4: string;
+    RIGHT5: string;
+  }
+  type SkillTree = 'Q' | 'E' | 'R' | 'Right' | 'None';
   interface Attribute {
     attribute_en: string;
     attribute_kr: string;
@@ -88,10 +129,6 @@ declare global {
     delete: string;
   }
 
-  interface GetContentFormat {
-    content_FK: number;
-  }
-
   interface Content {
     id: number;
     hero_FK: string;
@@ -100,6 +137,12 @@ declare global {
     end_item_list: string;
     possible_item_list: string;
     text: string;
+  }
+  interface GetPostFormat {
+    postId: number;
+  }
+  interface GetContentFormat {
+    content_FK: number;
   }
 
   interface ReturnCount {

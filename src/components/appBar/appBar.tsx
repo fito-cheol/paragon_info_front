@@ -25,7 +25,10 @@ export default function ButtonAppBar() {
             <Button>영웅</Button>
           </Link>
           <Link to='/Walkthrough' style={{ textDecoration: 'none' }}>
-            <Button>공략</Button>
+            <Button>공략쓰기</Button>
+          </Link>
+          <Link to='/list' style={{ textDecoration: 'none' }}>
+            <Button>공략리스트</Button>
           </Link>
           <Typography sx={{ flexGrow: 1 }}></Typography>
           <ToggleColorMode />

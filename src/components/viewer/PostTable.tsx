@@ -5,7 +5,7 @@ import Link from '@mui/material/Link';
 
 interface Props {
   posts: Post[];
-  onClick?: (content_FK: number) => void;
+  onClick?: (post: Post) => void;
 }
 
 export default function PostTable({ posts, onClick }: Props) {
@@ -37,7 +37,7 @@ export default function PostTable({ posts, onClick }: Props) {
       if (isToday(postDate)) {
         dateString = `${postDate.getHours()}:${postDate.getMinutes()}`;
       } else {
-        dateString = `${postDate.getMonth() + 1}.${postDate.getDay()}`;
+        dateString = `${postDate.getMonth() + 1}.${postDate.getDate()}`;
       }
 
       newPostElements.push(
@@ -48,7 +48,7 @@ export default function PostTable({ posts, onClick }: Props) {
               href='#'
               onClick={() => {
                 if (onClick) {
-                  onClick(post.content_FK);
+                  onClick(post);
                 }
               }}
             >

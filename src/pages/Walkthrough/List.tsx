@@ -2,67 +2,83 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import type { RootState } from 'redux/store';
-import { action, cleanContent } from 'redux/module/post';
+import { action, cleanContent, cleanPost } from 'redux/module/post';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 
 import Pagination from 'components/viewer/Pagination';
 import PostTable from 'components/viewer/PostTable';
 import PostContent from 'components/viewer/PostContent';
-import { getContent } from 'api/post';
+
+import './List.scoped.scss';
 
 export default function List() {
   // router 관련
   const [searchParams, setSearchParams] = useSearchParams();
   const queryPage: string | null = searchParams.get('page');
   const queryPageSize = searchParams.get('pageSize');
+  const no = searchParams.get('no');
 
   const [pageSize, setPageSize] = useState<number>(queryPageSize ? Number(queryPageSize) : 10);
   const [page, setPage] = useState<number>(queryPage ? Number(queryPage) : 1);
   const totalCount = useAppSelector((state: RootState) => state.post.totalCount);
   const postList = useAppSelector((state: RootState) => state.post.postList);
   const content = useAppSelector((state: RootState) => state.post.content);
+  const post = useAppSelector((state: RootState) => state.post.post);
 
   const dispatch = useAppDispatch();
 
-  // onMount
+  // mounted
   useEffect(() => {
-    updateUrl();
+    // post 가져오기
+    if (no) {
+      dispatch(action.getPostInfo({ postId: Number(no) }));
+    }
   }, []);
-
+  // computed
   useEffect(() => {
     // post 총 갯수 가져오기
     dispatch(action.getPostCount(null));
 
-    // post 가져오기
+    // postList 가져오기
     const pageInfo = {
       page,
       pageSize,
     };
     dispatch(action.listPost(pageInfo));
-    updateUrl();
   }, [page, pageSize]);
 
+  useEffect(() => {
+    updateUrl();
+  }, [page, pageSize, post]);
+
   const onPageChange = (page: number, pageSize: number) => {
-    // content 비우기
     dispatch(cleanContent());
+    dispatch(cleanPost());
 
     setPageSize(pageSize);
     setPage(page);
   };
+
   const updateUrl = () => {
-    setSearchParams({ page: page.toString(), pageSize: pageSize.toString() });
+    if (post) {
+      const newParam = { page: page.toString(), pageSize: pageSize.toString(), no: post.id.toString() };
+      setSearchParams(newParam);
+    } else {
+      const newParam = { page: page.toString(), pageSize: pageSize.toString() };
+      setSearchParams(newParam);
+    }
   };
-  const getContent = (content_FK: number) => {
-    dispatch(action.getPostContent({ content_FK: content_FK }));
+  const getContent = (post: Post) => {
+    dispatch(action.getPostInfo({ postId: post.id }));
   };
 
   return (
-    <>
-      {content ? <PostContent content={content}></PostContent> : <></>}
+    <div className='list__wrapper'>
+      {content && post ? <PostContent post={post} content={content}></PostContent> : <></>}
       <PostTable
         posts={postList}
-        onClick={content_FK => {
-          getContent(content_FK);
+        onClick={post => {
+          getContent(post);
         }}
       />
       <Pagination
@@ -73,6 +89,6 @@ export default function List() {
           onPageChange(newPage, pageSize);
         }}
       />
-    </>
+    </div>
   );
 }
