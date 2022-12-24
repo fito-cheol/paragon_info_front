@@ -14,7 +14,7 @@ export default function PostTable({ posts, onClick }: Props) {
   useEffect(() => {
     const newPostElements: JSX.Element[] = [];
     newPostElements.push(
-      <>
+      <Grid container xs={12} key='Header'>
         <Grid className='' xs={2}>
           <Typography variant='h6'>번호</Typography>
         </Grid>
@@ -27,10 +27,10 @@ export default function PostTable({ posts, onClick }: Props) {
         <Grid xs={2}>
           <Typography variant='h6'>조회</Typography>
         </Grid>
-      </>,
+      </Grid>,
     );
 
-    posts.map(post => {
+    posts.map((post, index) => {
       const postDate: Date = new Date(Date.parse(post.create_date));
 
       let dateString = `${postDate.getHours()}:${postDate.getMinutes()}`;
@@ -41,7 +41,7 @@ export default function PostTable({ posts, onClick }: Props) {
       }
 
       newPostElements.push(
-        <>
+        <Grid container xs={12} key={index}>
           <Grid xs={2}>{post.id}</Grid>
           <Grid xs={6}>
             <Link
@@ -57,7 +57,7 @@ export default function PostTable({ posts, onClick }: Props) {
           </Grid>
           <Grid xs={2}>{dateString}</Grid>
           <Grid xs={2}>{post.click_cnt}</Grid>
-        </>,
+        </Grid>,
       );
     });
 

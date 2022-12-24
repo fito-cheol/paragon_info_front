@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from 'axios';
 import cookies from 'js-cookie';
 
 import setupInterceptorsTo from './errorHandler';
-import { checkToken } from './tokenCheker';
+import { checkLogin } from './loginChecker';
 
 const SERVER_ADDRESS = process.env.REACT_APP_BACK_END_POINT;
 
@@ -15,7 +15,7 @@ const customAxios: AxiosInstance = axios.create({
   },
 });
 
-// customAxios.interceptors.request.use(checkToken);
+customAxios.interceptors.request.use(checkLogin);
 
 setupInterceptorsTo(customAxios);
 

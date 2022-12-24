@@ -7,8 +7,9 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
-import Button from 'components/button/ColoredButton';
 import ToggleColorMode from 'components/button/ToggleColorMode';
+import Button from 'components/button/ColoredButton';
+import SocialLogin from 'components/button/GoogleLogin';
 
 export default function ButtonAppBar() {
   return (
@@ -32,6 +33,7 @@ export default function ButtonAppBar() {
           </Link>
           <Typography sx={{ flexGrow: 1 }}></Typography>
           <ToggleColorMode />
+          <SocialLogin />
         </Toolbar>
       </AppBar>
     </Box>

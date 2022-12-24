@@ -4,7 +4,8 @@ import logger from 'redux-logger';
 import ReduxThunk from 'redux-thunk';
 import * as reduxThunk from 'redux-thunk/extend-redux';
 
-const middleware = new MiddlewareArray().concat(logger, ReduxThunk);
+// const middleware = new MiddlewareArray().concat(logger, ReduxThunk);
+const middleware = new MiddlewareArray().concat(ReduxThunk);
 const store = configureStore({
   reducer,
   middleware,

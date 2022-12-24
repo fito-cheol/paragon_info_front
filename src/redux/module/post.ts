@@ -117,7 +117,7 @@ const todosSlice = createSlice({
         state.error = null;
         state.loading = true;
       })
-      .addCase(uploadPost.fulfilled, (state, { payload }) => {
+      .addCase(uploadPost.fulfilled, state => {
         state.error = null;
         state.loading = false;
       })
@@ -147,7 +147,6 @@ const todosSlice = createSlice({
         state.loading = false;
         state.post = payload.post;
         state.content = payload.content;
-        console.log('~~~~~~~~', payload);
       })
       .addCase(getPostInfo.rejected, (state, { payload }) => {
         state.error = payload ? payload.errorMessage : null;

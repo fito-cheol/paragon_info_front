@@ -19,7 +19,7 @@ interface Props {
 }
 
 export default function PostTable({ post, content }: Props) {
-  const { id, hero_FK, skill_list, start_item_list, end_item_list, possible_item_list, text } = content;
+  const { hero_FK, skill_list, start_item_list, end_item_list, possible_item_list, text } = content;
   const [skillTreeArray, setSkillTreeArray] = useState<SkillTree[]>([]);
   const [dateString, setDateString] = useState<string>('');
   const [startItems, setStartItems] = useState<Item[]>([]);

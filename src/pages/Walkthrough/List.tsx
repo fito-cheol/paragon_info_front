@@ -75,6 +75,7 @@ export default function List() {
   return (
     <div className='list__wrapper'>
       {content && post ? <PostContent post={post} content={content}></PostContent> : <></>}
+      <div> 수정, 삭제 버튼 </div>
       <PostTable
         posts={postList}
         onClick={post => {
