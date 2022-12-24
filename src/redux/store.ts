@@ -4,8 +4,12 @@ import logger from 'redux-logger';
 import ReduxThunk from 'redux-thunk';
 import * as reduxThunk from 'redux-thunk/extend-redux';
 
-// const middleware = new MiddlewareArray().concat(logger, ReduxThunk);
-const middleware = new MiddlewareArray().concat(ReduxThunk);
+const middlewareList: any[] = [ReduxThunk];
+if (process.env.NODE_ENV === 'development') {
+  middlewareList.push(logger);
+}
+
+const middleware = new MiddlewareArray().concat(...middlewareList);
 const store = configureStore({
   reducer,
   middleware,
