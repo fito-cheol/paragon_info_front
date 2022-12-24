@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 
 import { upload, list, getTotalCount, getPost, getContent } from 'api/post/index';
 
@@ -10,6 +10,7 @@ type SuccessReturn = string;
 
 interface ErrorReturn {
   errorMessage: string;
+  response: AxiosResponse<unknown, any> | undefined;
 }
 
 const uploadPost = createAsyncThunk<
@@ -19,10 +20,12 @@ const uploadPost = createAsyncThunk<
 >('post/uploadPost', async (postInfo, { rejectWithValue }) => {
   try {
     const result = await upload(postInfo);
+
     return result as any;
   } catch (error) {
-    const { message } = error as unknown as AxiosError;
-    return rejectWithValue({ errorMessage: message });
+    const { message, response } = error as unknown as AxiosError;
+
+    return rejectWithValue({ errorMessage: message, response });
   }
 });
 
@@ -35,8 +38,8 @@ const listPost = createAsyncThunk<
     const result = await list(postInfo);
     return result as any;
   } catch (error) {
-    const { message } = error as unknown as AxiosError;
-    return rejectWithValue({ errorMessage: message });
+    const { message, response } = error as unknown as AxiosError;
+    return rejectWithValue({ errorMessage: message, response });
   }
 });
 
@@ -49,8 +52,8 @@ const getPostInfo = createAsyncThunk<
     const result = await getPost(postId);
     return result as any;
   } catch (error) {
-    const { message } = error as unknown as AxiosError;
-    return rejectWithValue({ errorMessage: message });
+    const { message, response } = error as unknown as AxiosError;
+    return rejectWithValue({ errorMessage: message, response });
   }
 });
 
@@ -63,8 +66,8 @@ const getPostContent = createAsyncThunk<
     const result = await getContent(contentId);
     return result as any;
   } catch (error) {
-    const { message } = error as unknown as AxiosError;
-    return rejectWithValue({ errorMessage: message });
+    const { message, response } = error as unknown as AxiosError;
+    return rejectWithValue({ errorMessage: message, response });
   }
 });
 
@@ -77,8 +80,8 @@ const getPostCount = createAsyncThunk<
     const result = await getTotalCount();
     return result as any;
   } catch (error) {
-    const { message } = error as unknown as AxiosError;
-    return rejectWithValue({ errorMessage: message });
+    const { message, response } = error as unknown as AxiosError;
+    return rejectWithValue({ errorMessage: message, response });
   }
 });
 

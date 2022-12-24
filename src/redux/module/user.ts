@@ -1,6 +1,6 @@
 import cookies from 'js-cookie';
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 
 import { googleLogin, updateNickname } from 'api/user/index';
 
@@ -11,6 +11,7 @@ type SuccessReturn = string;
 
 interface ErrorReturn {
   errorMessage: string;
+  response: AxiosResponse<unknown, any> | undefined;
 }
 interface LoginForamt {
   clientId: string;
@@ -18,6 +19,9 @@ interface LoginForamt {
 }
 
 interface UpdateNickFormat {
+  nickname: string;
+}
+interface UpdateNickSuccessReturn {
   nickname: string;
 }
 interface LoginSuccessReturn {
@@ -36,8 +40,22 @@ const userLoginGoogle = createAsyncThunk<
     const result = await googleLogin(postInfo);
     return result as any;
   } catch (error) {
-    const { message } = error as unknown as AxiosError;
-    return rejectWithValue({ errorMessage: message });
+    const { message, response } = error as unknown as AxiosError;
+    return rejectWithValue({ errorMessage: message, response });
+  }
+});
+
+const userUpdateNicknane = createAsyncThunk<
+  UpdateNickSuccessReturn,
+  UpdateNickFormat,
+  { rejectValue: ErrorReturn } // thunkApi 정의({dispatch?, state?, extra?, rejectValue?})
+>('user/updateNickname', async (nickInfo, { rejectWithValue }) => {
+  try {
+    const result = await updateNickname(nickInfo);
+    return result as any;
+  } catch (error) {
+    const { message, response } = error as unknown as AxiosError;
+    return rejectWithValue({ errorMessage: message, response });
   }
 });
 
@@ -72,6 +90,10 @@ const userSlice = createSlice({
       cookies.set('credential', payload.credential);
       cookies.set('nickname', payload.nickname);
     },
+    updateNick(state, { payload }) {
+      state.nickname = payload.nickname;
+      cookies.set('nickname', payload.nickname);
+    },
   },
   extraReducers: builder => {
     builder
@@ -86,6 +108,19 @@ const userSlice = createSlice({
         userSlice.caseReducers.logIn(state, action);
       })
       .addCase(userLoginGoogle.rejected, (state, { payload }) => {
+        state.error = payload ? payload.errorMessage : null;
+        state.loading = false;
+      })
+      .addCase(userUpdateNicknane.pending, state => {
+        state.error = null;
+        state.loading = true;
+      })
+      .addCase(userUpdateNicknane.fulfilled, (state, action) => {
+        state.error = null;
+        state.loading = false;
+        userSlice.caseReducers.updateNick(state, action);
+      })
+      .addCase(userUpdateNicknane.rejected, (state, { payload }) => {
         state.error = payload ? payload.errorMessage : null;
         state.loading = false;
       });
