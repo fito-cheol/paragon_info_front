@@ -25,7 +25,6 @@ const onResponseSuccess = (response: AxiosResponse): any => {
 
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {
   handleError(error?.response?.data);
-  console.warn(error?.response?.status);
   return Promise.reject(error);
 };
 

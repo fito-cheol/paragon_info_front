@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { GoogleLogin, googleLogout, CredentialResponse } from '@react-oauth/google';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import jwt_decode from 'jwt-decode';
 
 import type { RootState } from 'redux/store';
 import { action, logOut } from 'redux/module/user';
