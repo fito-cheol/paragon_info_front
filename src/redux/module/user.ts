@@ -63,14 +63,14 @@ interface PostState {
   loading: boolean;
   error: null | string;
   isSignIn: boolean;
-  nickname: string;
+  user: User | null;
 }
 
 const initialState: PostState = {
   loading: false,
   error: null,
   isSignIn: cookies.get('clientId') ? true : false,
-  nickname: cookies.get('nickname') || '',
+  user: null,
 };
 
 const userSlice = createSlice({
@@ -85,13 +85,22 @@ const userSlice = createSlice({
     },
     logIn(state, { payload }) {
       state.isSignIn = true;
-      state.nickname = payload.nickname;
+      state.user = {
+        nickname: payload.nickname,
+        clientId: payload.clientId,
+      };
+      console.log('Login', payload);
       cookies.set('clientId', payload.clientId);
       cookies.set('credential', payload.credential);
       cookies.set('nickname', payload.nickname);
     },
     updateNick(state, { payload }) {
-      state.nickname = payload.nickname;
+      if (state.user) {
+        state.user = {
+          ...state.user,
+          nickname: payload.nickname,
+        };
+      }
       cookies.set('nickname', payload.nickname);
     },
   },

@@ -34,16 +34,22 @@ export default function PostTable({ post, content }: Props) {
 
   useEffect(() => {
     let newItemKeyArray = start_item_list.split(',');
-    const newStartItems = newItemKeyArray.map(itemKey => itemDict[itemKey]);
+    const newStartItems = newItemKeyArray.map(itemKey => itemDict[itemKey]).filter(e => e);
     setStartItems(newStartItems);
 
     newItemKeyArray = end_item_list.split(',');
-    const newEndItems = newItemKeyArray.map(itemKey => itemDict[itemKey]);
+    const newEndItems = newItemKeyArray.map(itemKey => itemDict[itemKey]).filter(e => e);
     setEndItems(newEndItems);
 
     newItemKeyArray = possible_item_list.split(',');
-    const newPossibleItems = newItemKeyArray.map(itemKey => itemDict[itemKey]);
+    const newPossibleItems = newItemKeyArray.map(itemKey => itemDict[itemKey]).filter(e => e);
     setPossibleItems(newPossibleItems);
+    console.log(
+      'start_item_list, end_item_list, possible_item_list',
+      start_item_list,
+      end_item_list,
+      possible_item_list,
+    );
   }, [start_item_list, end_item_list, possible_item_list]);
 
   useEffect(() => {

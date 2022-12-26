@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import cookies from 'js-cookie';
+import Grid from '@mui/material/Unstable_Grid2';
+
+import { useNavigate } from 'react-router-dom';
 
 import type { RootState } from 'redux/store';
-import { action, cleanContent, cleanPost } from 'redux/module/post';
+import { action, cleanSelectedPost } from 'redux/module/post';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 
 import Pagination from 'components/viewer/Pagination';
 import PostTable from 'components/viewer/PostTable';
 import PostContent from 'components/viewer/PostContent';
+import PostButtonList from 'components/button/PostButtonList';
 
 import './List.scoped.scss';
 
@@ -20,11 +25,14 @@ export default function List() {
 
   const [pageSize, setPageSize] = useState<number>(queryPageSize ? Number(queryPageSize) : 10);
   const [page, setPage] = useState<number>(queryPage ? Number(queryPage) : 1);
+  const [canDeletePost, setCanDeletePost] = useState<boolean>(false);
+  const [canModifyPost, setCanModifyPost] = useState<boolean>(false);
   const totalCount = useAppSelector((state: RootState) => state.post.totalCount);
   const postList = useAppSelector((state: RootState) => state.post.postList);
-  const content = useAppSelector((state: RootState) => state.post.content);
-  const post = useAppSelector((state: RootState) => state.post.post);
+  const selectedPost = useAppSelector((state: RootState) => state.post.selectedPost);
+  const user = useAppSelector((state: RootState) => state.user.user);
 
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   // mounted
@@ -34,34 +42,41 @@ export default function List() {
       dispatch(action.getPostInfo({ postId: Number(no) }));
     }
   }, []);
+
   // computed
   useEffect(() => {
-    // post 총 갯수 가져오기
     dispatch(action.getPostCount(null));
-
-    // postList 가져오기
     const pageInfo = {
       page,
       pageSize,
     };
     dispatch(action.listPost(pageInfo));
   }, [page, pageSize]);
+  useEffect(() => {
+    if (!selectedPost) {
+      setCanDeletePost(false);
+      setCanModifyPost(false);
+    } else if (user) {
+      const isOwner = selectedPost.user.clientId == user.clientId;
+      setCanDeletePost(isOwner);
+      setCanModifyPost(isOwner);
+    }
+  }, [selectedPost]);
 
   useEffect(() => {
     updateUrl();
-  }, [page, pageSize, post]);
+  }, [page, pageSize, selectedPost]);
 
   const onPageChange = (page: number, pageSize: number) => {
-    dispatch(cleanContent());
-    dispatch(cleanPost());
+    dispatch(cleanSelectedPost());
 
     setPageSize(pageSize);
     setPage(page);
   };
 
   const updateUrl = () => {
-    if (post) {
-      const newParam = { page: page.toString(), pageSize: pageSize.toString(), no: post.id.toString() };
+    if (selectedPost) {
+      const newParam = { page: page.toString(), pageSize: pageSize.toString(), no: selectedPost.post.id.toString() };
       setSearchParams(newParam);
     } else {
       const newParam = { page: page.toString(), pageSize: pageSize.toString() };
@@ -71,11 +86,30 @@ export default function List() {
   const getContent = (post: Post) => {
     dispatch(action.getPostInfo({ postId: post.id }));
   };
+  const writeHandler = () => {
+    // link
+    console.log('link to writePage');
+    navigate('/Walkthrough', { replace: true });
+  };
+  const deleteHandler = () => {
+    if (selectedPost) {
+      dispatch(action.postDelete({ postId: selectedPost.post.id }));
+    }
+  };
+  const modifyHandler = () => {
+    navigate('/', { replace: false });
+  };
 
   return (
     <div className='list__wrapper'>
-      {content && post ? <PostContent post={post} content={content}></PostContent> : <></>}
-      <div> 수정, 삭제 버튼 </div>
+      {selectedPost ? <PostContent post={selectedPost.post} content={selectedPost.content}></PostContent> : <></>}
+      <PostButtonList
+        canDelete={canDeletePost}
+        canModify={canModifyPost}
+        onDelete={deleteHandler}
+        onModify={modifyHandler}
+        onWrite={writeHandler}
+      />
       <PostTable
         posts={postList}
         onClick={post => {

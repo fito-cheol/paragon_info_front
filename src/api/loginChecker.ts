@@ -5,7 +5,7 @@ import * as jwt from 'jsonwebtoken';
 export const checkLogin = async (config: AxiosRequestConfig) => {
   const clientId = cookies.get('clientId');
   const credential = cookies.get('credential');
-
+  console.log('Add Header', clientId);
   // early return
   if (!clientId && !credential) {
     if (config && config.headers) {

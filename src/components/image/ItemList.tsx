@@ -19,16 +19,18 @@ export default function ImageItemList({ itemList, onClick }: ImageItemListProps)
   // computed
   useEffect(() => {
     setItemElements(
-      itemList.map((item, index) => (
-        <Grid xs='auto' key={`${index}__${item.name}`}>
-          <ImageItem
-            item={item}
-            onClick={item => {
-              if (onClick) onClick({ index, item });
-            }}
-          />
-        </Grid>
-      )),
+      itemList.map((item, index) => {
+        return (
+          <Grid xs='auto' key={`${index}__${item.name}`}>
+            <ImageItem
+              item={item}
+              onClick={item => {
+                if (onClick) onClick({ index, item });
+              }}
+            />
+          </Grid>
+        );
+      }),
     );
   }, [itemList]);
 

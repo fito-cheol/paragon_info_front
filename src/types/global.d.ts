@@ -138,9 +138,18 @@ declare global {
     possible_item_list: string;
     text: string;
   }
+  interface User {
+    nickname: string;
+    clientId: string;
+  }
   interface GetPostFormat {
     postId: number;
   }
+  interface UpdatePostFormat extends GetPostFormat, Content {
+    title: string;
+  }
+  interface DeletePostFormat extends GetPostFormat {}
+
   interface GetContentFormat {
     content_FK: number;
   }
