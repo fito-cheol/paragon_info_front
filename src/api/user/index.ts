@@ -13,6 +13,7 @@ interface LoginSuccessReturn {
   message: string;
   clientId: string;
   credential: string;
+  nickname: string;
 }
 interface UpdateNickSuccessReturn {
   nickname: string;

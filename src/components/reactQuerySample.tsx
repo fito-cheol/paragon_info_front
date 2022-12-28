@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getTotalCount, getPost, list } from 'api/post/index';
+import { getTotalCount } from 'api/post/index';
 import { useQuery } from 'react-query';
 import { AxiosError } from 'axios';
 

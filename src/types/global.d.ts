@@ -140,7 +140,7 @@ declare global {
   }
   interface User {
     nickname: string;
-    credential?: string;
+    credential: string;
     clientId: string;
   }
   interface GetPostFormat {

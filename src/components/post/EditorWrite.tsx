@@ -21,9 +21,6 @@ interface Props {
 export default function EditorWrite({ initialValue, onChange }: Props) {
   const editorRef = createRef() as MutableRefObject<Editor>;
 
-  const clickHandler = () => {
-    const markDownData = editorRef.current.getInstance().getMarkdown();
-  };
   const onChangeHandler = () => {
     if (onChange) {
       const markDownData = editorRef.current.getInstance().getMarkdown();
@@ -86,9 +83,6 @@ export default function EditorWrite({ initialValue, onChange }: Props) {
           },
         }}
       />
-      <Button variant='outlined' onClick={clickHandler}>
-        TEST BUTTON
-      </Button>
     </>
   );
 }

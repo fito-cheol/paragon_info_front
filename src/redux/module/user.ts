@@ -67,8 +67,9 @@ interface PostState {
 }
 
 const clientIdInit = cookies.get('clientId');
+const credentialInit = cookies.get('credential');
 const nicknameInit = cookies.get('nickname');
-const isInitCookie = !!clientIdInit && !!nicknameInit;
+const isInitCookie = !!clientIdInit && !!nicknameInit && !!credentialInit;
 
 const initialState: PostState = {
   loading: false,
@@ -77,6 +78,7 @@ const initialState: PostState = {
   user: isInitCookie
     ? {
         clientId: clientIdInit,
+        credential: credentialInit,
         nickname: nicknameInit,
       }
     : null,
@@ -97,6 +99,7 @@ const userSlice = createSlice({
       state.isSignIn = true;
       state.user = {
         nickname: payload.nickname,
+        credential: payload.credential,
         clientId: payload.clientId,
       };
       cookies.set('clientId', payload.clientId);
