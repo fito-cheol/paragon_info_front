@@ -9,9 +9,11 @@ interface UpdateNickFormat {
 }
 
 export async function googleLogin(data: LoginForamt) {
-  return await customAxios.post('/user/googleLogin', data);
+  const response = await customAxios.post('/user/googleLogin', data);
+  return response.data;
 }
 
 export async function updateNickname(data: UpdateNickFormat) {
-  return await customAxios.post('/user/updateNickname', data);
+  const response = await customAxios.post('/user/updateNickname', data);
+  return response.data;
 }

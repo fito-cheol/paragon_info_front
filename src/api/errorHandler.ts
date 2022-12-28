@@ -20,7 +20,7 @@ const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
 };
 
 const onResponseSuccess = (response: AxiosResponse): any => {
-  return response.data;
+  return response;
 };
 
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {
