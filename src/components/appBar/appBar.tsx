@@ -25,7 +25,7 @@ export default function ButtonAppBar() {
           <Link to='/hero' style={{ textDecoration: 'none' }}>
             <Button>영웅</Button>
           </Link>
-          <Link to='/Walkthrough' style={{ textDecoration: 'none' }}>
+          <Link to='/walkthrough' style={{ textDecoration: 'none' }}>
             <Button>공략쓰기</Button>
           </Link>
           <Link to='/list' style={{ textDecoration: 'none' }}>

@@ -7,8 +7,11 @@ export async function list(data: ListFormat) {
   return await customAxios.get('/post/listPost', { params: data });
 }
 
+interface successReturn {
+  totalCount: number;
+}
 export async function getTotalCount() {
-  return await customAxios.get('/post/totalCount');
+  return await customAxios.get<successReturn>('/post/totalCount');
 }
 
 export async function getPost(data: GetPostFormat) {

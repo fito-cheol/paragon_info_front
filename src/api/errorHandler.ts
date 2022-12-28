@@ -7,11 +7,11 @@ import { isObject, isEmpty } from 'lodash';
 const API_DEFAULT_MESSAGE_REQUEST = 'The request is invalid';
 
 function handleError(serverError: any) {
-  if (isObject(serverError)) {
-    Object.entries(serverError).forEach(([, value]) => {
-      const errorMessage = isEmpty(value) ? API_DEFAULT_MESSAGE_REQUEST : value;
-      toast.error(`${errorMessage}`);
-    });
+  if (serverError?.errorMessage) {
+    if (serverError?.errorMessage == '디비에 등록되지 않은 토큰') {
+      // https://stackoverflow.com/questions/45043219/calling-dispatch-function-from-a-blank-javascript-file
+      // toast.error(`로그아웃 되었습니다. 다시로그인 해주세요`);
+    }
   }
 }
 

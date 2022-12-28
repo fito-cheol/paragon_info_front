@@ -89,7 +89,7 @@ export default function List() {
   const writeHandler = () => {
     // link
     console.log('link to writePage');
-    navigate('/Walkthrough', { replace: true });
+    navigate('/walkthrough', { replace: true });
   };
   const deleteHandler = () => {
     if (selectedPost) {

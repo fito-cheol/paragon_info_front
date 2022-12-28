@@ -3,7 +3,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 import ReduxSample from 'components/reduxSample';
 import ReduxAxiosSample from 'components/reduxAxiosSample';
-
+import ReactQuerySample from 'components/reactQuerySample';
 export default function Test() {
   return (
     <Grid container>
@@ -12,6 +12,9 @@ export default function Test() {
       </Grid>
       <Grid xs={12}>
         <ReduxAxiosSample />
+      </Grid>
+      <Grid xs={12}>
+        <ReactQuerySample />
       </Grid>
     </Grid>
   );

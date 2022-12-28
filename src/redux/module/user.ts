@@ -66,11 +66,20 @@ interface PostState {
   user: User | null;
 }
 
+const clientIdInit = cookies.get('clientId');
+const nicknameInit = cookies.get('nickname');
+const isInitCookie = !!clientIdInit && !!nicknameInit;
+
 const initialState: PostState = {
   loading: false,
   error: null,
-  isSignIn: cookies.get('clientId') ? true : false,
-  user: null,
+  isSignIn: isInitCookie,
+  user: isInitCookie
+    ? {
+        clientId: clientIdInit,
+        nickname: nicknameInit,
+      }
+    : null,
 };
 
 const userSlice = createSlice({
@@ -79,6 +88,7 @@ const userSlice = createSlice({
   reducers: {
     logOut(state) {
       state.isSignIn = false;
+      state.user = null;
       cookies.remove('clientId');
       cookies.remove('credential');
       cookies.remove('nickname');
@@ -89,7 +99,6 @@ const userSlice = createSlice({
         nickname: payload.nickname,
         clientId: payload.clientId,
       };
-      console.log('Login', payload);
       cookies.set('clientId', payload.clientId);
       cookies.set('credential', payload.credential);
       cookies.set('nickname', payload.nickname);

@@ -8,6 +8,8 @@ import WalkthroughWrite from './pages/Walkthrough/Write';
 import List from './pages/Walkthrough/List';
 import AppBar from './components/appBar/appBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
 import merge from 'ts-deepmerge';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -15,6 +17,15 @@ import { createTheme, ThemeProvider, responsiveFontSizes, Theme } from '@mui/mat
 import { getDesignTokens, getThemedComponents } from './theme/Theme';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ColorModeContext } from './context/ColorModeContext';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // ✅ globally default to 600 seconds
+      staleTime: 1000 * 600,
+    },
+  },
+});
 
 function App() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -39,22 +50,24 @@ function App() {
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <CssBaseline />
-          <AppBar />
-          <div className='container'>
-            <div className={`labeling__wrapper labeling__wrapper--${theme.palette.mode}`}>
-              <Routes>
-                <Route path='item' element={<ItemList />} />
-                <Route path='hero' element={<HeroList />} />
-                <Route path='Walkthrough' element={<WalkthroughWrite />} />
-                <Route path='list' element={<List />} />
-                <Route path='Test' element={<TestPage />} />
-                <Route path='*' element={<HomeMain />} />
-              </Routes>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <CssBaseline />
+            <AppBar />
+            <div className='container'>
+              <div className={`labeling__wrapper labeling__wrapper--${theme.palette.mode}`}>
+                <Routes>
+                  <Route path='item' element={<ItemList />} />
+                  <Route path='hero' element={<HeroList />} />
+                  <Route path='walkthrough' element={<WalkthroughWrite />} />
+                  <Route path='list' element={<List />} />
+                  <Route path='Test' element={<TestPage />} />
+                  <Route path='*' element={<HomeMain />} />
+                </Routes>
+              </div>
             </div>
-          </div>
-        </BrowserRouter>
+          </BrowserRouter>
+        </QueryClientProvider>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { GoogleLogin, googleLogout, CredentialResponse } from '@react-oauth/google';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import jwtDecode from 'jwt-decode';
 
 import type { RootState } from 'redux/store';
 import { action, logOut } from 'redux/module/user';
@@ -16,6 +17,7 @@ export default function GoogleLogIn() {
     const { clientId, credential } = credentialResponse;
 
     if (clientId && credential) {
+      console.log(jwtDecode(credential));
       dispatch(action.userLoginGoogle({ clientId, credential }));
     }
   };

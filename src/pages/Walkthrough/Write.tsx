@@ -108,7 +108,6 @@ export default function Write() {
         text: editorData,
         title: title,
       };
-      console.log('내보낼 데이터', exportData);
       dispatch(action.uploadPost(exportData));
     }
   };
