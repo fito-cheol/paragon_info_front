@@ -5,8 +5,6 @@ import jwtDecode from 'jwt-decode';
 import cookies from 'js-cookie';
 
 import { googleLogin } from 'api/user/index';
-import { useQuery } from 'react-query';
-import { AxiosError } from 'axios';
 
 import Button from '@mui/material/Button';
 
@@ -72,7 +70,7 @@ export default function GoogleLogIn() {
           />
         </GoogleOAuthProvider>
       ) : (
-        <Button variant='outlined' color='info' onClick={() => logoutHandler()}>
+        <Button style={{ margin: '5px' }} variant='contained' color='primary' onClick={() => logoutHandler()}>
           로그아웃
         </Button>
       )}

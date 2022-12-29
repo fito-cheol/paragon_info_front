@@ -1,5 +1,4 @@
 import React, { createRef, MutableRefObject } from 'react';
-import Button from '@mui/material/Button';
 
 // https://www.npmjs.com/package/@toast-ui/react-editor
 import '@toast-ui/editor/dist/toastui-editor.css';
