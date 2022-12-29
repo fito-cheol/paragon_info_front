@@ -12,9 +12,9 @@ import SkillTree from 'components/image/SkillTree';
 import ImageItemList from 'components/image/ItemList';
 import ItemListWithFilter from 'components/combined/ItemListWithFilter';
 
+import { upload } from 'api/post/index';
+
 import './Write.scoped.scss';
-import { action } from 'redux/module/post';
-import { useAppDispatch } from 'redux/hooks';
 
 export default function Write() {
   const [title, setTitle] = useState<string>('');
@@ -27,8 +27,6 @@ export default function Write() {
   const [filter, setFilter] = useState<AttributeCheck | undefined>(undefined);
   const [editorData, setEditorData] = useState<string>(' ');
   const [selectedHeroName, setSelectedHeroName] = useState<string | null>(null);
-
-  const dispatch = useAppDispatch();
 
   // onMount
   useEffect(() => {
@@ -93,7 +91,7 @@ export default function Write() {
   const closeItemSelect = () => {
     setClickedRow(-1);
   };
-  const saveData = () => {
+  const saveData = async () => {
     // FIXME: form validation check 할것
     if (selectedHeroName == null) {
       console.warn('선택된 영웅이 없습니다');
@@ -108,7 +106,7 @@ export default function Write() {
         text: editorData,
         title: title,
       };
-      dispatch(action.uploadPost(exportData));
+      await upload(exportData);
     }
   };
 
@@ -146,7 +144,7 @@ export default function Write() {
         <Grid xs={6} md={4} lg={3}>
           <TextField
             fullWidth
-            id='outlined-basic'
+            id='title'
             label='제목 *필수*'
             variant='outlined'
             value={title}
