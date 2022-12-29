@@ -6,8 +6,11 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { useNavigate } from 'react-router-dom';
 
 import type { RootState } from 'redux/store';
-import { action, cleanSelectedPost } from 'redux/module/post';
-import { useAppSelector, useAppDispatch } from 'redux/hooks';
+import { useAppSelector } from 'redux/hooks';
+
+import { getTotalCount, list, getPost, deletePost } from 'api/post/index';
+import { useQuery, useMutation } from 'react-query';
+import { AxiosError } from 'axios';
 
 import Pagination from 'components/viewer/Pagination';
 import PostTable from 'components/viewer/PostTable';
@@ -15,7 +18,11 @@ import PostContent from 'components/viewer/PostContent';
 import PostButtonList from 'components/button/PostButtonList';
 
 import './List.scoped.scss';
-
+interface PostFullInfo {
+  post: Post;
+  content: Content;
+  user: User;
+}
 export default function List() {
   // router 관련
   const [searchParams, setSearchParams] = useSearchParams();
@@ -27,37 +34,48 @@ export default function List() {
   const [page, setPage] = useState<number>(queryPage ? Number(queryPage) : 1);
   const [canDeletePost, setCanDeletePost] = useState<boolean>(false);
   const [canModifyPost, setCanModifyPost] = useState<boolean>(false);
-  const totalCount = useAppSelector((state: RootState) => state.post.totalCount);
-  const postList = useAppSelector((state: RootState) => state.post.postList);
-  const selectedPost = useAppSelector((state: RootState) => state.post.selectedPost);
-  const user = useAppSelector((state: RootState) => state.user.user);
+  const [postList, setPostList] = useState<Post[]>([]);
+  const [selectedPost, setSelectedPost] = useState<PostFullInfo | null>(null);
 
+  const totalCountQuery = useQuery<ReturnCount, AxiosError, number>('repoData', () => getTotalCount(), {
+    select: res => res.totalCount,
+    placeholderData: { totalCount: 0 },
+  });
+  const postListMutation = useMutation(list, {
+    onSuccess: postList => {
+      setPostList(postList);
+    },
+  });
+  const postMutation = useMutation(getPost, {
+    onSuccess: post => {
+      setSelectedPost(post);
+    },
+  });
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
 
   // mounted
   useEffect(() => {
     // post 가져오기
     if (no) {
-      dispatch(action.getPostInfo({ postId: Number(no) }));
+      postMutation.mutate({ postId: Number(no) });
     }
   }, []);
 
   // computed
   useEffect(() => {
-    dispatch(action.getPostCount(null));
     const pageInfo = {
       page,
       pageSize,
     };
-    dispatch(action.listPost(pageInfo));
+    postListMutation.mutate(pageInfo);
   }, [page, pageSize]);
+
   useEffect(() => {
     if (!selectedPost) {
       setCanDeletePost(false);
       setCanModifyPost(false);
-    } else if (user) {
-      const isOwner = selectedPost.user.clientId == user.clientId;
+    } else {
+      const isOwner = selectedPost.user.clientId == cookies.get('clientId');
       setCanDeletePost(isOwner);
       setCanModifyPost(isOwner);
     }
@@ -68,7 +86,7 @@ export default function List() {
   }, [page, pageSize, selectedPost]);
 
   const onPageChange = (page: number, pageSize: number) => {
-    dispatch(cleanSelectedPost());
+    setSelectedPost(null);
 
     setPageSize(pageSize);
     setPage(page);
@@ -84,16 +102,16 @@ export default function List() {
     }
   };
   const getContent = (post: Post) => {
-    dispatch(action.getPostInfo({ postId: post.id }));
+    postMutation.mutate({ postId: post.id });
   };
   const writeHandler = () => {
-    // link
-    console.log('link to writePage');
     navigate('/walkthrough', { replace: true });
   };
-  const deleteHandler = () => {
+  const deleteHandler = async () => {
     if (selectedPost) {
-      dispatch(action.postDelete({ postId: selectedPost.post.id }));
+      const response = await deletePost({ postId: selectedPost.post.id });
+      console.log(response);
+      // TODO: 삭제후 팝업 및 이동 처리
     }
   };
   const modifyHandler = () => {
@@ -118,7 +136,7 @@ export default function List() {
       />
       <Pagination
         itemsCountPerPage={pageSize}
-        totalItemsCount={totalCount}
+        totalItemsCount={totalCountQuery.data || 0}
         pageRangeDisplayed={10}
         onPageChange={newPage => {
           onPageChange(newPage, pageSize);

@@ -24,12 +24,12 @@ export async function getPost(data: GetPostFormat) {
   return response.data;
 }
 
-export async function updatePost(data: UpdatePostFormat) {
-  const response = await customAxios.get<DefaultReturn>('/post/updatePost', { params: data });
+export async function modifyPost(data: UpdatePostFormat) {
+  const response = await customAxios.post<DefaultReturn>('/post/modifyPost', data);
   return response.data;
 }
 
 export async function deletePost(data: DeletePostFormat) {
-  const response = await customAxios.get<DefaultReturn>('/post/deletePost', { params: data });
+  const response = await customAxios.post<DefaultReturn>('/post/deletePost', data);
   return response.data;
 }

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError, AxiosResponse } from 'axios';
 
-import { upload, list, getTotalCount, getPost, updatePost, deletePost } from 'api/post/index';
+import { upload, list, getTotalCount, getPost, modifyPost, deletePost } from 'api/post/index';
 
 type SuccessReturn = string;
 
@@ -27,9 +27,9 @@ const postUpdate = createAsyncThunk<
   SuccessReturn, // 성공 시 리턴 타입
   UpdatePostFormat, // First argument to the payload creator
   { rejectValue: ErrorReturn } // thunkApi 정의({dispatch?, state?, extra?, rejectValue?})
->('post/updatePost', async (postInfo, { rejectWithValue }) => {
+>('post/modifyPost', async (postInfo, { rejectWithValue }) => {
   try {
-    const result = await updatePost(postInfo);
+    const result = await modifyPost(postInfo);
     return result as any;
   } catch (error) {
     const { message, response } = error as unknown as AxiosError;

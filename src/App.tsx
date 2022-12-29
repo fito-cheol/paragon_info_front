@@ -5,10 +5,11 @@ import HeroList from './pages/Hero/List';
 import HomeMain from './pages/Home/Main';
 import TestPage from './pages/Test';
 import WalkthroughWrite from './pages/Walkthrough/Write';
-import List from './pages/Walkthrough/List';
+import List from './pages/Walkthrough/ListA';
 import AppBar from './components/appBar/appBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider, QueryCache } from 'react-query';
+import { toast } from 'react-toastify';
 
 import merge from 'ts-deepmerge';
 
@@ -19,10 +20,24 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ColorModeContext } from './context/ColorModeContext';
 
 const queryClient = new QueryClient({
+  queryCache: new QueryCache({
+    onError: (error, query) => {
+      console.log('Query Error:', error, query);
+      if (query.state.data !== undefined) {
+        toast.error(`에러가 났어요!!`);
+      }
+    },
+    onSuccess: data => {
+      console.log(data);
+    },
+  }),
   defaultOptions: {
     queries: {
       // ✅ globally default to 600 seconds
       staleTime: 1000 * 600,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      retry: false,
     },
   },
 });
