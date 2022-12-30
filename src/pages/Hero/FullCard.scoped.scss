@@ -1,0 +1,45 @@
+.fullCardMedia {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.fullCard {
+    position: relative;
+}
+
+.fullCardContent {
+    position: relative;
+    background-color: transparent;
+    height: 320px;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    background: rgb(2,0,36);
+    background: linear-gradient(0deg, rgba(2,0,36,39%) 0%, rgba(47,47,69,57%) 24%, rgba(255,255,255,0) 100%);
+
+    .iconImage {
+        opacity: 0;
+    }
+    &:hover {
+        border: solid 2px rgb(118,63,251);
+        background: rgb(118,63,251);
+        background: linear-gradient(0deg, rgba(118,63,251,1) 0%, rgba(118,63,251,0.53) 32%, rgba(118,63,251,0.3155856092436975) 100%);
+        .iconImage {
+            opacity: 1;
+        }
+    }
+
+
+}
+
+
+
+.fullCardTypography {
+    // background-color: #00000054;
+}
