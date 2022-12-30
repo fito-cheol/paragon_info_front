@@ -9,7 +9,8 @@ import List from './pages/Walkthrough/List';
 import AppBar from './components/appBar/appBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider, QueryCache } from 'react-query';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import merge from 'ts-deepmerge';
 
@@ -81,6 +82,7 @@ function App() {
                 </Routes>
               </div>
             </div>
+            <ToastContainer />
           </BrowserRouter>
         </QueryClientProvider>
       </ThemeProvider>

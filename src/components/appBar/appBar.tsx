@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from 'react-router-dom';
+import { Link, Router } from 'react-router-dom';
 import ToggleColorMode from 'components/button/ToggleColorMode';
 import Button from 'components/button/ColoredButton';
 import SocialLogin from 'components/button/GoogleLogin';
@@ -25,11 +25,8 @@ export default function ButtonAppBar() {
           <Link to='/hero' style={{ textDecoration: 'none' }}>
             <Button>영웅</Button>
           </Link>
-          <Link to='/walkthrough' style={{ textDecoration: 'none' }}>
-            <Button>공략쓰기</Button>
-          </Link>
           <Link to='/list' style={{ textDecoration: 'none' }}>
-            <Button>공략리스트</Button>
+            <Button>공략</Button>
           </Link>
           <Typography sx={{ flexGrow: 1 }}></Typography>
           <ToggleColorMode />

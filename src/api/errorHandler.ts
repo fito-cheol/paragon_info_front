@@ -2,6 +2,9 @@ import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'ax
 import { toast } from 'react-toastify';
 import { isObject, isEmpty } from 'lodash';
 
+import store from 'redux/store';
+import { logOut } from 'redux/module/user';
+
 // https://dev.to/vikirobles/how-to-create-an-auth-login-system-with-axios-interceptors-typescript-2k11
 
 const API_DEFAULT_MESSAGE_REQUEST = 'The request is invalid';
@@ -9,8 +12,10 @@ const API_DEFAULT_MESSAGE_REQUEST = 'The request is invalid';
 function handleError(serverError: any) {
   if (serverError?.errorMessage) {
     if (serverError?.errorMessage == '디비에 등록되지 않은 토큰') {
-      // https://stackoverflow.com/questions/45043219/calling-dispatch-function-from-a-blank-javascript-file
-      // toast.error(`로그아웃 되었습니다. 다시로그인 해주세요`);
+      toast.error(`로그아웃 되었습니다. 다시로그인 해주세요`);
+      store.dispatch(logOut());
+    } else if (serverError?.errorMessage == 'not logged in') {
+      toast.error(`로그인 해주세요`);
     }
   }
 }

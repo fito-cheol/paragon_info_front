@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, createSearchParams } from 'react-router-dom';
 import cookies from 'js-cookie';
+import { toast } from 'react-toastify';
 import Grid from '@mui/material/Unstable_Grid2';
 
 import { useNavigate } from 'react-router-dom';
@@ -18,13 +19,13 @@ import PostContent from 'components/viewer/PostContent';
 import PostButtonList from 'components/button/PostButtonList';
 
 import './List.scoped.scss';
+
 interface PostFullInfo {
   post: Post;
   content: Content;
   user: User;
 }
 export default function List() {
-  // router 관련
   const [searchParams, setSearchParams] = useSearchParams();
   const queryPage: string | null = searchParams.get('page');
   const queryPageSize = searchParams.get('pageSize');
@@ -36,6 +37,8 @@ export default function List() {
   const [canModifyPost, setCanModifyPost] = useState<boolean>(false);
   const [postList, setPostList] = useState<Post[]>([]);
   const [selectedPost, setSelectedPost] = useState<PostFullInfo | null>(null);
+
+  const user = useAppSelector((state: RootState) => state.user.user);
 
   const totalCountQuery = useQuery<ReturnCount, AxiosError, number>('repoData', () => getTotalCount(), {
     select: res => res.totalCount,
@@ -58,8 +61,10 @@ export default function List() {
     // post 가져오기
     if (no) {
       postMutation.mutate({ postId: Number(no) });
+    } else {
+      setSelectedPost(null);
     }
-  }, []);
+  }, [searchParams]);
 
   // computed
   useEffect(() => {
@@ -79,7 +84,7 @@ export default function List() {
       setCanDeletePost(isOwner);
       setCanModifyPost(isOwner);
     }
-  }, [selectedPost]);
+  }, [selectedPost, user]);
 
   useEffect(() => {
     updateUrl();
@@ -105,17 +110,29 @@ export default function List() {
     postMutation.mutate({ postId: post.id });
   };
   const writeHandler = () => {
-    navigate('/walkthrough', { replace: true });
+    navigate('/walkthrough', { replace: false });
   };
   const deleteHandler = async () => {
     if (selectedPost) {
       const response = await deletePost({ postId: selectedPost.post.id });
-      console.log(response);
-      // TODO: 삭제후 팝업 및 이동 처리
+      navigate('/list', { replace: false });
+      const pageInfo = {
+        page,
+        pageSize,
+      };
+      postListMutation.mutate(pageInfo);
+      toast.info('게시물이 삭제되었습니다');
     }
   };
   const modifyHandler = () => {
-    navigate('/', { replace: false });
+    // param 넘기는 방법 알아보자
+    if (no) {
+      const params = { no: no };
+      navigate({
+        pathname: '/postModify',
+        search: `?${createSearchParams(params)}`,
+      });
+    }
   };
 
   return (
