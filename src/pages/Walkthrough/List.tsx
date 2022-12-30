@@ -110,7 +110,7 @@ export default function List() {
     postMutation.mutate({ postId: post.id });
   };
   const writeHandler = () => {
-    navigate('/walkthrough', { replace: false });
+    navigate('/write', { replace: false });
   };
   const deleteHandler = async () => {
     if (selectedPost) {

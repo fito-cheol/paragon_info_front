@@ -4,7 +4,8 @@ import Autocomplete from '@mui/material/Autocomplete';
 import heroList from 'assets/hero/DB_Hero.json';
 
 interface Props {
-  onChange?: (heroName: string | null) => void;
+  value: AutocompleteOption | null;
+  onChange?: (heroInfo: AutocompleteOption | null) => void;
 }
 
 interface AutocompleteOption {
@@ -12,8 +13,7 @@ interface AutocompleteOption {
   id: string;
 }
 
-export default function autocompleteHero({ onChange }: Props) {
-  const [value, setValue] = React.useState<AutocompleteOption | null>(null);
+export default function autocompleteHero({ value, onChange }: Props) {
   const heroNameList = useMemo(() => {
     return heroList.map(heroInfo => {
       return { label: heroInfo['이름'], id: heroInfo.name };
@@ -28,11 +28,9 @@ export default function autocompleteHero({ onChange }: Props) {
       sx={{ width: 300 }}
       value={value}
       onChange={(event: any, newValue: AutocompleteOption | null) => {
-        setValue(newValue);
-
         if (onChange) {
           if (newValue) {
-            onChange(newValue.id);
+            onChange(newValue);
           } else {
             onChange(null);
           }

@@ -2,7 +2,7 @@ import customAxios from 'api/customAxios';
 
 type DefaultReturn = string;
 
-export async function upload(data: UploadForamt) {
+export async function upload(data: UploadFormat) {
   const response = await customAxios.post<DefaultReturn>('/post/uploadPost', data);
   return response.data;
 }
@@ -24,7 +24,7 @@ export async function getPost(data: GetPostFormat) {
   return response.data;
 }
 
-export async function modifyPost(data: UpdatePostFormat) {
+export async function modifyPost(data: ModifyPostFormat) {
   const response = await customAxios.post<DefaultReturn>('/post/modifyPost', data);
   return response.data;
 }

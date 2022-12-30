@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
+import _ from 'lodash';
+
 import Grid from '@mui/material/Unstable_Grid2';
 import IconButton from '@mui/material/IconButton';
 import Dialog from '@mui/material/Dialog';
@@ -12,11 +15,24 @@ import SkillTree from 'components/image/SkillTree';
 import ImageItemList from 'components/image/ItemList';
 import ItemListWithFilter from 'components/combined/ItemListWithFilter';
 
+import { getPost, modifyPost } from 'api/post/index';
+import { useMutation } from 'react-query';
 import { upload } from 'api/post/index';
 
+import heroList from 'assets/hero/DB_Hero.json';
+import itemDict from 'assets/item/itemDict';
 import './Write.scoped.scss';
 
+interface AutocompleteOption {
+  label: string;
+  id: string;
+}
+
 export default function Write() {
+  const location = useLocation();
+  const { no } = useParams();
+  const isModify = _.startsWith(location.pathname, '/modify');
+
   const [title, setTitle] = useState<string>('');
   const [skillTreeArray, setSkillTreeArray] = useState<SkillTree[]>([]);
   const [skillTreeElements, setSkillTreeElements] = useState<JSX.Element[]>([<div key={1}></div>]);
@@ -26,12 +42,46 @@ export default function Write() {
   const [isSmall, setIsSmall] = useState<boolean>(true);
   const [filter, setFilter] = useState<AttributeCheck | undefined>(undefined);
   const [editorData, setEditorData] = useState<string>(' ');
-  const [selectedHeroName, setSelectedHeroName] = useState<string | null>(null);
+  const [selectedHeroInfo, setSelectedHeroInfo] = useState<AutocompleteOption | null>(null);
 
-  // onMount
+  const postMutation = useMutation(getPost, {
+    onSuccess: post => {
+      const { title } = post.post;
+      setTitle(title);
+      const { skill_list, end_item_list, start_item_list, possible_item_list, text, hero_FK } = post.content;
+      const newSkillTreeArray = skill_list.split(',') as SkillTree[];
+      setSkillTreeArray(newSkillTreeArray);
+
+      let newItemKeyArray = start_item_list.split(',');
+      const newStartItems = newItemKeyArray.map(itemKey => itemDict[itemKey]).filter(e => e);
+
+      newItemKeyArray = end_item_list.split(',');
+      const newEndItems = newItemKeyArray.map(itemKey => itemDict[itemKey]).filter(e => e);
+
+      newItemKeyArray = possible_item_list.split(',');
+      const newPossibleItems = newItemKeyArray.map(itemKey => itemDict[itemKey]).filter(e => e);
+
+      setSelectedItemList([newStartItems, newEndItems, newPossibleItems]);
+      setEditorData(text);
+
+      _.forEach(heroList, heroInfo => {
+        if (heroInfo.name) {
+          setSelectedHeroInfo({ label: heroInfo['이름'], id: heroInfo.name });
+        }
+      });
+    },
+  });
+
+  // FIXME: no가 있는 경우 post를 불러와서 데이터 집어넣어주고
+  // modify인지 확인을 해서 나중에 저장할 떄 modify용으로 이동해주기
+
   useEffect(() => {
     const initialArray = Array(18).fill('None');
     setSkillTreeArray(initialArray);
+
+    if (isModify) {
+      postMutation.mutate({ postId: Number(no) });
+    }
   }, []);
 
   // computed
@@ -93,12 +143,24 @@ export default function Write() {
   };
   const saveData = async () => {
     // FIXME: form validation check 할것
-    if (selectedHeroName == null) {
+    if (selectedHeroInfo == null) {
       console.warn('선택된 영웅이 없습니다');
       return;
+    } else if (isModify && no) {
+      const exportData = {
+        postId: Number(no),
+        heroName: selectedHeroInfo.id,
+        skillTree: skillTreeArray,
+        startItems: selectedItemList[0].map(item => item.name),
+        endItems: selectedItemList[1].map(item => item.name),
+        possibleItems: selectedItemList[2].map(item => item.name),
+        text: editorData,
+        title: title,
+      };
+      await modifyPost(exportData);
     } else {
       const exportData = {
-        heroName: selectedHeroName,
+        heroName: selectedHeroInfo.id,
         skillTree: skillTreeArray,
         startItems: selectedItemList[0].map(item => item.name),
         endItems: selectedItemList[1].map(item => item.name),
@@ -155,7 +217,7 @@ export default function Write() {
         </Grid>
       </Grid>
       <h2> 1. 영웅 선택 </h2>
-      <AutoHero onChange={setSelectedHeroName} />
+      <AutoHero value={selectedHeroInfo} onChange={setSelectedHeroInfo} />
       <h2> 스킬트리 선택 </h2>
       <Grid container>
         <Grid xs={12}>
@@ -194,7 +256,7 @@ export default function Write() {
         />
       </Dialog>
       <Grid>
-        <EditorWrite initialValue={editorData} onChange={setEditorData}></EditorWrite>
+        <EditorWrite value={editorData} onChange={setEditorData}></EditorWrite>
       </Grid>
 
       <Button variant='contained' onClick={() => saveData()}>
