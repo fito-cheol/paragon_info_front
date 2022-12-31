@@ -7,11 +7,11 @@ import type { RootState } from 'redux/store';
 import { logIn, logOut } from 'redux/module/user';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 
-import { googleLogin } from 'api/user/index';
-
+import { toast } from 'react-toastify';
 import Button from '@mui/material/Button';
 
 import clientSecret from 'assets/gapi/client_secret.json';
+import { googleLogin } from 'api/user/index';
 
 export default function GoogleLogIn() {
   // const [userInfo, setUserInfo] = useState<User | null>(null);

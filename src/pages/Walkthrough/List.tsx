@@ -26,6 +26,8 @@ interface PostFullInfo {
   user: User;
 }
 export default function List() {
+  const navigate = useNavigate();
+
   const [searchParams, setSearchParams] = useSearchParams();
   const queryPage: string | null = searchParams.get('page');
   const queryPageSize = searchParams.get('pageSize');
@@ -54,7 +56,6 @@ export default function List() {
       setSelectedPost(post);
     },
   });
-  const navigate = useNavigate();
 
   // mounted
   useEffect(() => {
@@ -129,8 +130,8 @@ export default function List() {
     if (no) {
       const params = { no: no };
       navigate({
-        pathname: '/postModify',
-        search: `?${createSearchParams(params)}`,
+        pathname: `/modify/${no}`,
+        // search: `?${createSearchParams(params)}`,
       });
     }
   };

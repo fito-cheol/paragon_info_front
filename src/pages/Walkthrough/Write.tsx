@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import _ from 'lodash';
+
+import type { RootState } from 'redux/store';
+import { useAppSelector } from 'redux/hooks';
+
+import { toast } from 'react-toastify';
 
 import Grid from '@mui/material/Unstable_Grid2';
 import IconButton from '@mui/material/IconButton';
@@ -29,9 +34,12 @@ interface AutocompleteOption {
 }
 
 export default function Write() {
+  const navigate = useNavigate();
   const location = useLocation();
   const { no } = useParams();
   const isModify = _.startsWith(location.pathname, '/modify');
+
+  const user = useAppSelector((state: RootState) => state.user.user);
 
   const [title, setTitle] = useState<string>('');
   const [skillTreeArray, setSkillTreeArray] = useState<SkillTree[]>([]);
@@ -71,9 +79,6 @@ export default function Write() {
       });
     },
   });
-
-  // FIXME: no가 있는 경우 post를 불러와서 데이터 집어넣어주고
-  // modify인지 확인을 해서 나중에 저장할 떄 modify용으로 이동해주기
 
   useEffect(() => {
     const initialArray = Array(18).fill('None');
@@ -142,6 +147,12 @@ export default function Write() {
     setClickedRow(-1);
   };
   const saveData = async () => {
+    // 로그인 되어 있는지 확인하고 로그인할것
+    if (!user) {
+      toast.error('로그인이 필요한 기능입니다');
+      return;
+    }
+
     // FIXME: form validation check 할것
     if (selectedHeroInfo == null) {
       console.warn('선택된 영웅이 없습니다');
@@ -158,6 +169,8 @@ export default function Write() {
         title: title,
       };
       await modifyPost(exportData);
+      toast.info('게시물 수정 완료');
+      navigate('/list', { replace: false });
     } else {
       const exportData = {
         heroName: selectedHeroInfo.id,
@@ -169,6 +182,8 @@ export default function Write() {
         title: title,
       };
       await upload(exportData);
+      toast.info('게시물 저장 완료');
+      navigate('/list', { replace: false });
     }
   };
 
@@ -201,7 +216,7 @@ export default function Write() {
 
   return (
     <div>
-      <h2> 공략 작성 </h2>
+      <h2> {isModify ? '공략 수정' : '공략 작성'} </h2>
       <Grid container>
         <Grid xs={6} md={4} lg={3}>
           <TextField
@@ -260,7 +275,7 @@ export default function Write() {
       </Grid>
 
       <Button variant='contained' onClick={() => saveData()}>
-        저장
+        {isModify ? '수정' : '저장'}
       </Button>
     </div>
   );

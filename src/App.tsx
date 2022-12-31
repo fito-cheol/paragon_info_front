@@ -25,7 +25,7 @@ const queryClient = new QueryClient({
     onError: (error, query) => {
       console.log('Query Error:', error, query);
       if (query.state.data !== undefined) {
-        toast.error(`에러가 났어요!!`);
+        // toast.error(`에러가 났어요!!`);
       }
     },
     onSuccess: data => {
