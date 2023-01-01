@@ -26,6 +26,7 @@ import { upload } from 'api/post/index';
 
 import heroList from 'assets/hero/DB_Hero.json';
 import itemDict from 'assets/item/itemDict';
+import heroImages from 'assets/hero/imagePreloaderHero';
 import './Write.scoped.scss';
 
 interface AutocompleteOption {
@@ -215,9 +216,11 @@ export default function Write() {
   };
 
   return (
-    <div>
-      <h2> {isModify ? '공략 수정' : '공략 작성'} </h2>
-      <Grid container>
+    <Grid container>
+      <Grid xs={12}>
+        <h2> {isModify ? '공략 수정' : '공략 작성'} </h2>
+      </Grid>
+      <Grid xs={12} container>
         <Grid xs={6} md={4} lg={3}>
           <TextField
             fullWidth
@@ -231,10 +234,24 @@ export default function Write() {
           />
         </Grid>
       </Grid>
-      <h2> 1. 영웅 선택 </h2>
-      <AutoHero value={selectedHeroInfo} onChange={setSelectedHeroInfo} />
-      <h2> 스킬트리 선택 </h2>
-      <Grid container>
+      <Grid xs={12}>
+        <h2> 1. 영웅 선택 </h2>
+      </Grid>
+      {selectedHeroInfo ? (
+        <Grid xs={12}>
+          <img src={heroImages[selectedHeroInfo?.id]} loading='lazy' width={100} height={100} />
+        </Grid>
+      ) : (
+        <></>
+      )}
+      <Grid xs={12}>
+        <AutoHero value={selectedHeroInfo} onChange={setSelectedHeroInfo} />
+      </Grid>
+
+      <Grid xs={12}>
+        <h2> 스킬트리 선택 </h2>
+      </Grid>
+      <Grid xs={12} container>
         <Grid xs={12}>
           <SkillTree type='Q' onClick={() => addSkillTree('Q')} />
           <SkillTree type='E' onClick={() => addSkillTree('E')} />
@@ -243,13 +260,21 @@ export default function Write() {
         </Grid>
         <Grid xs={12}>{skillTreeElements}</Grid>
       </Grid>
-      <h2> 아이템 선택 </h2>
-      <h3> 시작 아이템</h3>
-      {ItemAdder(0)}
-      <h3> 최종 아이템</h3>
-      {ItemAdder(1)}
-      <h3> 핵심 아이템</h3>
-      {ItemAdder(2)}
+      <Grid xs={12}>
+        <h2> 아이템 선택 </h2>
+      </Grid>
+      <Grid xs={12}>
+        <h3> 시작 아이템</h3>
+      </Grid>
+      <Grid xs={12}>{ItemAdder(0)}</Grid>
+      <Grid xs={12}>
+        <h3> 최종 아이템</h3>
+      </Grid>
+      <Grid xs={12}>{ItemAdder(1)}</Grid>
+      <Grid xs={12}>
+        <h3> 핵심 아이템</h3>
+      </Grid>
+      <Grid xs={12}>{ItemAdder(2)}</Grid>
       <Dialog
         onClose={() => {
           closeItemSelect();
@@ -270,13 +295,14 @@ export default function Write() {
           defaultIsSmall={isSmall}
         />
       </Dialog>
-      <Grid>
+      <Grid xs={12}>
         <EditorWrite value={editorData} onChange={setEditorData}></EditorWrite>
       </Grid>
-
-      <Button variant='contained' onClick={() => saveData()}>
-        {isModify ? '수정' : '저장'}
-      </Button>
-    </div>
+      <Grid container justifyContent={'flex-end'} xs={12}>
+        <Button variant='contained' onClick={() => saveData()}>
+          {isModify ? '수정' : '저장'}
+        </Button>
+      </Grid>
+    </Grid>
   );
 }
