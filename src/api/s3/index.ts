@@ -1,10 +1,10 @@
 import customAxios from 'api/customAxios';
 
-interface uploadForamt {
+interface UploadFormat {
   file: Blob | File;
 }
 
-export async function uploadImage(data: uploadForamt) {
+export async function uploadImage(data: UploadFormat) {
   const formData = new FormData();
   formData.append('file', data.file);
   const axoisFileConfig = { headers: { 'Content-Type': 'multipart/form-data' } };

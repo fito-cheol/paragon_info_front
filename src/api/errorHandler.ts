@@ -12,8 +12,8 @@ const API_DEFAULT_MESSAGE_REQUEST = 'The request is invalid';
 function handleError(serverError: any) {
   if (serverError?.errorMessage) {
     if (serverError?.errorMessage == '디비에 등록되지 않은 토큰') {
-      toast.error(`로그아웃 되었습니다. 다시로그인 해주세요`);
       store.dispatch(logOut());
+      toast.error(`유효하지 않은 로그인입니다. 다시 로그인 해주세요`);
     } else if (serverError?.errorMessage == 'not logged in') {
       toast.error(`로그인 해주세요`);
     }

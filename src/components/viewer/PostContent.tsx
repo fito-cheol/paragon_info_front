@@ -55,7 +55,7 @@ export default function PostTable({ post, content }: Props) {
   }, [post]);
 
   const CustomDivider = (
-    <Grid xs={12}>
+    <Grid xs={12} sx={{ marginTop: '12px', marginBottom: '12px' }}>
       <Divider className='divider' variant='middle' />
     </Grid>
   );
@@ -87,10 +87,10 @@ export default function PostTable({ post, content }: Props) {
         </Grid>
       </Grid>
 
-      {CustomDivider}
+      {/* {CustomDivider}
       <Grid xs={12}>
         <Typography variant='h4'>스킬 정보</Typography>
-      </Grid>
+      </Grid> */}
       {CustomDivider}
       <Grid xs={12}>
         <Typography variant='h4'>스킬 트리</Typography>
@@ -102,25 +102,21 @@ export default function PostTable({ post, content }: Props) {
       <Grid xs={12}>
         <Typography variant='h4'>시작 아이템</Typography>
       </Grid>
-      <Grid xs={12}>
-        <ImageItemList itemList={startItems} />
-      </Grid>
+      <Grid xs={12}>{startItems.length > 0 ? <ImageItemList itemList={startItems} /> : <h3> 아이템 없음 </h3>}</Grid>
       {CustomDivider}
       <Grid xs={12}>
         <Typography variant='h4'>최종 아이템</Typography>
       </Grid>
-      <Grid xs={12}>
-        <ImageItemList itemList={endItems} />
-      </Grid>
+      <Grid xs={12}>{endItems.length > 0 ? <ImageItemList itemList={endItems} /> : <h3> 아이템 없음 </h3>}</Grid>
       {CustomDivider}
       <Grid xs={12}>
         <Typography variant='h4'>핵심 아이템</Typography>
       </Grid>
       <Grid xs={12}>
-        <ImageItemList itemList={possibleItems} />
+        {possibleItems.length > 0 ? <ImageItemList itemList={possibleItems} /> : <h3> 아이템 없음 </h3>}
       </Grid>
       {CustomDivider}
-      <Grid xs={12}>
+      <Grid xs={12} sx={{ minHeight: '300px', padding: '10px' }}>
         <EditorRead content={text} />
       </Grid>
       {CustomDivider}

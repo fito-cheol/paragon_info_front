@@ -104,7 +104,7 @@ declare global {
   };
 
   // API Format
-  interface UploadForamt {
+  interface UploadFormat {
     heroName: string;
     skillTree: string[];
     startItems: string[];
@@ -146,9 +146,7 @@ declare global {
   interface GetPostFormat {
     postId: number;
   }
-  interface UpdatePostFormat extends GetPostFormat, Content {
-    title: string;
-  }
+  interface ModifyPostFormat extends GetPostFormat, UploadFormat {}
   interface DeletePostFormat extends GetPostFormat {}
 
   interface GetContentFormat {

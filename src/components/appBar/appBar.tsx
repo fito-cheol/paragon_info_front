@@ -29,7 +29,6 @@ export default function ButtonAppBar() {
             <Button>공략</Button>
           </Link>
           <Typography sx={{ flexGrow: 1 }}></Typography>
-          <ToggleColorMode />
           <SocialLogin />
         </Toolbar>
       </AppBar>

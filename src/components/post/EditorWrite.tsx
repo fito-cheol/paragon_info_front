@@ -1,4 +1,4 @@
-import React, { createRef, MutableRefObject } from 'react';
+import React, { createRef, MutableRefObject, useEffect } from 'react';
 
 // https://www.npmjs.com/package/@toast-ui/react-editor
 import '@toast-ui/editor/dist/toastui-editor.css';
@@ -13,11 +13,11 @@ import '@toast-ui/editor/dist/theme/toastui-editor-dark.css';
 import { uploadImage } from 'api/s3/index';
 
 interface Props {
-  initialValue?: string;
+  value?: string;
   onChange?: (text: string) => void;
 }
 
-export default function EditorWrite({ initialValue, onChange }: Props) {
+export default function EditorWrite({ value, onChange }: Props) {
   const editorRef = createRef() as MutableRefObject<Editor>;
 
   const onChangeHandler = () => {
@@ -26,12 +26,18 @@ export default function EditorWrite({ initialValue, onChange }: Props) {
       onChange(markDownData);
     }
   };
+  useEffect(() => {
+    const markDownData = editorRef.current.getInstance().getMarkdown();
+    if (value && value != markDownData) {
+      editorRef.current.getInstance().setMarkdown(value);
+    }
+  }, [value]);
 
   return (
     <>
       <Editor
         ref={editorRef}
-        initialValue={initialValue ? initialValue : ' '}
+        initialValue={value ? value : ' '}
         previewStyle='vertical'
         height='600px'
         initialEditType='wysiwyg' // wysiwyg
