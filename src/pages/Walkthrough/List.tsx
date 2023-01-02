@@ -137,29 +137,41 @@ export default function List() {
   };
 
   return (
-    <div className='list__wrapper'>
-      {selectedPost ? <PostContent post={selectedPost.post} content={selectedPost.content}></PostContent> : <></>}
-      <PostButtonList
-        canDelete={canDeletePost}
-        canModify={canModifyPost}
-        onDelete={deleteHandler}
-        onModify={modifyHandler}
-        onWrite={writeHandler}
-      />
-      <PostTable
-        posts={postList}
-        onClick={post => {
-          getContent(post);
-        }}
-      />
-      <Pagination
-        itemsCountPerPage={pageSize}
-        totalItemsCount={totalCountQuery.data || 0}
-        pageRangeDisplayed={10}
-        onPageChange={newPage => {
-          onPageChange(newPage, pageSize);
-        }}
-      />
-    </div>
+    <Grid container xs={12} className='list__wrapper'>
+      {selectedPost ? (
+        <Grid xs={12} sx={{ marginTop: '12px', marginBottom: '12px' }}>
+          <PostContent post={selectedPost.post} content={selectedPost.content}></PostContent>
+        </Grid>
+      ) : (
+        <></>
+      )}
+      <Grid xs={12} sx={{ marginTop: '12px', marginBottom: '12px' }}>
+        <PostButtonList
+          canDelete={canDeletePost}
+          canModify={canModifyPost}
+          onDelete={deleteHandler}
+          onModify={modifyHandler}
+          onWrite={writeHandler}
+        />
+      </Grid>
+      <Grid xs={12} sx={{ marginTop: '12px', marginBottom: '12px' }}>
+        <PostTable
+          posts={postList}
+          onClick={post => {
+            getContent(post);
+          }}
+        />
+      </Grid>
+      <Grid xs={12} sx={{ marginTop: '12px', marginBottom: '12px' }}>
+        <Pagination
+          itemsCountPerPage={pageSize}
+          totalItemsCount={totalCountQuery.data || 0}
+          pageRangeDisplayed={10}
+          onPageChange={newPage => {
+            onPageChange(newPage, pageSize);
+          }}
+        />
+      </Grid>
+    </Grid>
   );
 }
