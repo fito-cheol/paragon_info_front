@@ -3,9 +3,10 @@ import Button from '@mui/material/Button';
 
 type ButtonProps = {
   children: ReactNode;
+  onClick?: () => void;
 };
 
-export default function ColoredButton({ children }: ButtonProps) {
+export default function ColoredButton({ children, onClick }: ButtonProps) {
   return (
     <Button
       sx={{
@@ -18,6 +19,9 @@ export default function ColoredButton({ children }: ButtonProps) {
         cursor: 'pointer',
         fontSize: 24,
         fontWeight: 700,
+      }}
+      onClick={() => {
+        if (onClick) onClick();
       }}
     >
       {children}

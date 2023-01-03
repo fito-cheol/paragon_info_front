@@ -1,35 +1,52 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Link, Router } from 'react-router-dom';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-
+import Grid from '@mui/material/Unstable_Grid2';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link, Router } from 'react-router-dom';
+
 import ToggleColorMode from 'components/button/ToggleColorMode';
 import Button from 'components/button/ColoredButton';
 import SocialLogin from 'components/button/GoogleLogin';
 
 export default function ButtonAppBar() {
+  const navigate = useNavigate();
+
+  const navgateTo = (pathname: string) => {
+    navigate({
+      pathname,
+    });
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position='static' color='inherit'>
         <Toolbar>
-          <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }}>
-            <MenuIcon />
-          </IconButton>
-          <Link to='/item' style={{ textDecoration: 'none' }}>
-            <Button>아이템</Button>
-          </Link>
-          <Link to='/hero' style={{ textDecoration: 'none' }}>
-            <Button>영웅</Button>
-          </Link>
-          <Link to='/list' style={{ textDecoration: 'none' }}>
-            <Button>공략</Button>
-          </Link>
-          <Typography sx={{ flexGrow: 1 }}></Typography>
-          <SocialLogin />
+          <Grid container xs={12}>
+            <Grid xs='auto'>
+              <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }}>
+                <MenuIcon />
+              </IconButton>
+            </Grid>
+            <Grid xs='auto'>
+              <Button onClick={() => navigate({ pathname: '/item' })}>아이템 </Button>
+            </Grid>
+            <Grid xs='auto'>
+              <Button onClick={() => navigate({ pathname: '/hero' })}>영웅 </Button>
+            </Grid>
+            <Grid xs='auto'>
+              <Button onClick={() => navigate({ pathname: '/list' })}>공략 </Button>
+            </Grid>
+
+            <Grid xs='auto' xsOffset='auto'>
+              <SocialLogin />
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
     </Box>
