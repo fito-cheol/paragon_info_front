@@ -1,0 +1,21 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/frontServer
+    overwrite: yes
+
+# https://docs.aws.amazon.com/ko_kr/codedeploy/latest/userguide/reference-appspec-file-structure-permissions.html
+permissions:
+  - object: /home/ubuntu/frontServer/scripts
+    pattern: '*.sh'
+    owner: ubuntu
+    mode: 777
+    type:
+      - file
+
+hooks:
+  AfterInstall:
+    - location: scripts/after-deploy.sh
+      timeout: 300
+      runas: root

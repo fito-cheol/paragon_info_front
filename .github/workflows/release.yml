@@ -1,0 +1,60 @@
+name: github-action-test
+
+on:
+  push:
+    branches: [release]
+  pull_request:
+    branches: [release]
+
+  workflow_dispatch:
+
+env:
+  S3_BUCKET_NAME: aufebucket
+  AWS_REGION: ap-northeast-2
+  CODEDEPLOY_APPLICATION: paragon-distributor
+  CODEDEPLOY_GROUP: paragon-backend-group
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: ['14.x']
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: install Node.js  ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install server dependencies
+        run: npm install
+
+      # - run: npm test --if-present
+
+      - name: Run server build
+        run: npm run build
+
+      - name: zip distributions
+        run: zip -r /$GITHUB_SHA.zip ./build ./appspec.yml ./scripts
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: upload to S3
+        run: aws s3 cp --region ap-northeast-2 /front.zip s3://${{env.S3_BUCKET_NAME}}/front_build/front.zip
+
+      - name: Code Deploy
+        run: aws deploy create-deployment
+          --application-name ${{ env.CODEDEPLOY_APPLICATION }}
+          --deployment-config-name CodeDeployDefault.AllAtOnce
+          --deployment-group-name ${{ env.CODEDEPLOY_GROUP }}
+          --s3-location bucket=${{ env.S3_BUCKET_NAME }},bundleType=zip,key=front_build/front.zip
