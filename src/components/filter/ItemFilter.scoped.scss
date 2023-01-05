@@ -1,0 +1,30 @@
+.category {
+  text-align: center;
+  justify-content: start;
+  align-content: center;
+}
+.category__text {
+  font-weight: bold;
+  padding: 3px;
+}
+
+.filter__item {
+  text-align: center;
+  margin: 3px;
+}
+.item__textWrapper {
+  align-content: center;
+}
+
+.category {
+  border: 1px;
+  border-style: solid;
+  border-color: rgba($color: #aaaaaa, $alpha: 0.5);
+  padding: 5px;
+}
+.filter__line {
+  border: 1px;
+  border-style: solid;
+  border-color: rgba($color: #aaaaaa, $alpha: 0.5);
+  padding: 5px;
+}
