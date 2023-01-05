@@ -52,7 +52,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: upload to S3
-        run: aws s3 cp --region ap-northeast-2 /front.zip s3://${{env.S3_BUCKET_NAME}}/front_build/front.zip
+        run: aws s3 cp --region ap-northeast-2 ./front.zip s3://${{env.S3_BUCKET_NAME}}/front_build/front.zip
 
       - name: Code Deploy
         run: aws deploy create-deployment
