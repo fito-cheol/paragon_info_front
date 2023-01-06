@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchParams, createSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import cookies from 'js-cookie';
 import { toast } from 'react-toastify';
-import Grid from '@mui/material/Unstable_Grid2';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -13,6 +12,7 @@ import { getTotalCount, list, getPost, deletePost } from 'api/post/index';
 import { useQuery, useMutation } from 'react-query';
 import { AxiosError } from 'axios';
 
+import Grid from '@mui/material/Unstable_Grid2';
 import Pagination from 'components/viewer/Pagination';
 import PostTable from 'components/viewer/PostTable';
 import PostContent from 'components/viewer/PostContent';
@@ -59,7 +59,6 @@ export default function List() {
 
   // mounted
   useEffect(() => {
-    // post 가져오기
     if (no) {
       postMutation.mutate({ postId: Number(no) });
     } else {
@@ -115,7 +114,7 @@ export default function List() {
   };
   const deleteHandler = async () => {
     if (selectedPost) {
-      const response = await deletePost({ postId: selectedPost.post.id });
+      await deletePost({ postId: selectedPost.post.id });
       navigate('/list', { replace: false });
       const pageInfo = {
         page,
@@ -126,12 +125,9 @@ export default function List() {
     }
   };
   const modifyHandler = () => {
-    // param 넘기는 방법 알아보자
     if (no) {
-      const params = { no: no };
       navigate({
         pathname: `/modify/${no}`,
-        // search: `?${createSearchParams(params)}`,
       });
     }
   };

@@ -1,15 +1,16 @@
 import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
-import { isObject, isEmpty } from 'lodash';
 
 import store from 'redux/store';
 import { logOut } from 'redux/module/user';
 
 // https://dev.to/vikirobles/how-to-create-an-auth-login-system-with-axios-interceptors-typescript-2k11
 
-const API_DEFAULT_MESSAGE_REQUEST = 'The request is invalid';
+interface ResponseData {
+  errorMessage?: string;
+}
 
-function handleError(serverError: any) {
+function handleError(serverError: ResponseData) {
   if (serverError?.errorMessage) {
     if (serverError?.errorMessage == '디비에 등록되지 않은 토큰') {
       store.dispatch(logOut());
@@ -24,12 +25,12 @@ const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
   return config;
 };
 
-const onResponseSuccess = (response: AxiosResponse): any => {
+const onResponseSuccess = (response: AxiosResponse) => {
   return response;
 };
 
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {
-  handleError(error?.response?.data);
+  handleError(error?.response?.data as ResponseData);
   return Promise.reject(error);
 };
 

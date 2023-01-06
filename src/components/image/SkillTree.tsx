@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useTheme } from '@mui/material';
 
 import './SkillTree.scoped.scss';
 import images from 'assets/hero/imagePreloaderSkillTree';
@@ -11,8 +10,6 @@ interface SKILL_TREE_IMAGE_PROPS {
 }
 
 export default function SkillTreeImage({ type, size, onClick }: SKILL_TREE_IMAGE_PROPS) {
-  const theme = useTheme();
-
   return (
     <img
       className='skillTree__img'

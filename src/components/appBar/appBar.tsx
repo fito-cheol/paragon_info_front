@@ -1,27 +1,18 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Link, Router } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import ToggleColorMode from 'components/button/ToggleColorMode';
 import Button from 'components/button/ColoredButton';
 import SocialLogin from 'components/button/GoogleLogin';
 
 export default function ButtonAppBar() {
   const navigate = useNavigate();
-
-  const navgateTo = (pathname: string) => {
-    navigate({
-      pathname,
-    });
-  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>

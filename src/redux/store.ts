@@ -2,9 +2,9 @@ import { configureStore, MiddlewareArray } from '@reduxjs/toolkit';
 import reducer from './rootReducer';
 import logger from 'redux-logger';
 import ReduxThunk from 'redux-thunk';
-import * as reduxThunk from 'redux-thunk/extend-redux';
+import { Middleware } from 'redux';
 
-const middlewareList: any[] = [ReduxThunk];
+const middlewareList: Middleware[] = [ReduxThunk];
 if (process.env.NODE_ENV === 'development') {
   middlewareList.push(logger);
 }

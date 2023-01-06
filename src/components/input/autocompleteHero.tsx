@@ -27,7 +27,7 @@ export default function autocompleteHero({ value, onChange }: Props) {
       options={heroNameList}
       sx={{ width: 300 }}
       value={value}
-      onChange={(event: any, newValue: AutocompleteOption | null) => {
+      onChange={(event, newValue: AutocompleteOption | null) => {
         if (onChange) {
           if (newValue) {
             onChange(newValue);

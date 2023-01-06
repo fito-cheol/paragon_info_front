@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Unstable_Grid2';
 

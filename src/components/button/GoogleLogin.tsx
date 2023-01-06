@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { GoogleLogin, googleLogout, CredentialResponse } from '@react-oauth/google';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import cookies from 'js-cookie';
@@ -7,7 +7,6 @@ import type { RootState } from 'redux/store';
 import { logIn, logOut } from 'redux/module/user';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 
-import { toast } from 'react-toastify';
 import Button from '@mui/material/Button';
 
 import clientSecret from 'assets/gapi/client_secret.json';

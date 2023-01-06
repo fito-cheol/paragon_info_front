@@ -1,6 +1,5 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import { AxiosRequestConfig } from 'axios';
 import cookies from 'js-cookie';
-import * as jwt from 'jsonwebtoken';
 
 export const checkLogin = async (config: AxiosRequestConfig) => {
   const clientId = cookies.get('clientId');

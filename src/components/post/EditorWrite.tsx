@@ -3,6 +3,8 @@ import React, { createRef, MutableRefObject, useEffect } from 'react';
 // https://www.npmjs.com/package/@toast-ui/react-editor
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
+import { HTMLMdNode } from '@toast-ui/editor/types';
+
 // https://leego.tistory.com/entry/React-%EC%97%90%EB%94%94%ED%84%B0%EB%A1%9C-TOAST-UI-Editor-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EA%B8%B0
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import 'tui-color-picker/dist/tui-color-picker.css';
@@ -16,6 +18,8 @@ interface Props {
   value?: string;
   onChange?: (text: string) => void;
 }
+
+// HTMLMdNode
 
 export default function EditorWrite({ value, onChange }: Props) {
   const editorRef = createRef() as MutableRefObject<Editor>;
@@ -48,22 +52,22 @@ export default function EditorWrite({ value, onChange }: Props) {
         language='ko-KR'
         onChange={onChangeHandler}
         customHTMLRenderer={{
-          htmlBlock: {
-            iframe(node: any) {
-              return [
-                {
-                  type: 'openTag',
-                  tagName: 'iframe',
-                  outerNewLine: true,
-                  attributes: node.attrs,
-                },
-                { type: 'html', content: node.childrenHTML },
-                { type: 'closeTag', tagName: 'iframe', outerNewLine: true },
-              ];
-            },
-          },
+          // htmlBlock: {
+          //   iframe(node: any) {
+          //     return [
+          //       {
+          //         type: 'openTag',
+          //         tagName: 'iframe',
+          //         outerNewLine: true,
+          //         attributes: node.attrs,
+          //       },
+          //       { type: 'html', content: node.childrenHTML },
+          //       { type: 'closeTag', tagName: 'iframe', outerNewLine: true },
+          //     ];
+          //   },
+          // },
           htmlInline: {
-            big(node, { entering }) {
+            big(node: HTMLMdNode, { entering }) {
               return entering
                 ? { type: 'openTag', tagName: 'big', attributes: node.attrs }
                 : { type: 'closeTag', tagName: 'big' };
