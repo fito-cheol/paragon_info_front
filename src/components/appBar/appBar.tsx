@@ -10,6 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 import Button from 'components/button/ColoredButton';
 import SocialLogin from 'components/button/GoogleLogin';
+import ToggleColorMode from 'components/button/ToggleColorMode';
 
 export default function ButtonAppBar() {
   const navigate = useNavigate();
@@ -33,8 +34,11 @@ export default function ButtonAppBar() {
             <Grid xs='auto'>
               <Button onClick={() => navigate({ pathname: '/list' })}>공략 </Button>
             </Grid>
-
             <Grid xs='auto' xsOffset='auto'>
+              <ToggleColorMode />
+            </Grid>
+
+            <Grid xs='auto'>
               <SocialLogin />
             </Grid>
           </Grid>
