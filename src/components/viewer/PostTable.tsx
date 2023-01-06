@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+
+import './PostTable.scoped.scss';
 
 interface Props {
   posts: Post[];
@@ -14,7 +16,7 @@ export default function PostTable({ posts, onClick }: Props) {
   useEffect(() => {
     const newPostElements: JSX.Element[] = [];
     newPostElements.push(
-      <Grid container xs={12} key='Header'>
+      <Grid container xs={12} key='Header' className='table__header--row'>
         <Grid className='' xs={2}>
           <Typography variant='h6'>번호</Typography>
         </Grid>
@@ -41,22 +43,28 @@ export default function PostTable({ posts, onClick }: Props) {
       }
 
       newPostElements.push(
-        <Grid container xs={12} key={index}>
-          <Grid xs={2}>{post.id}</Grid>
+        <Grid container xs={12} key={index} className='post__row'>
+          <Grid xs={2}>
+            <p className='post__id'>{post.id}</p>
+          </Grid>
           <Grid xs={6}>
-            <Link
-              href='#'
+            <p
               onClick={() => {
                 if (onClick) {
                   onClick(post);
                 }
               }}
+              className='post__title'
             >
               {post.title}
-            </Link>
+            </p>
           </Grid>
-          <Grid xs={2}>{dateString}</Grid>
-          <Grid xs={2}>{post.click_cnt}</Grid>
+          <Grid xs={2}>
+            <p className='post__date'>{dateString}</p>
+          </Grid>
+          <Grid xs={2}>
+            <p className='post__click_cnt'>{post.click_cnt}</p>
+          </Grid>
         </Grid>,
       );
     });

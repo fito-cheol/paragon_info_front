@@ -1,0 +1,18 @@
+.table__header--row {
+  border-top: 4px solid #273272;
+  border-bottom: 4px solid #273272;
+}
+.post__row {
+  border-bottom: 1px solid rgba(100, 100, 200, 0.5);
+}
+
+.post__title {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+  &:active {
+    color: rgba(100, 100, 200, 1);
+  }
+}
