@@ -52,6 +52,9 @@ export default function ItemCard({ item, onClick }: IItemCardProps) {
           onClick(item);
         }
       }}
+      sx={{
+        backgroundColor: theme => theme.palette.background.default,
+      }}
     >
       <CardContent>
         <Grid container spacing={1}>

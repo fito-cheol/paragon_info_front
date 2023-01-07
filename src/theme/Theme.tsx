@@ -1,4 +1,4 @@
-import { amber, indigo, grey, blue, common } from '@mui/material/colors';
+import { amber, indigo, grey, blue, common, blueGrey } from '@mui/material/colors';
 import { Theme } from '@mui/material/styles';
 const palette = {
   light: {
@@ -35,10 +35,10 @@ export const getDesignTokens = (mode: PaletteMode | undefined) =>
               dark: '#002884',
               contrastText: '#fff',
             },
-            divider: indigo[700],
+            divider: grey[700],
             background: {
-              default: indigo[900],
-              paper: indigo[900],
+              default: grey[900],
+              paper: grey[900],
             },
             text: {
               primary: '#fff',

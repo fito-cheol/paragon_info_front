@@ -77,10 +77,10 @@ export default function itemListWithFilter({
 
   return (
     <Grid container className={`wrapper wrapper--${theme.palette.mode}`}>
-      <Grid xs={12}>
+      <Grid container xs={12}>
         <ItemFilter onUpdate={checkObject => updateCheck(checkObject)} filterValue={filter} />
       </Grid>
-      <Grid xs={12}>
+      <Grid container xs={12}>
         <FormControlLabel
           control={
             <Checkbox
@@ -93,7 +93,7 @@ export default function itemListWithFilter({
           label='간략히'
         />
       </Grid>
-      <Grid xs={12} container className={isSmall ? 'hidden' : undefined}>
+      <Grid xs={12} spacing={0.5} container className={isSmall ? 'hidden' : undefined}>
         <ItemCardList
           itemList={itemList}
           onClick={item => {
@@ -101,7 +101,7 @@ export default function itemListWithFilter({
           }}
         />
       </Grid>
-      <Grid xs={12} container className={isSmall ? undefined : 'hidden'}>
+      <Grid xs={12} spacing={0.5} container className={isSmall ? undefined : 'hidden'}>
         <ItemImageList
           itemList={itemList}
           onClick={({ item }) => {

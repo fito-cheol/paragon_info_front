@@ -34,11 +34,10 @@ export default function ButtonAppBar() {
             <Grid xs='auto'>
               <Button onClick={() => navigate({ pathname: '/list' })}>공략 </Button>
             </Grid>
-            <Grid xs='auto' xsOffset='auto'>
+            <Grid container xs='auto' xsOffset='auto' alignContent={'center'}>
               <ToggleColorMode />
             </Grid>
-
-            <Grid xs='auto'>
+            <Grid container xs='auto' alignContent={'center'}>
               <SocialLogin />
             </Grid>
           </Grid>

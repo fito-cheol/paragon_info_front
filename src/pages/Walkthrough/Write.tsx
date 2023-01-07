@@ -9,10 +9,11 @@ import { toast } from 'react-toastify';
 
 import Grid from '@mui/material/Unstable_Grid2';
 import IconButton from '@mui/material/IconButton';
-import Dialog from '@mui/material/Dialog';
+import { Dialog, DialogContent } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 import EditorWrite from 'components/post/EditorWrite';
 import AutoHero from 'components/input/autocompleteHero';
@@ -44,6 +45,8 @@ export default function Write() {
 
   const [title, setTitle] = useState<string>('');
   const [skillTreeArray, setSkillTreeArray] = useState<SkillTree[]>([]);
+
+  const [skillTreeErrorMessage, setSkillTreeErrorMessage] = useState<string>('');
   const [skillTreeElements, setSkillTreeElements] = useState<JSX.Element[]>([<div key={1}></div>]);
   const [clickedRow, setClickedRow] = useState<number>(-1);
   const [show, setShow] = useState<boolean>(false);
@@ -107,13 +110,69 @@ export default function Write() {
   const addSkillTree = (skillType: SkillTree) => {
     // none이 아닌 가장 첫번 째 element에 넣고 탈출
     const newSkillTreeArray = [...skillTreeArray];
+
+    let isAdded = false;
     for (let index = 0; index < newSkillTreeArray.length; index++) {
       const skillTreeElement = newSkillTreeArray[index];
       if (skillTreeElement == 'None') {
         newSkillTreeArray[index] = skillType;
+        isAdded = true;
         break;
       }
     }
+    if (!isAdded) {
+      return;
+    }
+
+    let errorMessage = '';
+    switch (skillType) {
+      case 'None':
+        break;
+      case 'R':
+        if (newSkillTreeArray.slice(0, 5).filter(x => x == skillType).length > 0) {
+          errorMessage = '6레벨 이전에 R스킬을 찍을 수 없습니다';
+          break;
+        }
+        if (newSkillTreeArray.slice(0, 10).filter(x => x == skillType).length > 1) {
+          errorMessage = '11레벨 이전에 R스킬을 2번 찍을 수 없습니다';
+          break;
+        }
+        if (newSkillTreeArray.slice(0, 15).filter(x => x == skillType).length > 2) {
+          errorMessage = '16레벨 이전에 R스킬을 3번 찍을 수 없습니다';
+          break;
+        }
+        if (newSkillTreeArray.filter(x => x == skillType).length > 3) {
+          errorMessage = 'R스킬은 최대 3번 찍을 수 있습니다';
+          break;
+        }
+        break;
+      default:
+        if (newSkillTreeArray.slice(0, 2).filter(x => x == skillType).length > 1) {
+          errorMessage = '2레벨까지 스킬을 1번 찍을 수 없습니다';
+          break;
+        }
+        if (newSkillTreeArray.slice(0, 4).filter(x => x == skillType).length > 2) {
+          errorMessage = '4레벨까지 스킬을 2번 찍을 수 없습니다';
+          break;
+        }
+        if (newSkillTreeArray.slice(0, 6).filter(x => x == skillType).length > 3) {
+          errorMessage = '6레벨까지 스킬을 3번 찍을 수 없습니다';
+          break;
+        }
+        if (newSkillTreeArray.slice(0, 8).filter(x => x == skillType).length > 4) {
+          errorMessage = '8레벨까지 스킬을 4번 찍을 수 없습니다';
+          break;
+        }
+        if (newSkillTreeArray.filter(x => x == skillType).length > 5) {
+          errorMessage = 'R스킬은 최대 5번 찍을 수 있습니다';
+          break;
+        }
+    }
+    setSkillTreeErrorMessage(errorMessage);
+    if (errorMessage) {
+      return;
+    }
+
     setSkillTreeArray(newSkillTreeArray);
   };
   const addItemButtonHandler = (rowNumber: number) => {
@@ -147,21 +206,28 @@ export default function Write() {
   const closeItemSelect = () => {
     setClickedRow(-1);
   };
+  const formValidate = () => {
+    if (selectedHeroInfo == null) {
+      toast.error('선택된 영웅이 없습니다');
+      return false;
+    }
+
+    return true;
+  };
   const saveData = async () => {
     // 로그인 되어 있는지 확인하고 로그인할것
     if (!user) {
       toast.error('로그인이 필요한 기능입니다');
       return;
     }
-
-    // FIXME: form validation check 할것
-    if (selectedHeroInfo == null) {
-      console.warn('선택된 영웅이 없습니다');
+    if (!formValidate()) {
       return;
-    } else if (isModify && no) {
+    }
+
+    if (isModify && no) {
       const exportData = {
         postId: Number(no),
-        heroName: selectedHeroInfo.id,
+        heroName: selectedHeroInfo!.id,
         skillTree: skillTreeArray,
         startItems: selectedItemList[0].map(item => item.name),
         endItems: selectedItemList[1].map(item => item.name),
@@ -174,7 +240,7 @@ export default function Write() {
       navigate('/list', { replace: false });
     } else {
       const exportData = {
-        heroName: selectedHeroInfo.id,
+        heroName: selectedHeroInfo!.id,
         skillTree: skillTreeArray,
         startItems: selectedItemList[0].map(item => item.name),
         endItems: selectedItemList[1].map(item => item.name),
@@ -259,6 +325,9 @@ export default function Write() {
           <SkillTree type='Right' onClick={() => addSkillTree('Right')} />
         </Grid>
         <Grid xs={12}>{skillTreeElements}</Grid>
+        <Grid xs='auto'>
+          <p className='error__message'>{skillTreeErrorMessage}</p>
+        </Grid>
       </Grid>
       <Grid xs={12}>
         <h1> 아이템 </h1>
@@ -280,20 +349,35 @@ export default function Write() {
           closeItemSelect();
         }}
         open={show}
+        sx={{
+          '& .MuiDialog-container': {
+            '& .MuiPaper-root': {
+              width: '100%',
+              maxWidth: '1200px', // Set your width here
+            },
+          },
+          '&.css-ypiqx9-MuiDialogContent-root': {
+            padding: '0px',
+          },
+          color: theme => theme.palette.grey[500],
+        }}
+        scroll='paper'
       >
-        <ItemListWithFilter
-          onItemSelect={item => {
-            selectItem(item);
-          }}
-          onFilterUpdate={filter => {
-            setFilter(filter);
-          }}
-          onOptionUpdate={isSmall => {
-            setIsSmall(isSmall);
-          }}
-          defaultFilter={filter}
-          defaultIsSmall={isSmall}
-        />
+        <DialogContent>
+          <ItemListWithFilter
+            onItemSelect={item => {
+              selectItem(item);
+            }}
+            onFilterUpdate={filter => {
+              setFilter(filter);
+            }}
+            onOptionUpdate={isSmall => {
+              setIsSmall(isSmall);
+            }}
+            defaultFilter={filter}
+            defaultIsSmall={isSmall}
+          />
+        </DialogContent>
       </Dialog>
       <Grid xs={12}>
         <EditorWrite value={editorData} onChange={setEditorData}></EditorWrite>
