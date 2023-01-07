@@ -282,7 +282,7 @@ export default function Write() {
   };
 
   return (
-    <Grid container>
+    <Grid container className='write__wrapper'>
       <Grid xs={12}>
         <h1> {isModify ? '공략 수정' : '공략 작성'} </h1>
       </Grid>
