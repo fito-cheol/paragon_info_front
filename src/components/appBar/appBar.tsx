@@ -19,20 +19,15 @@ export default function ButtonAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position='static' color='inherit'>
         <Toolbar>
-          <Grid container xs={12}>
+          <Grid container xs={12} spacing={3}>
             <Grid xs='auto'>
-              <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ mr: 2 }}>
-                <MenuIcon />
-              </IconButton>
+              <Button onClick={() => navigate({ pathname: '/list' })}>공략 </Button>
             </Grid>
             <Grid xs='auto'>
               <Button onClick={() => navigate({ pathname: '/item' })}>아이템 </Button>
             </Grid>
             <Grid xs='auto'>
               <Button onClick={() => navigate({ pathname: '/hero' })}>영웅 </Button>
-            </Grid>
-            <Grid xs='auto'>
-              <Button onClick={() => navigate({ pathname: '/list' })}>공략 </Button>
             </Grid>
             <Grid container xs='auto' xsOffset='auto' alignContent={'center'}>
               <ToggleColorMode />
