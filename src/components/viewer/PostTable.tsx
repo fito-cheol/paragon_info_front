@@ -31,7 +31,6 @@ export default function PostTable({ posts, onClick }: Props) {
         </Grid>
       </Grid>,
     );
-
     posts.map((post, index) => {
       const postDate: Date = new Date(Date.parse(post.create_date));
 

@@ -1,14 +1,24 @@
 #!/bin/bash
 
-REPOSITORY=/home/ubuntu/frontServer
+REPOSITORY=/home/ubuntu/paragonServer
 
 cd $REPOSITORY
 
-pm2 desc front_server > /dev/null
+PROCESSNAME=ParagonServer
+
+pm2 desc PROCESSNAME > /dev/null
 RUNNING=$?
 
+# if [ "${RUNNING}" -ne 0 ]; then
+#   pm2 start build/server.js --name PROCESSNAME
+# else
+#   pm2 restart PROCESSNAME
+# fi;
+
 if [ "${RUNNING}" -ne 0 ]; then
-  pm2 start build/server.js --name front_server
+  pm2 restart $PROCESSNAME
 else
-  pm2 restart front_server
+  npm run pm2:pro
 fi;
+
+
