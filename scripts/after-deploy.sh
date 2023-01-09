@@ -16,9 +16,9 @@ RUNNING=$?
 # fi;
 
 if [ "${RUNNING}" -ne 0 ]; then
-  pm2 restart $PROCESSNAME
-else
   npm run pm2:pro
+else
+  pm2 restart $PROCESSNAME
 fi;
 
 
