@@ -2,12 +2,12 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ubuntu/paragonServer
+    destination: /home/ubuntu/paragonServer/front
     overwrite: yes
 
 # https://docs.aws.amazon.com/ko_kr/codedeploy/latest/userguide/reference-appspec-file-structure-permissions.html
 permissions:
-  - object: /home/ubuntu/paragonServer/scripts
+  - object: /home/ubuntu/paragonServer/front/scripts
     pattern: '*.sh'
     owner: ubuntu
     mode: 777
