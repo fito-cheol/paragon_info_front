@@ -12,7 +12,7 @@ env:
   S3_BUCKET_NAME: aufebucket
   AWS_REGION: ap-northeast-2
   CODEDEPLOY_APPLICATION: paragon-distributor
-  CODEDEPLOY_GROUP: paragon-backend-group
+  CODEDEPLOY_GROUP: paragon-front
 
 jobs:
   build:
