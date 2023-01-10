@@ -4,6 +4,7 @@ import React, { createRef, MutableRefObject, useEffect } from 'react';
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
 import { HTMLMdNode } from '@toast-ui/editor/types';
+import { toast } from 'react-toastify';
 
 // https://leego.tistory.com/entry/React-%EC%97%90%EB%94%94%ED%84%B0%EB%A1%9C-TOAST-UI-Editor-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EA%B8%B0
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
@@ -76,18 +77,16 @@ export default function EditorWrite({ value, onChange }: Props) {
         }}
         hooks={{
           addImageBlobHook: async (blob, callback) => {
-            console.log(blob); // File {name: '카레유.png', ... }
             if (blob.size > 20971520) {
-              // Error Dialog 발생
-              console.warn('이미지 파일 크기가 20MB가 넘습니다');
+              toast.error('이미지 파일 크기가 20MB가 넘습니다');
               return;
             }
             try {
-              // 1. 첨부된 이미지 파일을 서버로 전송후, 이미지 경로 url을 받아온다.
-              const result = await uploadImage({ file: blob }); //  서버 전송 / 경로 수신 코드 ...
+              const result = await uploadImage({ file: blob });
               callback(result.data.Location, '');
             } catch (error) {
               console.error(error);
+              toast.error('이미지 첨부에 실패했습니다');
             }
           },
         }}

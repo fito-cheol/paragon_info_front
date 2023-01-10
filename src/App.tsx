@@ -22,15 +22,14 @@ import { ColorModeContext } from './context/ColorModeContext';
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
-    onError: (error, query) => {
-      console.log('Query Error:', error, query);
-      if (query.state.data !== undefined) {
-        // toast.error(`에러가 났어요!!`);
-      }
-    },
-    onSuccess: data => {
-      console.log(data);
-    },
+    // onError: (error, query) => {
+    //   if (query.state.data !== undefined) {
+    //     // toast.error(`에러가 났어요!!`);
+    //   }
+    // },
+    // onSuccess: data => {
+    //
+    // },
   }),
   defaultOptions: {
     queries: {

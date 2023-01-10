@@ -7,6 +7,7 @@ import type { RootState } from 'redux/store';
 import { logIn, logOut } from 'redux/module/user';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 
+import { toast } from 'react-toastify';
 import Button from '@mui/material/Button';
 
 import clientSecret from 'assets/gapi/client_secret.json';
@@ -53,7 +54,7 @@ export default function GoogleLogIn() {
           <GoogleLogin
             onSuccess={loginHandler}
             onError={() => {
-              console.log('Login Failed');
+              toast.error('로그인 실패');
             }}
           />
         </GoogleOAuthProvider>
