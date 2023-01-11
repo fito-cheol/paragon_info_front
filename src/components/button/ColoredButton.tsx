@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 
 type ButtonProps = {
   children: ReactNode;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
 export default function ColoredButton({ children, onClick }: ButtonProps) {
@@ -20,8 +20,8 @@ export default function ColoredButton({ children, onClick }: ButtonProps) {
         fontSize: 24,
         fontWeight: 700,
       }}
-      onClick={() => {
-        if (onClick) onClick();
+      onClick={event => {
+        if (onClick) onClick(event);
       }}
     >
       {children}

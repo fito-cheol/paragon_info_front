@@ -8,7 +8,7 @@ import './PostTable.scoped.scss';
 
 interface Props {
   posts: Post[];
-  onClick?: (post: Post) => void;
+  onClick?: (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>, post: Post) => void;
 }
 
 export default function PostTable({ posts, onClick }: Props) {
@@ -58,9 +58,9 @@ export default function PostTable({ posts, onClick }: Props) {
           </Grid>
           <Grid xs={5} container alignContent='center' justifyContent='start'>
             <p
-              onClick={() => {
+              onClick={event => {
                 if (onClick) {
-                  onClick(post);
+                  onClick(event, post);
                 }
               }}
               className='post__title'

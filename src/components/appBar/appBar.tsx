@@ -15,19 +15,27 @@ import ToggleColorMode from 'components/button/ToggleColorMode';
 export default function ButtonAppBar() {
   const navigate = useNavigate();
 
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, pathname: string) => {
+    if (event.ctrlKey) {
+      window.open(pathname, '_blank');
+    } else {
+      navigate({ pathname });
+    }
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position='static' color='inherit'>
         <Toolbar>
           <Grid container xs={12} spacing={3}>
             <Grid xs='auto'>
-              <Button onClick={() => navigate({ pathname: '/list' })}>공략 </Button>
+              <Button onClick={event => handleClick(event, '/list')}>공략 </Button>
             </Grid>
             <Grid xs='auto'>
-              <Button onClick={() => navigate({ pathname: '/item' })}>아이템 </Button>
+              <Button onClick={event => handleClick(event, '/item')}>아이템 </Button>
             </Grid>
             <Grid xs='auto'>
-              <Button onClick={() => navigate({ pathname: '/hero' })}>영웅 </Button>
+              <Button onClick={event => handleClick(event, '/hero')}>영웅 </Button>
             </Grid>
             <Grid container xs='auto' xsOffset='auto' alignContent={'center'}>
               <ToggleColorMode />

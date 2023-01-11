@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, createSearchParams } from 'react-router-dom';
 
 import type { RootState } from 'redux/store';
 import { useAppSelector } from 'redux/hooks';
@@ -27,6 +27,7 @@ interface PostFullInfo {
 }
 export default function List() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [searchParams, setSearchParams] = useSearchParams();
   const queryPage: string | null = searchParams.get('page');
@@ -106,8 +107,13 @@ export default function List() {
       setSearchParams(newParam);
     }
   };
-  const getContent = (post: Post) => {
-    postMutation.mutate({ postId: post.id });
+  const getContent = (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>, post: Post) => {
+    if (event.ctrlKey) {
+      const params = { page: page.toString(), pageSize: pageSize.toString(), no: post.id.toString() };
+      window.open(location.pathname + `?${createSearchParams(params)}`, '_blank');
+    } else {
+      postMutation.mutate({ postId: post.id });
+    }
   };
   const writeHandler = () => {
     navigate('/write', { replace: false });
@@ -153,8 +159,8 @@ export default function List() {
       <Grid xs={12} sx={{ marginTop: '12px', marginBottom: '12px' }}>
         <PostTable
           posts={postList}
-          onClick={post => {
-            getContent(post);
+          onClick={(event, post) => {
+            getContent(event, post);
           }}
         />
       </Grid>
