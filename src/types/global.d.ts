@@ -127,6 +127,8 @@ declare global {
     create_date: string;
     click_cnt: number;
     delete: string;
+    hero_FK: string;
+    nickname: string;
   }
 
   interface Content {
@@ -138,6 +140,7 @@ declare global {
     possible_item_list: string;
     text: string;
   }
+
   interface User {
     nickname: string;
     credential: string;
