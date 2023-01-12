@@ -17,7 +17,7 @@ import { useAppSelector, useAppDispatch } from 'redux/hooks';
 import type { RootState } from 'redux/store';
 import { completeProgress } from 'redux/module/progress';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider, QueryCache } from 'react-query';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -87,7 +87,7 @@ function App() {
                   <Route path='modify/:no' element={<Write />} />
                   <Route path='list' element={<List />} />
                   <Route path='Test' element={<TestPage />} />
-                  <Route path='*' element={<HomeMain />} />
+                  <Route path='*' element={<Navigate to='/list' replace />} />
                 </Routes>
               </div>
             </div>
