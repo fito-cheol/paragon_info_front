@@ -24,11 +24,14 @@ export default function PostTable({ posts, onClick }: Props) {
         <Grid className='' xs={2} container alignContent='center' justifyContent='center'>
           <Typography variant='h6'>영웅</Typography>
         </Grid>
-        <Grid xs={5} container alignContent='center' justifyContent='center'>
+        <Grid xs={4} container alignContent='center' justifyContent='center'>
           <Typography variant='h6'>제목</Typography>
         </Grid>
         <Grid xs={2} container alignContent='center' justifyContent='center'>
           <Typography variant='h6'>작성자</Typography>
+        </Grid>
+        <Grid xs={1} container alignContent='center' justifyContent='center'>
+          <Typography variant='h6'>추천수</Typography>
         </Grid>
         <Grid xs={1} container alignContent='center' justifyContent='center'>
           <Typography variant='h6'>작성일</Typography>
@@ -56,7 +59,7 @@ export default function PostTable({ posts, onClick }: Props) {
           <Grid xs={2} container alignContent='center' justifyContent='center'>
             <img src={heroImages[post.hero_FK]} loading='lazy' width={40} height={40} />
           </Grid>
-          <Grid xs={5} container alignContent='center' justifyContent='start'>
+          <Grid xs={4} container alignContent='center' justifyContent='start'>
             <p
               onClick={event => {
                 if (onClick) {
@@ -72,10 +75,13 @@ export default function PostTable({ posts, onClick }: Props) {
             <p className='post__nickname'>{post.nickname}</p>
           </Grid>
           <Grid xs={1} container alignContent='center' justifyContent='center'>
+            <p className='post__date'>{post.like_count}</p>
+          </Grid>
+          <Grid xs={1} container alignContent='center' justifyContent='center'>
             <p className='post__date'>{dateString}</p>
           </Grid>
           <Grid xs={1} container alignContent='center' justifyContent='center'>
-            <p className='post__click_cnt'>{post.click_cnt}</p>
+            <p className='post__click_count'>{post.click_count}</p>
           </Grid>
         </Grid>,
       );

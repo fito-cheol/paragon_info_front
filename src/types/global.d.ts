@@ -125,10 +125,11 @@ declare global {
     content_FK: number;
     title: string;
     create_date: string;
-    click_cnt: number;
+    click_count: number;
     delete: string;
     hero_FK: string;
     nickname: string;
+    like_count: number;
   }
 
   interface Content {
@@ -158,5 +159,9 @@ declare global {
 
   interface ReturnCount {
     totalCount: number;
+  }
+
+  interface ReturnDoILike {
+    likePost: boolean;
   }
 }

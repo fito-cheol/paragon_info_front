@@ -70,7 +70,7 @@ export default function PostTable({ post, content }: Props) {
           <Typography> {dateString} </Typography>
         </Grid>
         <Grid xs='auto'>
-          <Typography> 조회수 {post.click_cnt} </Typography>
+          <Typography> 조회수 {post.click_count} </Typography>
         </Grid>
       </Grid>
 

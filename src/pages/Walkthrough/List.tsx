@@ -8,7 +8,7 @@ import { useNavigate, useLocation, createSearchParams } from 'react-router-dom';
 import type { RootState } from 'redux/store';
 import { useAppSelector } from 'redux/hooks';
 
-import { getTotalCount, list, getPost, deletePost } from 'api/post/index';
+import { getTotalCount, list, getPost, deletePost, getDoILikePost, addLike, deleteLike } from 'api/post/index';
 import { useQuery, useMutation } from 'react-query';
 import { AxiosError } from 'axios';
 
@@ -17,6 +17,9 @@ import Pagination from 'components/viewer/Pagination';
 import PostTable from 'components/viewer/PostTable';
 import PostContent from 'components/viewer/PostContent';
 import PostButtonList from 'components/button/PostButtonList';
+
+import likeImage from 'assets/icon/Like-Button-Transparent.png';
+import likeShineImage from 'assets/icon/Like-Shine-Button-Transparent.png';
 
 import './List.scoped.scss';
 
@@ -40,6 +43,7 @@ export default function List() {
   const [canModifyPost, setCanModifyPost] = useState<boolean>(false);
   const [postList, setPostList] = useState<Post[]>([]);
   const [selectedPost, setSelectedPost] = useState<PostFullInfo | null>(null);
+  const [doILikePost, setDoILikePost] = useState<boolean>(false);
 
   const user = useAppSelector((state: RootState) => state.user.user);
 
@@ -47,6 +51,7 @@ export default function List() {
     select: res => res.totalCount,
     placeholderData: { totalCount: 0 },
   });
+
   const postListMutation = useMutation(list, {
     onSuccess: postList => {
       setPostList(postList);
@@ -55,6 +60,14 @@ export default function List() {
   const postMutation = useMutation(getPost, {
     onSuccess: post => {
       setSelectedPost(post);
+    },
+  });
+  const doILikeMutation = useMutation(getDoILikePost, {
+    onSuccess: ({ likePost }) => {
+      setDoILikePost(likePost);
+    },
+    onError: () => {
+      setDoILikePost(false);
     },
   });
 
@@ -84,6 +97,11 @@ export default function List() {
       const isOwner = selectedPost.user.clientId == cookies.get('clientId');
       setCanDeletePost(isOwner);
       setCanModifyPost(isOwner);
+    }
+    if (selectedPost && user) {
+      doILikeMutation.mutate({ postId: selectedPost.post.id });
+    } else {
+      setDoILikePost(false);
     }
   }, [selectedPost, user]);
 
@@ -137,13 +155,55 @@ export default function List() {
       });
     }
   };
+  const likeHandler = async () => {
+    // 로그인 안되어 있으면 로그인 하라고 알려줌
+    if (!user) {
+      toast.warn('로그인 후 추천 가능합니다');
+      return;
+    } else if (!selectedPost) {
+      toast.error('잘못된 접근입니다');
+      return;
+    } else if (!doILikePost) {
+      const { success } = await addLike({ postId: selectedPost.post.id });
+      if (success) postMutation.mutate({ postId: selectedPost.post.id });
+    } else {
+      const { success } = await deleteLike({ postId: selectedPost.post.id });
+      if (success) postMutation.mutate({ postId: selectedPost.post.id });
+    }
+  };
 
   return (
     <Grid container xs={12} className='list__wrapper'>
       {selectedPost ? (
-        <Grid xs={12} sx={{ marginTop: '12px', marginBottom: '12px' }}>
-          <PostContent post={selectedPost.post} content={selectedPost.content}></PostContent>
-        </Grid>
+        <>
+          <Grid xs={12} sx={{ marginTop: '12px', marginBottom: '12px' }}>
+            <PostContent post={selectedPost.post} content={selectedPost.content}></PostContent>
+          </Grid>
+          <Grid
+            className='post__like--wrapper'
+            xs={12}
+            sx={{ marginTop: '12px', marginBottom: '12px' }}
+            alignContent='center'
+            justifyContent='center'
+            container
+            spacing={3}
+          >
+            <Grid>
+              <button className='post__like--button'>
+                <img
+                  src={doILikePost ? likeShineImage : likeImage}
+                  className='post__like--image'
+                  width={60}
+                  height={60}
+                  onClick={() => likeHandler()}
+                />
+              </button>
+            </Grid>
+            <Grid>
+              <h3> {selectedPost.post.like_count} </h3>
+            </Grid>
+          </Grid>
+        </>
       ) : (
         <></>
       )}

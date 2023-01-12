@@ -14,8 +14,6 @@ import clientSecret from 'assets/gapi/client_secret.json';
 import { googleLogin } from 'api/user/index';
 
 export default function GoogleLogIn() {
-  // const [userInfo, setUserInfo] = useState<User | null>(null);
-
   const user = useAppSelector((state: RootState) => state.user.user);
   const dispatch = useAppDispatch();
 
