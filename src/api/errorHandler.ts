@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 
 import store from 'redux/store';
 import { logOut } from 'redux/module/user';
+import { startProgress, completeProgress, setProgress } from 'redux/module/progress';
 
 // https://dev.to/vikirobles/how-to-create-an-auth-login-system-with-axios-interceptors-typescript-2k11
 
@@ -22,14 +23,17 @@ function handleError(serverError: ResponseData) {
 }
 
 const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
+  store.dispatch(startProgress());
   return config;
 };
 
 const onResponseSuccess = (response: AxiosResponse) => {
+  store.dispatch(completeProgress());
   return response;
 };
 
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {
+  store.dispatch(setProgress(100));
   handleError(error?.response?.data as ResponseData);
   return Promise.reject(error);
 };

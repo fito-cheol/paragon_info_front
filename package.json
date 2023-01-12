@@ -44,6 +44,7 @@
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.0",
     "react-toastify": "^9.1.1",
+    "react-top-loading-bar": "^2.3.1",
     "redux-logger": "^3.0.6",
     "sass": "^1.50.0",
     "ts-deepmerge": "^5.0.0",

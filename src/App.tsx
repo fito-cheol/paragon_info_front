@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import './App.scoped.scss';
+import merge from 'ts-deepmerge';
+import { AxiosError } from 'axios';
+
 import ItemList from './pages/Item/List';
 import HeroList from './pages/Hero/List';
 import HomeMain from './pages/Home/Main';
@@ -7,29 +9,32 @@ import TestPage from './pages/Test';
 import Write from './pages/Walkthrough/Write';
 import List from './pages/Walkthrough/List';
 import AppBar from './components/appBar/appBar';
+import CssBaseline from '@mui/material/CssBaseline';
+import LoadingBar from 'react-top-loading-bar';
+import { toast } from 'react-toastify';
+
+import { useAppSelector, useAppDispatch } from 'redux/hooks';
+import type { RootState } from 'redux/store';
+import { completeProgress } from 'redux/module/progress';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider, QueryCache } from 'react-query';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-import merge from 'ts-deepmerge';
+import './App.scoped.scss';
 
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { createTheme, ThemeProvider, responsiveFontSizes, Theme } from '@mui/material/styles';
 import { getDesignTokens, getThemedComponents } from './theme/Theme';
-import CssBaseline from '@mui/material/CssBaseline';
 import { ColorModeContext } from './context/ColorModeContext';
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
-    // onError: (error, query) => {
-    //   if (query.state.data !== undefined) {
-    //     // toast.error(`에러가 났어요!!`);
-    //   }
-    // },
-    // onSuccess: data => {
-    //
-    // },
+    onError: (error, query) => {
+      if ((error as AxiosError).code == 'ERR_NETWORK') {
+        toast.error(`서버와 연결되지 않습니다`);
+      }
+    },
   }),
   defaultOptions: {
     queries: {
@@ -45,6 +50,9 @@ const queryClient = new QueryClient({
 function App() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const [mode, setMode] = useState<'light' | 'dark'>(prefersDarkMode ? 'dark' : 'light');
+
+  const progress = useAppSelector((state: RootState) => state.progress.progress);
+  const dispatch = useAppDispatch();
 
   const colorMode = useMemo(
     () => ({
@@ -68,6 +76,7 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
             <CssBaseline />
+            <LoadingBar color='#a1d9b6' progress={progress} onLoaderFinished={() => dispatch(completeProgress())} />
             <AppBar />
             <div className='container'>
               <div className={`labeling__wrapper labeling__wrapper--${theme.palette.mode}`}>
