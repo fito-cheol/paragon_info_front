@@ -1,4 +1,4 @@
-import { amber, indigo, grey, blue, common, blueGrey } from '@mui/material/colors';
+import { amber, grey, blue, common } from '@mui/material/colors';
 import { Theme } from '@mui/material/styles';
 const palette = {
   light: {

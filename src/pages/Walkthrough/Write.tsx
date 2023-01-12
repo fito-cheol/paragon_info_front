@@ -13,7 +13,6 @@ import { Dialog, DialogContent } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
 
 import EditorWrite from 'components/post/EditorWrite';
 import AutoHero from 'components/input/autocompleteHero';
@@ -224,10 +223,10 @@ export default function Write() {
       return;
     }
 
-    if (isModify && no) {
+    if (isModify && no && selectedHeroInfo) {
       const exportData = {
         postId: Number(no),
-        heroName: selectedHeroInfo!.id,
+        heroName: selectedHeroInfo.id,
         skillTree: skillTreeArray,
         startItems: selectedItemList[0].map(item => item.name),
         endItems: selectedItemList[1].map(item => item.name),
@@ -238,9 +237,9 @@ export default function Write() {
       await modifyPost(exportData);
       toast.info('게시물 수정 완료');
       navigate('/list', { replace: false });
-    } else {
+    } else if (selectedHeroInfo) {
       const exportData = {
-        heroName: selectedHeroInfo!.id,
+        heroName: selectedHeroInfo.id,
         skillTree: skillTreeArray,
         startItems: selectedItemList[0].map(item => item.name),
         endItems: selectedItemList[1].map(item => item.name),

@@ -1,6 +1,4 @@
-import cookies from 'js-cookie';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Action } from '@remix-run/router';
 
 // https://cocoder16.tistory.com/65
 

@@ -4,7 +4,6 @@ import { AxiosError } from 'axios';
 
 import ItemList from './pages/Item/List';
 import HeroList from './pages/Hero/List';
-import HomeMain from './pages/Home/Main';
 import TestPage from './pages/Test';
 import Write from './pages/Walkthrough/Write';
 import List from './pages/Walkthrough/List';
@@ -34,6 +33,7 @@ const queryClient = new QueryClient({
       if ((error as AxiosError).code == 'ERR_NETWORK') {
         toast.error(`서버와 연결되지 않습니다`);
       }
+      query.state.data;
     },
   }),
   defaultOptions: {
