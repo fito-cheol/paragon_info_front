@@ -1,13 +1,22 @@
+// 카드 감싸는 구역
+.content {
+    display: flex;
+    flex-wrap: wrap;
+}
+// 카드관련
 .fullCardMedia {
     position: absolute;
     top: 0;
     right: 0;
     height: 100%;
     width: 100%;
+
 }
 
 .fullCard {
     position: relative;
+    width: 208px;
+    margin: 12px;
 }
 
 .fullCardContent {
