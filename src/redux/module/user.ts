@@ -11,9 +11,10 @@ interface PostState {
 }
 
 const clientIdInit = cookies.get('clientId');
-const credentialInit = cookies.get('credential');
-const nicknameInit = cookies.get('nickname');
-const isInitCookie = !!clientIdInit && !!nicknameInit && !!credentialInit;
+const credentialInit = cookies.get('access_token');
+const nicknameInit = cookies.get('full_name');
+const emailInit = cookies.get('email');
+const isInitCookie = !!clientIdInit && !!nicknameInit && !!credentialInit && !!emailInit;
 
 const initialState: PostState = {
   loading: false,
@@ -22,8 +23,9 @@ const initialState: PostState = {
   user: isInitCookie
     ? {
         clientId: clientIdInit,
-        credential: credentialInit,
-        nickname: nicknameInit,
+        access_token: credentialInit,
+        full_name: nicknameInit,
+        email: emailInit,
       }
     : null,
 };
@@ -36,24 +38,26 @@ const userSlice = createSlice({
       state.isSignIn = false;
       state.user = null;
       cookies.remove('clientId');
-      cookies.remove('credential');
-      cookies.remove('nickname');
+      cookies.remove('access_token');
+      cookies.remove('full_name');
+      cookies.remove('email');
     },
-    logIn(state, action: PayloadAction<User>) {
+    logIn(state, { payload }: PayloadAction<User>) {
       state.isSignIn = true;
-      state.user = action.payload;
-      cookies.set('clientId', action.payload.clientId);
-      cookies.set('credential', action.payload.credential);
-      cookies.set('nickname', action.payload.nickname);
+      state.user = payload;
+      cookies.set('clientId', payload.clientId);
+      cookies.set('access_token', payload.access_token);
+      cookies.set('full_name', payload.full_name);
+      cookies.set('email', payload.email);
     },
-    updateNick(state, { payload }) {
+    updateName(state, { payload }) {
       if (state.user) {
         state.user = {
           ...state.user,
-          nickname: payload.nickname,
+          full_name: payload.full_name,
         };
       }
-      cookies.set('nickname', payload.nickname);
+      cookies.set('full_name', payload.full_name);
     },
   },
 });

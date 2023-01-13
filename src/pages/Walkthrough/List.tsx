@@ -94,7 +94,7 @@ export default function List() {
       setCanDeletePost(false);
       setCanModifyPost(false);
     } else {
-      const isOwner = selectedPost.user.clientId == cookies.get('clientId');
+      const isOwner = selectedPost.user.email == cookies.get('email');
       setCanDeletePost(isOwner);
       setCanModifyPost(isOwner);
     }

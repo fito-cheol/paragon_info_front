@@ -72,7 +72,7 @@ export default function PostTable({ posts, onClick }: Props) {
             </p>
           </Grid>
           <Grid xs={2} container alignContent='center' justifyContent='center'>
-            <p className='post__nickname'>{post.nickname}</p>
+            <p className='post__nickname'>{post.full_name}</p>
           </Grid>
           <Grid xs={1} container alignContent='center' justifyContent='center'>
             <p className='post__date'>{post.like_count}</p>

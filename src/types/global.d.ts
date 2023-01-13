@@ -128,7 +128,7 @@ declare global {
     click_count: number;
     delete: string;
     hero_FK: string;
-    nickname: string;
+    full_name: string;
     like_count: number;
   }
 
@@ -143,9 +143,10 @@ declare global {
   }
 
   interface User {
-    nickname: string;
-    credential: string;
+    email: string;
+    full_name: string;
     clientId: string;
+    access_token: string;
   }
   interface GetPostFormat {
     postId: number;

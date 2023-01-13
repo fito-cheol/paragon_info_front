@@ -1,61 +1,65 @@
-import React, { useEffect } from 'react';
-import { GoogleLogin, googleLogout, CredentialResponse } from '@react-oauth/google';
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import cookies from 'js-cookie';
+import React, { useState, useEffect } from 'react';
+import { LoginSocialGoogle, IResolveParams } from 'reactjs-social-login';
+
+import { GoogleLoginButton } from 'react-social-login-buttons';
+import Button from '@mui/material/Button';
 
 import type { RootState } from 'redux/store';
 import { logIn, logOut } from 'redux/module/user';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 
-import { toast } from 'react-toastify';
-import Button from '@mui/material/Button';
-
 import clientSecret from 'assets/gapi/client_secret.json';
 import { googleLogin } from 'api/user/index';
 
+// https://github.com/cuongdevjs/reactjs-social-login/blob/master/example/src/App.tsx
+
+interface GoogleReturn {
+  access_token: string;
+  family_name: string;
+  given_name: string;
+  email: string;
+}
+
 export default function GoogleLogIn() {
+  const [profile, setProfile] = useState<GoogleReturn>();
+
   const user = useAppSelector((state: RootState) => state.user.user);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const clientId = cookies.get('clientId');
-    const credential = cookies.get('credential');
-    const nickname = cookies.get('nickname');
-    if (clientId && credential && nickname) {
-      const newUser: User = {
-        clientId,
-        credential,
-        nickname,
-      };
-      dispatch(logIn(newUser));
+    if (profile) {
+      loginHandler(profile);
     }
-  }, []);
+  }, [profile]);
 
-  const loginHandler = async (credentialResponse: CredentialResponse) => {
-    const { clientId, credential } = credentialResponse;
-
-    if (clientId && credential) {
-      const newUser = await googleLogin({ clientId, credential });
-      dispatch(logIn(newUser));
-    }
+  const loginHandler = async (profile: GoogleReturn) => {
+    const clientId = clientSecret.web.client_id;
+    const { access_token, family_name, given_name, email } = profile;
+    const { user } = await googleLogin({ full_name: `${family_name}${given_name}`, email, clientId, access_token });
+    dispatch(logIn(user));
   };
-
   const logoutHandler = async () => {
     dispatch(logOut());
-    await googleLogout();
   };
 
   return (
     <React.Fragment>
       {!user ? (
-        <GoogleOAuthProvider clientId={clientSecret.web.client_id}>
-          <GoogleLogin
-            onSuccess={loginHandler}
-            onError={() => {
-              toast.error('로그인 실패');
-            }}
-          />
-        </GoogleOAuthProvider>
+        <LoginSocialGoogle
+          client_id={clientSecret.web.client_id}
+          scope='openid profile email'
+          discoveryDocs='claims_supported'
+          access_type='offline'
+          onResolve={({ provider, data }: IResolveParams) => {
+            console.log(provider, data);
+            setProfile(data as GoogleReturn);
+          }}
+          onReject={err => {
+            console.log(err);
+          }}
+        >
+          <GoogleLoginButton iconSize='30px' />
+        </LoginSocialGoogle>
       ) : (
         <Button style={{ margin: '5px' }} variant='contained' color='primary' onClick={() => logoutHandler()}>
           로그아웃
