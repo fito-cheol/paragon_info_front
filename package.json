@@ -54,7 +54,6 @@
     "typescript": "^4.6.3",
     "web-vitals": "^2.1.4"
   },
-  "proxy":" https://cors.bridged.cc/",
   "scripts": {
     "start": "craco start",
     "winstart": "set \"GENERATE_SOURCEMAP=false\" && craco start",
