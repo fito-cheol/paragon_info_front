@@ -24,8 +24,7 @@ const scope = scopes.join(' ');
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const redirectUri = `${BASE_URL}/redirect`;
-console.log('BASE_URL', BASE_URL);
-console.log('redirectUri', redirectUri);
+
 const GoogleURL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientSecret.web.client_id}&response_type=token&redirect_uri=${redirectUri}&scope=${scope}`;
 
 export default function GoogleLogIn() {
@@ -36,7 +35,6 @@ export default function GoogleLogIn() {
 
   useEffect(() => {
     if (!externalPopup || externalPopup.closed) {
-      console.log('remove ');
       window.removeEventListener('message', receiveMessage);
       return;
     }
