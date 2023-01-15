@@ -8,6 +8,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 import Button from 'components/button/ColoredButton';
 import SocialLogin from 'components/button/GoogleLogin';
+import GoogleCustom from 'components/button/GoogleCustom';
 import ToggleColorMode from 'components/button/ToggleColorMode';
 
 export default function ButtonAppBar() {
@@ -39,7 +40,8 @@ export default function ButtonAppBar() {
               <ToggleColorMode />
             </Grid>
             <Grid container xs='auto' alignContent={'center'}>
-              <SocialLogin />
+              {/* <SocialLogin /> */}
+              <GoogleCustom />
             </Grid>
           </Grid>
         </Toolbar>

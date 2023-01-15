@@ -5,6 +5,8 @@ import { AxiosError } from 'axios';
 import ItemList from './pages/Item/List';
 import HeroList from './pages/Hero/List';
 import TestPage from './pages/Test';
+import MainPage from './pages/Home/Main';
+import RedirectPage from './pages/Redirect/Google';
 import Write from './pages/Walkthrough/Write';
 import List from './pages/Walkthrough/List';
 import AppBar from './components/appBar/appBar';
@@ -86,7 +88,9 @@ function App() {
                   <Route path='write' element={<Write />} />
                   <Route path='modify/:no' element={<Write />} />
                   <Route path='list' element={<List />} />
-                  <Route path='Test' element={<TestPage />} />
+                  <Route path='test' element={<TestPage />} />
+                  <Route path='' element={<MainPage />} />
+                  <Route path='redirect' element={<RedirectPage />} />
                   <Route path='*' element={<Navigate to='/list' replace />} />
                 </Routes>
               </div>

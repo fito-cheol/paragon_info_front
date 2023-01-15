@@ -51,11 +51,10 @@ export default function GoogleLogIn() {
           discoveryDocs='claims_supported'
           access_type='offline'
           onResolve={({ provider, data }: IResolveParams) => {
-            console.log(provider, data);
             setProfile(data as GoogleReturn);
           }}
           onReject={err => {
-            console.log(err);
+            console.error(err);
           }}
         >
           <GoogleLoginButton iconSize='30px' />
