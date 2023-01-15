@@ -21,7 +21,11 @@ import './GoogleCustom.scoped.scss';
 const scopes = ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email'];
 const scope = scopes.join(' ');
 
-const redirectUri = `${process.env.BASE_URL}/redirect`;
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+
+const redirectUri = `${BASE_URL}/redirect`;
+console.log('BASE_URL', BASE_URL);
+console.log('redirectUri', redirectUri);
 const GoogleURL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientSecret.web.client_id}&response_type=token&redirect_uri=${redirectUri}&scope=${scope}`;
 
 export default function GoogleLogIn() {
