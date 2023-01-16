@@ -7,7 +7,6 @@ import { logIn, logOut } from 'redux/module/user';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 
 import { toast } from 'react-toastify';
-import Button from '@mui/material/Button';
 import googleLogoImage from 'assets/icon/google-text-logo.png';
 
 import clientSecret from 'assets/gapi/client_secret.json';
