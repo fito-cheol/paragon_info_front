@@ -14,7 +14,8 @@ const clientIdInit = cookies.get('clientId');
 const credentialInit = cookies.get('access_token');
 const nicknameInit = cookies.get('full_name');
 const emailInit = cookies.get('email');
-const isInitCookie = !!clientIdInit && !!nicknameInit && !!credentialInit && !!emailInit;
+const pictureInit = cookies.get('picture');
+const isInitCookie = !!clientIdInit && !!nicknameInit && !!credentialInit && !!emailInit && !!pictureInit;
 
 const initialState: PostState = {
   loading: false,
@@ -26,6 +27,7 @@ const initialState: PostState = {
         access_token: credentialInit,
         full_name: nicknameInit,
         email: emailInit,
+        picture: pictureInit,
       }
     : null,
 };
@@ -41,6 +43,7 @@ const userSlice = createSlice({
       cookies.remove('access_token');
       cookies.remove('full_name');
       cookies.remove('email');
+      cookies.remove('picture');
     },
     logIn(state, { payload }: PayloadAction<User>) {
       state.isSignIn = true;
@@ -49,6 +52,7 @@ const userSlice = createSlice({
       cookies.set('access_token', payload.access_token);
       cookies.set('full_name', payload.full_name);
       cookies.set('email', payload.email);
+      cookies.set('picture', payload.picture);
     },
     updateName(state, { payload }) {
       if (state.user) {

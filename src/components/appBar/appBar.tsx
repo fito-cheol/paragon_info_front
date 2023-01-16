@@ -7,11 +7,15 @@ import Toolbar from '@mui/material/Toolbar';
 import Grid from '@mui/material/Unstable_Grid2';
 
 import Button from 'components/button/ColoredButton';
-import SocialLogin from 'components/button/GoogleLogin';
-import GoogleCustom from 'components/button/GoogleCustom';
+import GoogleLogIn from 'components/button/GoogleLogIn';
 import ToggleColorMode from 'components/button/ToggleColorMode';
+import UserProfile from 'components/image/UserProfile';
+
+import type { RootState } from 'redux/store';
+import { useAppSelector } from 'redux/hooks';
 
 export default function ButtonAppBar() {
+  const user = useAppSelector((state: RootState) => state.user.user);
   const navigate = useNavigate();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, pathname: string) => {
@@ -36,12 +40,11 @@ export default function ButtonAppBar() {
             <Grid xs='auto'>
               <Button onClick={event => handleClick(event, '/hero')}>영웅 </Button>
             </Grid>
-            <Grid container xs='auto' xsOffset='auto' alignContent={'center'}>
+            <Grid container xs='auto' xsOffset='auto' alignContent={'center'} padding={3}>
               <ToggleColorMode />
             </Grid>
             <Grid container xs='auto' alignContent={'center'}>
-              {/* <SocialLogin /> */}
-              <GoogleCustom />
+              {user ? <UserProfile user={user} /> : <GoogleLogIn />}
             </Grid>
           </Grid>
         </Toolbar>

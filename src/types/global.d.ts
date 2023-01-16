@@ -147,6 +147,7 @@ declare global {
     full_name: string;
     clientId: string;
     access_token: string;
+    picture: string;
   }
   interface GetPostFormat {
     postId: number;
