@@ -7,8 +7,8 @@ import { logIn, logOut } from 'redux/module/user';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 
 import { toast } from 'react-toastify';
-import { GoogleLoginButton } from 'react-social-login-buttons';
 import Button from '@mui/material/Button';
+import googleLogoImage from 'assets/icon/google-text-logo.png';
 
 import clientSecret from 'assets/gapi/client_secret.json';
 import { googleLogin } from 'api/user/index';
@@ -20,11 +20,9 @@ import './GoogleCustom.scoped.scss';
 
 const scopes = ['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/userinfo.email'];
 const scope = scopes.join(' ');
-
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const redirectUri = `${BASE_URL}/redirect`;
-
 const GoogleURL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientSecret.web.client_id}&response_type=token&redirect_uri=${redirectUri}&scope=${scope}`;
 
 export default function GoogleLogIn() {
@@ -42,25 +40,24 @@ export default function GoogleLogIn() {
   }, [externalPopup]);
 
   const oAuthHandler = (): void => {
-    openSignInWindow(GoogleURL, '구글 로그인');
+    const popup = openSignInWindow(GoogleURL, '구글 로그인');
+    setExternalPopup(popup);
   };
 
   const openSignInWindow = (url: string, title: string) => {
     const width = 500;
     const height = 400;
-    const left = window.screenX + (window.outerWidth - 500) / 2;
-    const top = window.screenY + (window.outerHeight - 400) / 2.5;
+    const left = window.screenX + (window.outerWidth - width) / 2;
+    const top = window.screenY + (window.outerHeight - height) / 2.5;
     const popup = window.open(url, title, `width=${width},height=${height},left=${left},top=${top}`);
     if (popup) {
       popup.focus();
     }
-
-    setExternalPopup(popup);
+    return popup;
   };
 
   const receiveMessage = async (event: any) => {
     const { data } = event;
-    console.log(data);
     const params = queryString.parse(data);
     const { access_token } = params;
     if (access_token && typeof access_token == 'string') {
@@ -87,19 +84,27 @@ export default function GoogleLogIn() {
   };
 
   const logoutHandler = async () => {
-    dispatch(logOut());
+    const revoke_url = 'https://oauth2.googleapis.com/revoke';
+    const method = 'POST';
+    if (user) {
+      try {
+        await axios.post(revoke_url, { token: user.access_token });
+        dispatch(logOut());
+      } catch (err) {
+        toast.error(err as string);
+      }
+    }
   };
 
   return (
     <React.Fragment>
       {!user ? (
-        <GoogleLoginButton
-          className='button__google'
-          onClick={() => {
-            oAuthHandler();
-          }}
-          iconSize='30px'
-        />
+        <button className='button__login--button'>
+          <div className='button__login--row' onClick={() => oAuthHandler()}>
+            <img className='button__login--img' src={googleLogoImage} width={30} height={30} />
+            <p className='button__login--text'>구글 로그인</p>
+          </div>
+        </button>
       ) : (
         <Button variant='contained' color='primary' className='button__logout' onClick={() => logoutHandler()}>
           로그아웃
@@ -107,5 +112,4 @@ export default function GoogleLogIn() {
       )}
     </React.Fragment>
   );
-  // <button onClick={oAuthHandler}>Google Login하기</button>;
 }
