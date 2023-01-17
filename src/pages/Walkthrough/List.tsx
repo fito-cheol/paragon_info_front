@@ -104,11 +104,11 @@ export default function List() {
   }, [page, pageSize, selectedHeroName]);
 
   useEffect(() => {
-    if (!selectedPost) {
+    if (!selectedPost || !user) {
       setCanDeletePost(false);
       setCanModifyPost(false);
     } else {
-      const isOwner = selectedPost.user.email == cookies.get('email');
+      const isOwner = selectedPost.user.email == user.email;
       setCanDeletePost(isOwner);
       setCanModifyPost(isOwner);
     }

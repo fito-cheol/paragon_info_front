@@ -85,7 +85,6 @@ export default function EditorWrite({ value, onChange }: Props) {
               const result = await uploadImage({ file: blob });
               callback(result.data.Location, '');
             } catch (error) {
-              console.error(error);
               toast.error('이미지 첨부에 실패했습니다');
             }
           },
