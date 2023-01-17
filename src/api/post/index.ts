@@ -6,6 +6,9 @@ interface DefaultObjectReturn {
   success: boolean;
   message: string;
 }
+interface GetCountParam {
+  heroName: string | null;
+}
 
 export async function upload(data: UploadFormat) {
   const response = await customAxios.post<DefaultReturn>('/post/uploadPost', data);
@@ -17,8 +20,8 @@ export async function list(data: ListFormat) {
   return response.data;
 }
 
-export async function getTotalCount() {
-  const response = await customAxios.get<ReturnCount>('/post/totalCount');
+export async function getTotalCount(data: GetCountParam) {
+  const response = await customAxios.get<ReturnCount>('/post/totalCount', { params: data });
   return response.data;
 }
 

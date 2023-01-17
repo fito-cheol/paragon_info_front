@@ -29,11 +29,6 @@ import itemDict from 'assets/item/itemDict';
 import heroImages from 'assets/hero/imagePreloaderHero';
 import './Write.scoped.scss';
 
-interface AutocompleteOption {
-  label: string;
-  id: string;
-}
-
 export default function Write() {
   const navigate = useNavigate();
   const location = useLocation();

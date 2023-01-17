@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Grid from '@mui/material/Unstable_Grid2';
 
-import Button from 'components/button/ColoredButton';
+import Button from 'components/button/MainButton';
 import GoogleLogIn from 'components/button/GoogleLogin';
 import ToggleColorMode from 'components/button/ToggleColorMode';
 import UserProfile from 'components/image/UserProfile';

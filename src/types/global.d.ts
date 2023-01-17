@@ -102,6 +102,11 @@ declare global {
   type AttributeCheck = {
     [key in Attributes]: boolean;
   };
+  // component
+  interface AutocompleteOption {
+    label: string;
+    id: string;
+  }
 
   // API Format
   interface UploadFormat {
@@ -117,6 +122,7 @@ declare global {
   interface ListFormat {
     page: number;
     pageSize: number;
+    heroName?: string;
   }
 
   interface Post {

@@ -17,6 +17,7 @@ import Pagination from 'components/viewer/Pagination';
 import PostTable from 'components/viewer/PostTable';
 import PostContent from 'components/viewer/PostContent';
 import PostButtonList from 'components/button/PostButtonList';
+import PostFilter from 'components/filter/PostFilter';
 
 import likeImage from 'assets/icon/Like-Button-Transparent.png';
 import likeShineImage from 'assets/icon/Like-Shine-Button-Transparent.png';
@@ -28,6 +29,10 @@ interface PostFullInfo {
   content: Content;
   user: User;
 }
+
+const PageSizeDefault = 10;
+const PageDefault = 1;
+
 export default function List() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -36,9 +41,11 @@ export default function List() {
   const queryPage: string | null = searchParams.get('page');
   const queryPageSize = searchParams.get('pageSize');
   const no = searchParams.get('no');
+  const hero = searchParams.get('hero');
 
-  const [pageSize, setPageSize] = useState<number>(queryPageSize ? Number(queryPageSize) : 10);
-  const [page, setPage] = useState<number>(queryPage ? Number(queryPage) : 1);
+  const [pageSize, setPageSize] = useState<number>(queryPageSize ? Number(queryPageSize) : PageSizeDefault);
+  const [page, setPage] = useState<number>(queryPage ? Number(queryPage) : PageDefault);
+  const [selectedHeroName, setSelectedHeroName] = useState<string | null>(hero || null);
   const [canDeletePost, setCanDeletePost] = useState<boolean>(false);
   const [canModifyPost, setCanModifyPost] = useState<boolean>(false);
   const [postList, setPostList] = useState<Post[]>([]);
@@ -47,10 +54,14 @@ export default function List() {
 
   const user = useAppSelector((state: RootState) => state.user.user);
 
-  const totalCountQuery = useQuery<ReturnCount, AxiosError, number>('repoData', () => getTotalCount(), {
-    select: res => res.totalCount,
-    placeholderData: { totalCount: 0 },
-  });
+  const totalCountQuery = useQuery<ReturnCount, AxiosError, number>(
+    ['postCount', selectedHeroName],
+    () => getTotalCount({ heroName: selectedHeroName }),
+    {
+      select: res => res.totalCount,
+      placeholderData: { totalCount: 0 },
+    },
+  );
 
   const postListMutation = useMutation(list, {
     onSuccess: postList => {
@@ -82,12 +93,15 @@ export default function List() {
 
   // computed
   useEffect(() => {
-    const pageInfo = {
+    const pageInfo: ListFormat = {
       page,
       pageSize,
     };
+    if (selectedHeroName) {
+      pageInfo.heroName = selectedHeroName;
+    }
     postListMutation.mutate(pageInfo);
-  }, [page, pageSize]);
+  }, [page, pageSize, selectedHeroName]);
 
   useEffect(() => {
     if (!selectedPost) {
@@ -156,7 +170,6 @@ export default function List() {
     }
   };
   const likeHandler = async () => {
-    // 로그인 안되어 있으면 로그인 하라고 알려줌
     if (!user) {
       toast.warn('로그인 후 추천 가능합니다');
       return;
@@ -170,6 +183,11 @@ export default function List() {
       const { success } = await deleteLike({ postId: selectedPost.post.id });
       if (success) postMutation.mutate({ postId: selectedPost.post.id });
     }
+  };
+  const filterHandler = (heroName: string | null) => {
+    setPageSize(PageSizeDefault);
+    setPage(PageDefault);
+    setSelectedHeroName(heroName);
   };
 
   return (
@@ -207,6 +225,9 @@ export default function List() {
       ) : (
         <></>
       )}
+      <Grid xs={12} container>
+        <PostFilter applyFilter={filterHandler} />
+      </Grid>
       <Grid xs={12} sx={{ marginTop: '12px', marginBottom: '12px' }}>
         <PostButtonList
           canDelete={canDeletePost}

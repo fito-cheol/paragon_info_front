@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
-import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 
 import EditorRead from 'components/post/EditorRead';
 import SkillTree from 'components/image/SkillTree';
 import ImageItemList from 'components/image/ItemList';
+import CustomDivider from 'components/layout/Divider';
 
 import heroImages from 'assets/hero/imagePreloaderHero';
 import heroDict from 'assets/hero/heroDict';
@@ -54,12 +54,6 @@ export default function PostTable({ post, content }: Props) {
     setDateString(newDateString);
   }, [post]);
 
-  const CustomDivider = (
-    <Grid xs={12} sx={{ marginTop: '12px', marginBottom: '12px' }}>
-      <Divider className='divider' variant='middle' />
-    </Grid>
-  );
-
   return (
     <Grid container>
       <Grid xs={12}>
@@ -73,8 +67,7 @@ export default function PostTable({ post, content }: Props) {
           <Typography> 조회수 {post.click_count} </Typography>
         </Grid>
       </Grid>
-
-      {CustomDivider}
+      <CustomDivider />
       <Grid container>
         <Grid xs={12}>
           <Typography variant='h4'>영웅 정보</Typography>
@@ -86,40 +79,35 @@ export default function PostTable({ post, content }: Props) {
           <Typography variant='h5'> {heroDict[hero_FK]['이름']} </Typography>
         </Grid>
       </Grid>
-
-      {/* {CustomDivider}
-      <Grid xs={12}>
-        <Typography variant='h4'>스킬 정보</Typography>
-      </Grid> */}
-      {CustomDivider}
+      <CustomDivider />
       <Grid xs={12}>
         <Typography variant='h4'>스킬 트리</Typography>
       </Grid>
       {skillTreeArray.map((skillTreeElement, index) => {
         return <SkillTree key={index} type={skillTreeElement} />;
       })}
-      {CustomDivider}
+      <CustomDivider />
       <Grid xs={12}>
         <Typography variant='h4'>시작 아이템</Typography>
       </Grid>
       <Grid xs={12}>{startItems.length > 0 ? <ImageItemList itemList={startItems} /> : <h3> 아이템 없음 </h3>}</Grid>
-      {CustomDivider}
+      <CustomDivider />
       <Grid xs={12}>
         <Typography variant='h4'>최종 아이템</Typography>
       </Grid>
       <Grid xs={12}>{endItems.length > 0 ? <ImageItemList itemList={endItems} /> : <h3> 아이템 없음 </h3>}</Grid>
-      {CustomDivider}
+      <CustomDivider />
       <Grid xs={12}>
         <Typography variant='h4'>핵심 아이템</Typography>
       </Grid>
       <Grid xs={12}>
         {possibleItems.length > 0 ? <ImageItemList itemList={possibleItems} /> : <h3> 아이템 없음 </h3>}
       </Grid>
-      {CustomDivider}
+      <CustomDivider />
       <Grid xs={12} sx={{ minHeight: '300px', padding: '10px', border: '1px solid grey' }}>
         <EditorRead content={text} />
       </Grid>
-      {CustomDivider}
+      <CustomDivider />
     </Grid>
   );
 }
