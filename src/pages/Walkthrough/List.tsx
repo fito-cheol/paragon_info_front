@@ -18,6 +18,7 @@ import PostTable from 'components/viewer/PostTable';
 import PostContent from 'components/viewer/PostContent';
 import PostButtonList from 'components/button/PostButtonList';
 import PostFilter from 'components/filter/PostFilter';
+import SearchBox from 'components/input/SearchBox';
 
 import likeImage from 'assets/icon/Like-Button-Transparent.png';
 import likeShineImage from 'assets/icon/Like-Shine-Button-Transparent.png';
@@ -42,9 +43,11 @@ export default function List() {
   const queryPageSize = searchParams.get('pageSize');
   const no = searchParams.get('no');
   const hero = searchParams.get('hero');
+  const searchTextInit = searchParams.get('searchText');
 
   const [pageSize, setPageSize] = useState<number>(queryPageSize ? Number(queryPageSize) : PageSizeDefault);
   const [page, setPage] = useState<number>(queryPage ? Number(queryPage) : PageDefault);
+  const [searchText, setSearchText] = useState<string>(searchTextInit || '');
   const [selectedHeroName, setSelectedHeroName] = useState<string | null>(hero || null);
   const [canDeletePost, setCanDeletePost] = useState<boolean>(false);
   const [canModifyPost, setCanModifyPost] = useState<boolean>(false);
@@ -55,8 +58,8 @@ export default function List() {
   const user = useAppSelector((state: RootState) => state.user.user);
 
   const totalCountQuery = useQuery<ReturnCount, AxiosError, number>(
-    ['postCount', selectedHeroName],
-    () => getTotalCount({ heroName: selectedHeroName }),
+    ['postCount', selectedHeroName, searchText],
+    () => getTotalCount({ heroName: selectedHeroName, searchText }),
     {
       select: res => res.totalCount,
       placeholderData: { totalCount: 0 },
@@ -97,11 +100,10 @@ export default function List() {
       page,
       pageSize,
     };
-    if (selectedHeroName) {
-      pageInfo.heroName = selectedHeroName;
-    }
+    if (selectedHeroName) pageInfo.heroName = selectedHeroName;
+    if (searchText) pageInfo.searchText = searchText;
     postListMutation.mutate(pageInfo);
-  }, [page, pageSize, selectedHeroName]);
+  }, [page, pageSize, selectedHeroName, searchText]);
 
   useEffect(() => {
     if (!selectedPost || !user) {
@@ -121,7 +123,7 @@ export default function List() {
 
   useEffect(() => {
     updateUrl();
-  }, [page, pageSize, selectedPost]);
+  }, [page, pageSize, selectedPost, searchText]);
 
   const onPageChange = (page: number, pageSize: number) => {
     setSelectedPost(null);
@@ -131,13 +133,14 @@ export default function List() {
   };
 
   const updateUrl = () => {
+    const newParam: Record<string, string | string[]> = { page: page.toString(), pageSize: pageSize.toString() };
     if (selectedPost) {
-      const newParam = { page: page.toString(), pageSize: pageSize.toString(), no: selectedPost.post.id.toString() };
-      setSearchParams(newParam);
-    } else {
-      const newParam = { page: page.toString(), pageSize: pageSize.toString() };
-      setSearchParams(newParam);
+      newParam.no = selectedPost.post.id.toString();
     }
+    if (searchText) {
+      newParam.searchText = searchText;
+    }
+    setSearchParams(newParam);
   };
   const getContent = (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>, post: Post) => {
     if (event.ctrlKey) {
@@ -188,6 +191,11 @@ export default function List() {
     setPageSize(PageSizeDefault);
     setPage(PageDefault);
     setSelectedHeroName(heroName);
+  };
+  const searchInputHandler = (text: string) => {
+    setPageSize(PageSizeDefault);
+    setPage(PageDefault);
+    setSearchText(text);
   };
 
   return (
@@ -255,6 +263,9 @@ export default function List() {
             onPageChange(newPage, pageSize);
           }}
         />
+      </Grid>
+      <Grid xs={12} sx={{ marginTop: '12px', marginBottom: '12px' }} justifyContent='center' alignContent='center'>
+        <SearchBox onEnter={text => searchInputHandler(text)}></SearchBox>
       </Grid>
     </Grid>
   );

@@ -9,7 +9,7 @@ import { AxiosError } from 'axios';
 export default function Counter() {
   const totalCountQuery = useQuery<ReturnCount, AxiosError, number>(
     'repoData',
-    () => getTotalCount({ heroName: 'muriel' }),
+    () => getTotalCount({ heroName: 'muriel', searchText: '' }),
     {
       select: res => res.totalCount,
       placeholderData: { totalCount: 0 },

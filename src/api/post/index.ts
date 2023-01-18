@@ -8,6 +8,7 @@ interface DefaultObjectReturn {
 }
 interface GetCountParam {
   heroName: string | null;
+  searchText: string;
 }
 
 export async function upload(data: UploadFormat) {

@@ -123,6 +123,7 @@ declare global {
     page: number;
     pageSize: number;
     heroName?: string;
+    searchText?: string;
   }
 
   interface Post {
