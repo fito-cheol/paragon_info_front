@@ -3,18 +3,16 @@ import Pagination from 'react-js-pagination';
 import './Paging.css';
 
 interface Props {
+  page: number;
   itemsCountPerPage: number;
   totalItemsCount: number;
   pageRangeDisplayed: number;
-  onPageChange?: (page: number) => void;
+  onPageChange: (page: number) => void;
 }
 
-export default function Paging({ itemsCountPerPage, totalItemsCount, pageRangeDisplayed, onPageChange }: Props) {
-  const [page, setPage] = useState<number>(1);
-
+export default function Paging({ page, itemsCountPerPage, totalItemsCount, pageRangeDisplayed, onPageChange }: Props) {
   const handlePageChange = (newPage: number) => {
-    setPage(newPage);
-    if (onPageChange) onPageChange(newPage);
+    onPageChange(newPage);
   };
 
   return (

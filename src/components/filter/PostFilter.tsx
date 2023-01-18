@@ -9,16 +9,17 @@ import AutoHero from 'components/input/autocompleteHero';
 
 interface Props {
   applyFilter: (heroName: string | null) => void;
+  onReset: () => void;
 }
 
-export default function PostFilter({ applyFilter }: Props) {
+export default function PostFilter({ applyFilter, onReset }: Props) {
   const [selectedHeroInfo, setSelectedHeroInfo] = useState<AutocompleteOption | null>(null);
 
   return (
     <Grid container xs={12}>
       <CustomDivider />
       <Grid xs={2} container justifyContent={'center'}>
-        <h3>챔피언 </h3>
+        <h4>챔피언 </h4>
       </Grid>
       <Grid xs={10} container alignContent={'center'}>
         <AutoHero value={selectedHeroInfo} onChange={setSelectedHeroInfo} />
@@ -36,7 +37,14 @@ export default function PostFilter({ applyFilter }: Props) {
           <Button onClick={() => applyFilter(selectedHeroInfo?.id || null)}> 필터 적용하기</Button>
         </Grid>
         <Grid xs='auto'>
-          <Button> 필터 초기화</Button>
+          <Button
+            onClick={() => {
+              setSelectedHeroInfo(null);
+              onReset();
+            }}
+          >
+            필터 초기화
+          </Button>
         </Grid>
       </Grid>
       <CustomDivider />

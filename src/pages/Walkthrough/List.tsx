@@ -226,7 +226,7 @@ export default function List() {
         <></>
       )}
       <Grid xs={12} container>
-        <PostFilter applyFilter={filterHandler} />
+        <PostFilter applyFilter={filterHandler} onReset={() => filterHandler(null)} />
       </Grid>
       <Grid xs={12} sx={{ marginTop: '12px', marginBottom: '12px' }}>
         <PostButtonList
@@ -247,9 +247,10 @@ export default function List() {
       </Grid>
       <Grid xs={12} sx={{ marginTop: '12px', marginBottom: '12px' }}>
         <Pagination
+          page={page}
           itemsCountPerPage={pageSize}
           totalItemsCount={totalCountQuery.data || 0}
-          pageRangeDisplayed={10}
+          pageRangeDisplayed={PageSizeDefault}
           onPageChange={newPage => {
             onPageChange(newPage, pageSize);
           }}
