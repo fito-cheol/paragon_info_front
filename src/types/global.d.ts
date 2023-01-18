@@ -53,6 +53,7 @@ declare global {
   interface Hero {
     이름: string;
     name: string;
+    category: string;
     TITLE_Q: string;
     TITLE_E: string;
     TITLE_R: string;

@@ -2,7 +2,7 @@
   {
     "이름": "제나",
     "name": "Zena",
-    "category": "암살자",
+    "category": "Assassin",
     "TITLE_Q": "돌고 돌아",
     "TITLE_E": "날아올라",
     "TITLE_R": "다섯 개의 별",
@@ -44,7 +44,7 @@
   {
     "이름": "카이메라",
     "name": "Khaimera",
-    "category": "전사",
+    "category": "Worrior",
     "TITLE_Q": "빠르게 휘두르기",
     "TITLE_E": "재생의 구슬",
     "TITLE_R": "광기의 도끼",
@@ -86,7 +86,7 @@
   {
     "이름": "레이스",
     "name": "Wraith",
-    "category": "원거리 딜러",
+    "category": "AD Carry",
     "TITLE_Q": "AI 스캔",
     "TITLE_E": "공간 왜곡",
     "TITLE_R": "절대 변환",
@@ -128,7 +128,7 @@
   {
     "이름": "하위처",
     "name": "Howitzer",
-    "category": "마법사",
+    "category": "Wizard",
     "TITLE_Q": "진짜 강력한 미사일",
     "TITLE_E": "내꺼야!",
     "TITLE_R": "하위처 쇼타임!",
@@ -170,7 +170,7 @@
   {
     "이름": "데커",
     "name": "Dekker",
-    "category": "서포터",
+    "category": "Supporter",
     "TITLE_Q": "고탄성 플라스마 볼",
     "TITLE_E": "플라스마 돔",
     "TITLE_R": "분리 장벽",
@@ -212,7 +212,7 @@
   {
     "이름": "세라스",
     "name": "Serath",
-    "category": "전사",
+    "category": "Worrior",
     "TITLE_Q": "환영 심판",
     "TITLE_E": "강림",
     "TITLE_R": "소환된 균형",
@@ -254,7 +254,7 @@
   {
     "이름": "가젯",
     "name": "Gadget",
-    "category": "마법사",
+    "category": "Wizard",
     "TITLE_Q": "끈적이는 폭탄",
     "TITLE_E": "스피드 게이트",
     "TITLE_R": "마그네틱 필드",
@@ -296,7 +296,7 @@
   {
     "이름": "페이",
     "name": "The Fey",
-    "category": "마법사",
+    "category": "Wizard",
     "TITLE_Q": "숲의 바람",
     "TITLE_E": "숲의 경고",
     "TITLE_R": "숲의 심판",
@@ -338,7 +338,7 @@
   {
     "이름": "오로라",
     "name": "Aurora",
-    "category": "마법사",
+    "category": "Wizard",
     "TITLE_Q": "얼어붙은 길",
     "TITLE_E": "얼음 결계",
     "TITLE_R": "얼음 폭발",
@@ -380,7 +380,7 @@
   {
     "이름": "나르바쉬",
     "name": "Narbash",
-    "category": "서포터",
+    "category": "Supporter",
     "TITLE_Q": "행진의 찬가",
     "TITLE_E": "격려의 찬가",
     "TITLE_R": "거대한 울림",
@@ -422,7 +422,7 @@
   {
     "이름": "레버넌트",
     "name": "Revenant",
-    "category": "원거리 딜러",
+    "category": "AD Carry",
     "TITLE_Q": "빗발치는 총알",
     "TITLE_E": "치명적인 상처",
     "TITLE_R": "심연의 감옥",
@@ -464,7 +464,7 @@
   {
     "이름": "칼라리",
     "name": "Kallari",
-    "category": "암살자",
+    "category": "Assassin",
     "TITLE_Q": "사그라든 빛",
     "TITLE_E": "황혼의 인도자",
     "TITLE_R": "악이 되리라",
@@ -506,7 +506,7 @@
   {
     "이름": "뮤리엘",
     "name": "Muriel",
-    "category": "서포터",
+    "category": "Supporter",
     "TITLE_Q": "천벌",
     "TITLE_E": "눈부신 빛",
     "TITLE_R": "함께하리라",
@@ -548,7 +548,7 @@
   {
     "이름": "페이즈",
     "name": "Phase",
-    "category": "마법사",
+    "category": "Wizard",
     "TITLE_Q": "플래쉬 버스트",
     "TITLE_E": "라이트 플럭스",
     "TITLE_R": "슈퍼 충전",
@@ -590,7 +590,7 @@
   {
     "이름": "머독",
     "name": "Murdock",
-    "category": "원거리 딜러",
+    "category": "AD Carry",
     "TITLE_Q": "목표물 확인",
     "TITLE_E": "폭격 개시",
     "TITLE_R": "초정밀 사격",
@@ -632,7 +632,7 @@
   {
     "이름": "램페이지",
     "name": "Rampage",
-    "category": "탱커",
+    "category": "Tanker",
     "TITLE_Q": "야만적 던지기",
     "TITLE_E": "지진 강타",
     "TITLE_R": "해방된 자",
@@ -674,7 +674,7 @@
   {
     "이름": "기데온",
     "name": "Gideon",
-    "category": "마법사",
+    "category": "Wizard",
     "TITLE_Q": "메테오 소환",
     "TITLE_E": "아공간 개방",
     "TITLE_R": "잠식",
@@ -716,7 +716,7 @@
   {
     "이름": "펭 마오",
     "name": "Feng Mao",
-    "category": "전사",
+    "category": "Worrior",
     "TITLE_Q": "상서로운 기운",
     "TITLE_E": "여명의 창",
     "TITLE_R": "강건한 결심",
@@ -758,7 +758,7 @@
   {
     "이름": "그럭스",
     "name": "Grux",
-    "category": "전사",
+    "category": "Worrior",
     "TITLE_Q": "원시 손아귀",
     "TITLE_E": "압도적인 여세",
     "TITLE_R": "대족장의 분노",
@@ -800,7 +800,7 @@
   {
     "이름": "세바로그",
     "name": "Sevarog",
-    "category": "탱커",
+    "category": "Tanker",
     "TITLE_Q": "영혼 훔치기",
     "TITLE_E": "공허한 숨결",
     "TITLE_R": "사망선고",
@@ -842,7 +842,7 @@
   {
     "이름": "벨리카",
     "name": "Belica",
-    "category": "마법사",
+    "category": "Wizard",
     "TITLE_Q": "붕괴장",
     "TITLE_E": "사령관의 눈",
     "TITLE_R": "신경마비탄",
@@ -884,7 +884,7 @@
   {
     "이름": "트윈블라스트",
     "name": "Twinblast",
-    "category": "원거리 딜러",
+    "category": "AD Carry",
     "TITLE_Q": "잿더미로 만들어!",
     "TITLE_E": "기동력 강화",
     "TITLE_R": "이퀄리브리엄",
@@ -926,7 +926,7 @@
   {
     "이름": "스패로우",
     "name": "Sparrow",
-    "category": "원거리 딜러",
+    "category": "AD Carry",
     "TITLE_Q": "화살비",
     "TITLE_E": "신속한 화살",
     "TITLE_R": "융단 사격",
@@ -968,7 +968,7 @@
   {
     "이름": "광",
     "name": "Kwang",
-    "category": "전사",
+    "category": "Worrior",
     "TITLE_Q": "진섬",
     "TITLE_E": "격전",
     "TITLE_R": "신월, 광",
@@ -1010,7 +1010,7 @@
   {
     "이름": "신비",
     "name": "Shinbi",
-    "category": "암살자",
+    "category": "Assassin",
     "TITLE_Q": "수호령 소환",
     "TITLE_E": "수호의 춤",
     "TITLE_R": "신녀의 부름",
@@ -1052,7 +1052,7 @@
   {
     "이름": "카운테스",
     "name": "Countess",
-    "category": "암살자",
+    "category": "Assassin",
     "TITLE_Q": "그림자 물결",
     "TITLE_E": "피의 물결",
     "TITLE_R": "갈증",
@@ -1094,7 +1094,7 @@
   {
     "이름": "스틸",
     "name": "Steel",
-    "category": "서포터",
+    "category": "Supporter",
     "TITLE_Q": "전진",
     "TITLE_E": "철갑 장벽",
     "TITLE_R": "멈출 수 없는 힘",

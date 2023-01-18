@@ -5,13 +5,11 @@ interface ImageStorage {
 function importAll(imageContext: __WebpackModuleApi.RequireContext) {
   const images = {} as ImageStorage;
   imageContext.keys().map(item => {
-    images[item.replace('./', '').replace('.jpg', '')] = imageContext(item);
+    images[item.replace('./', '').replace('.png', '')] = imageContext(item);
   });
   return images;
 }
 
-const images = importAll(require.context('./HERO_PROFILE', false, /.jpg/));
-
-console.log('images', images);
+const images = importAll(require.context('./HERO_TYPE', false, /.png/));
 
 export default images;
