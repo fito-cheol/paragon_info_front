@@ -25,7 +25,8 @@ export default function autocompleteHero({ value, onChange }: Props) {
       disablePortal
       id='combo-box'
       options={heroNameList}
-      sx={{ width: 300 }}
+      size='small'
+      sx={{ width: 220 }}
       value={value}
       onChange={(event, newValue: AutocompleteOption | null) => {
         if (onChange) {

@@ -18,7 +18,7 @@ export default function ColoredButton({ children, onClick }: ButtonProps) {
         border: '1px solid',
         borderRadius: 2,
         cursor: 'pointer',
-        fontSize: 18,
+        fontSize: 14,
         fontWeight: 700,
         ':hover': {
           backgroundColor: 'grey',
