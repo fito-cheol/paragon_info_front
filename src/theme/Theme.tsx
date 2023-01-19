@@ -20,6 +20,7 @@ export const getDesignTokens = (mode: PaletteMode | undefined) =>
               main: palette.light.primary.main,
               light: palette.light.primary.light,
               dark: palette.light.primary.dark,
+              contrastText: '#fff',
             },
 
             divider: amber[200],

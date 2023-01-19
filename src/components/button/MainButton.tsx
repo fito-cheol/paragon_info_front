@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import Button from '@mui/material/Button';
+import { text } from 'stream/consumers';
 
 type ButtonProps = {
   children: ReactNode;
@@ -15,7 +16,7 @@ export default function ColoredButton({ children, variant, onClick }: ButtonProp
         width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        color: 'text.primary',
+        color: theme => `${variant == 'contained' ? theme.palette.primary.contrastText : theme.palette.text.primary}`,
         borderRadius: 2,
         cursor: 'pointer',
         fontSize: 24,
