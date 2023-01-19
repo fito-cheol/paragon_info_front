@@ -17,9 +17,12 @@ export default function PostFilter({ applyFilter, onReset }: Props) {
 
   return (
     <Grid container xs={12}>
+      <Grid xs={12} container>
+        <h1> 공략 </h1>
+      </Grid>
       <CustomDivider />
       <Grid xs={2} container justifyContent={'center'}>
-        <h4>챔피언 </h4>
+        <h4>영웅 </h4>
       </Grid>
       <Grid xs={10} container alignContent={'center'}>
         <AutoHero value={selectedHeroInfo} onChange={setSelectedHeroInfo} />

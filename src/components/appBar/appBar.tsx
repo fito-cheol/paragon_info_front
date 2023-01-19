@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -14,9 +14,13 @@ import UserProfile from 'components/image/UserProfile';
 import type { RootState } from 'redux/store';
 import { useAppSelector } from 'redux/hooks';
 
+import './appBar.scoped.scss';
+
 export default function ButtonAppBar() {
   const user = useAppSelector((state: RootState) => state.user.user);
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location.pathname);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, pathname: string) => {
     if (event.ctrlKey) {
@@ -30,15 +34,30 @@ export default function ButtonAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position='static' color='inherit'>
         <Toolbar>
-          <Grid container xs={12} spacing={3}>
-            <Grid xs='auto'>
-              <Button onClick={event => handleClick(event, '/list')}>공략 </Button>
+          <Grid container xs={12}>
+            <Grid xs='auto' container className={`link--wrapper`}>
+              <Button
+                variant={location.pathname == '/list' ? 'contained' : undefined}
+                onClick={event => handleClick(event, '/list')}
+              >
+                공략
+              </Button>
             </Grid>
-            <Grid xs='auto'>
-              <Button onClick={event => handleClick(event, '/item')}>아이템 </Button>
+            <Grid xs='auto' container className={`link--wrapper`}>
+              <Button
+                variant={location.pathname == '/item' ? 'contained' : undefined}
+                onClick={event => handleClick(event, '/item')}
+              >
+                아이템{' '}
+              </Button>
             </Grid>
-            <Grid xs='auto'>
-              <Button onClick={event => handleClick(event, '/hero')}>영웅 </Button>
+            <Grid xs='auto' container className={`link--wrapper`}>
+              <Button
+                variant={location.pathname == '/hero' ? 'contained' : undefined}
+                onClick={event => handleClick(event, '/hero')}
+              >
+                영웅{' '}
+              </Button>
             </Grid>
             <Grid container xs='auto' xsOffset='auto' alignContent={'center'} padding={3}>
               <ToggleColorMode />

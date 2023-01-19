@@ -11,4 +11,16 @@
   &:active {
     background-color: rgba(200, 200, 200, 0.5) !important;
   }
+  &--Q {
+    background-color: chartreuse;
+  }
+  &--E {
+    background-color: skyblue;
+  }
+  &--Right {
+    background-color: yellow;
+  }
+  &--R {
+    background-color: red;
+  }
 }

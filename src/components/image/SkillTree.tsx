@@ -12,7 +12,7 @@ interface SKILL_TREE_IMAGE_PROPS {
 export default function SkillTreeImage({ type, size, onClick }: SKILL_TREE_IMAGE_PROPS) {
   return (
     <img
-      className='skillTree__img'
+      className={`skillTree__img skillTree__img--${type}`}
       src={images[type]}
       loading='lazy'
       width={size || 24}

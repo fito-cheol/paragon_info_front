@@ -89,7 +89,6 @@ function App() {
                   <Route path='modify/:no' element={<Write />} />
                   <Route path='list' element={<List />} />
                   <Route path='test' element={<TestPage />} />
-                  <Route path='' element={<MainPage />} />
                   <Route path='redirect' element={<RedirectPage />} />
                   <Route path='*' element={<Navigate to='/list' replace />} />
                 </Routes>
