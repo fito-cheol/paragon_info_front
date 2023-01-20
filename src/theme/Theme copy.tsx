@@ -4,7 +4,7 @@ const palette = {
   light: {
     primary: {
       main: '#7060ff',
-      light: '#9e93ff',
+      light: '#7060ff',
       dark: '#7060ff',
     },
   },
@@ -31,9 +31,9 @@ export const getDesignTokens = (mode: PaletteMode | undefined) =>
           }
         : {
             primary: {
-              light: '#9e93ff',
-              main: '#757ce8',
-              dark: '#757ce8',
+              light: '#757ce8',
+              main: '#3f50b5',
+              dark: '#002884',
               contrastText: '#fff',
             },
             divider: grey[700],
