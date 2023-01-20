@@ -12,6 +12,7 @@ import './Details.scoped.scss';
 export default function Details() {
   const { name } = useParams();
   const [hero, setHero] = useState<Hero | null>(null);
+  const [index, setIndex] = useState(0);
   const getHero = async (name: string) => {
     setHero(HeroDict[name]);
   };
@@ -35,7 +36,7 @@ export default function Details() {
                   <h1 className='title'>{hero.이름}</h1>
                   <hr />
                   <div className='rowItem'>
-                    <img src={ImageHeroTypes[hero.category]} height={52} />
+                    <img src={ImageHeroTypes[hero.category]} width={52} />
                     <h3 className='subTitle'>{hero.category}</h3>
                   </div>
                   <span className='description'>{hero.story}</span>
@@ -59,24 +60,56 @@ export default function Details() {
               </div>
             </div>
             <div className='heroSkill'>
-              <ul className='left tab'>
-                <li className='tabItem'>
-                  <img height={60} src={ImageHeroSkill[`${hero.name}_Q`]} />
-                </li>
-                <li className='tabItem'>
-                  <img height={60} src={ImageHeroSkill[`${hero.name}_E`]} />
-                </li>
-                <li className='tabItem'>
-                  <img height={60} src={ImageHeroSkill[`${hero.name}_R`]} />
-                </li>
-                <li className='tabItem'>
-                  <img height={60} src={ImageHeroSkill[`${hero.name}_LEFT`]} />
-                </li>
-                <li className='tabItem'>
-                  <img height={60} src={ImageHeroSkill[`${hero.name}_RIGHT`]} />
-                </li>
-              </ul>
-              <div className='right'>content</div>
+              <h1 className='title'>스킬</h1>
+              <div className='content'>
+                <div className='tab'>
+                  <div className='tab__line'></div>
+                  <ul className='tab__container'>
+                    <li className={index === 0 ? 'tab__image current' : 'tab__image'} onClick={() => setIndex(0)}>
+                      <img width={62} src={ImageHeroSkill[`${hero.name}_Q`]} />
+                      <div className='pointer__circle'></div>
+                    </li>
+                    <li className={index === 1 ? 'tab__image current' : 'tab__image'} onClick={() => setIndex(1)}>
+                      <img width={62} src={ImageHeroSkill[`${hero.name}_E`]} />
+                      <div className='pointer__circle'></div>
+                    </li>
+                    <li className={index === 2 ? 'tab__image current' : 'tab__image'} onClick={() => setIndex(2)}>
+                      <img width={62} src={ImageHeroSkill[`${hero.name}_R`]} />
+                      <div className='pointer__circle'></div>
+                    </li>
+                    <li className={index === 3 ? 'tab__image current' : 'tab__image'} onClick={() => setIndex(3)}>
+                      <img width={62} src={ImageHeroSkill[`${hero.name}_LEFT`]} />
+                      <div className='pointer__circle'></div>
+                    </li>
+                    <li className={index === 4 ? 'tab__image current' : 'tab__image'} onClick={() => setIndex(4)}>
+                      <img width={62} src={ImageHeroSkill[`${hero.name}_RIGHT`]} />
+                      <div className='pointer__circle'></div>
+                    </li>
+                  </ul>
+
+                  <div className={index === 0 ? 'tab__content current' : 'tab__content'}>
+                    <h3 className='title'>{hero.TITLE_Q}</h3>
+                    <span className='description'>{hero.DETAIL_Q_SIMPLE}</span>
+                  </div>
+                  <div className={index === 1 ? 'tab__content current' : 'tab__content'}>
+                    <h3 className='title'>{hero.TITLE_E}</h3>
+                    <span className='description'>{hero.DETAIL_E_SIMPLE}</span>
+                  </div>
+                  <div className={index === 2 ? 'tab__content current' : 'tab__content'}>
+                    <h3 className='title'>{hero.TITLE_R}</h3>
+                    <span className='description'>{hero.DETAIL_R_SIMPLE}</span>
+                  </div>
+                  <div className={index === 3 ? 'tab__content current' : 'tab__content'}>
+                    <h3 className='title'>{hero.TITLE_LEFT}</h3>
+                    <span className='description'>{hero.DETAIL_LEFT_SIMPLE}</span>
+                  </div>
+                  <div className={index === 4 ? 'tab__content current' : 'tab__content'}>
+                    <h3 className='title'>{hero.TITLE_RIGHT}</h3>
+                    <span className='description'>{hero.DETAIL_RIGHT_SIMPLE}</span>
+                  </div>
+                </div>
+                <div className='skillPlayer'>skillPlayer</div>
+              </div>
             </div>
           </div>
         </div>
