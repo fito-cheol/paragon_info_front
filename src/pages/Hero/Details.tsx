@@ -78,34 +78,34 @@ export default function Details() {
                       <div className='pointer__circle'></div>
                     </li>
                     <li className={index === 3 ? 'tab__image current' : 'tab__image'} onClick={() => setIndex(3)}>
-                      <img width={62} src={ImageHeroSkill[`${hero.name}_LEFT`]} />
+                      <img width={62} src={ImageHeroSkill[`${hero.name}_RIGHT`]} />
                       <div className='pointer__circle'></div>
                     </li>
                     <li className={index === 4 ? 'tab__image current' : 'tab__image'} onClick={() => setIndex(4)}>
-                      <img width={62} src={ImageHeroSkill[`${hero.name}_RIGHT`]} />
+                      <img width={62} src={ImageHeroSkill[`${hero.name}_LEFT`]} />
                       <div className='pointer__circle'></div>
                     </li>
                   </ul>
 
                   <div className={index === 0 ? 'tab__content current' : 'tab__content'}>
-                    <h3 className='title'>{hero.TITLE_Q}</h3>
+                    <h3 className='title'>Q : {hero.TITLE_Q}</h3>
                     <span className='description'>{hero.DETAIL_Q_SIMPLE}</span>
                   </div>
                   <div className={index === 1 ? 'tab__content current' : 'tab__content'}>
-                    <h3 className='title'>{hero.TITLE_E}</h3>
+                    <h3 className='title'>E : {hero.TITLE_E}</h3>
                     <span className='description'>{hero.DETAIL_E_SIMPLE}</span>
                   </div>
                   <div className={index === 2 ? 'tab__content current' : 'tab__content'}>
-                    <h3 className='title'>{hero.TITLE_R}</h3>
+                    <h3 className='title'>R : {hero.TITLE_R}</h3>
                     <span className='description'>{hero.DETAIL_R_SIMPLE}</span>
                   </div>
                   <div className={index === 3 ? 'tab__content current' : 'tab__content'}>
-                    <h3 className='title'>{hero.TITLE_LEFT}</h3>
-                    <span className='description'>{hero.DETAIL_LEFT_SIMPLE}</span>
+                    <h3 className='title'>오른쪽 마우스 : {hero.TITLE_RIGHT}</h3>
+                    <span className='description'>{hero.DETAIL_RIGHT_SIMPLE}</span>
                   </div>
                   <div className={index === 4 ? 'tab__content current' : 'tab__content'}>
-                    <h3 className='title'>{hero.TITLE_RIGHT}</h3>
-                    <span className='description'>{hero.DETAIL_RIGHT_SIMPLE}</span>
+                    <h3 className='title'>왼쪽 마우스 : {hero.TITLE_LEFT}</h3>
+                    <span className='description'>{hero.DETAIL_LEFT_SIMPLE}</span>
                   </div>
                 </div>
                 <div className='skillPlayer'>skillPlayer</div>
