@@ -1,0 +1,103 @@
+.container {
+    position: relative;
+    .heroPages  {
+        overflow: hidden;
+        position: relative;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        background: #151515 url(https://sgimage.netmarble.com/mobile/game/overprime/brand/v1/img/108010100357.jpg) no-repeat 50% 0;
+        text-align: left;
+        .heroDetails {
+            position: relative;
+            // bottom: 0;
+            height: 1230px;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .heroImage {
+            position: absolute;
+            bottom: 0;
+            left: calc(50% - 1300px);
+            img {
+                border: 0;
+                vertical-align: top;
+            }
+        }
+        .heroInfoBg {
+            position: absolute;
+            bottom: 0;
+            height: 280px;
+            width: 100%;
+            background: rgb(65,50,69);
+            background: linear-gradient(90deg, rgba(65,50,69,1) 0%, rgba(39,47,75,1) 100%);
+        }
+        
+    }
+    
+    .content {
+        position: relative;
+        padding: 100px;
+    }
+    .heroStroy {
+        position: relative;
+        width: 45%;
+        color: white;
+        .title {
+            margin-bottom: 16px;
+            font-size: 52px;
+            font-weight: 700;
+        }
+        .rowItem {
+            display: flex;
+            align-items: center;
+            .subTitle {
+                padding: 0 12px;
+                font-size: 36px;
+            }
+        }
+        .description {
+            font-size: 18px;
+            line-height: 1.6;
+            letter-spacing: 0.6px;
+        }
+    }
+    .heroInfo {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 300px;
+        .info {
+            width: 36%;
+            padding: 100px;
+        }
+        .tab {
+            display: flex;
+            justify-content: space-between;
+            margin: 4px;
+            .leftText {
+                font-size: 22px;
+                font-weight: 700;
+                color: #7060ff;
+            }
+            .rightText {
+                font-size: 22px;
+                font-weight: 400;
+                color: #ffffff;
+            }
+        }
+        
+    }
+    .heroSkill {
+        display: flex;
+        .left {
+            width: 60px;
+        }
+        .tab {
+            margin: 0;
+            background-color: #222;
+        }
+        .right {
+            width: 80%;
+        }
+    }
+}
