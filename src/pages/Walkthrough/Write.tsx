@@ -54,7 +54,7 @@ export default function Write() {
     onSuccess: post => {
       const { title } = post.post;
       setTitle(title);
-      const { skill_list, end_item_list, start_item_list, possible_item_list, text } = post.content;
+      const { skill_list, end_item_list, start_item_list, possible_item_list, text, hero_FK } = post.content;
       const newSkillTreeArray = skill_list.split(',') as SkillTree[];
       setSkillTreeArray(newSkillTreeArray);
 
@@ -71,7 +71,7 @@ export default function Write() {
       setEditorData(text);
 
       _.forEach(heroList, heroInfo => {
-        if (heroInfo.name) {
+        if (heroInfo.name == hero_FK) {
           setSelectedHeroInfo({ label: heroInfo['이름'], id: heroInfo.name });
         }
       });
