@@ -74,6 +74,7 @@ export default function List() {
   const postMutation = useMutation(getPost, {
     onSuccess: post => {
       setSelectedPost(post);
+      scrollToTop();
     },
   });
   const doILikeMutation = useMutation(getDoILikePost, {
@@ -125,6 +126,12 @@ export default function List() {
     updateUrl();
   }, [page, pageSize, selectedPost, searchText]);
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
   const onPageChange = (page: number, pageSize: number) => {
     setSelectedPost(null);
 
