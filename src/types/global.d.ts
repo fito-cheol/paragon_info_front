@@ -157,6 +157,20 @@ declare global {
     access_token: string;
     picture: string;
   }
+
+  interface Comment {
+    id: number;
+    post_FK: number;
+    user_FK: number;
+    user: User;
+    root: number;
+    depth: number;
+    level: number;
+    text: string;
+    date: string;
+    deleted: number;
+  }
+
   interface GetPostFormat {
     postId: number;
   }

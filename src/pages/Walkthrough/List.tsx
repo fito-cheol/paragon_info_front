@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 
 import { useNavigate, useLocation, createSearchParams } from 'react-router-dom';
@@ -9,6 +8,7 @@ import type { RootState } from 'redux/store';
 import { useAppSelector } from 'redux/hooks';
 
 import { getTotalCount, list, getPost, deletePost, getDoILikePost, addLike, deleteLike } from 'api/post/index';
+import { addComment } from 'api/comment/index';
 import { useQuery, useMutation } from 'react-query';
 import { AxiosError } from 'axios';
 
@@ -19,6 +19,7 @@ import PostContent from 'components/viewer/PostContent';
 import PostButtonList from 'components/button/PostButtonList';
 import PostFilter from 'components/filter/PostFilter';
 import SearchBox from 'components/input/SearchBox';
+import CommentInput from 'components/comment/Input';
 
 import likeImage from 'assets/icon/Like-Button-Transparent.png';
 import likeShineImage from 'assets/icon/Like-Shine-Button-Transparent.png';
@@ -235,6 +236,18 @@ export default function List() {
             <Grid>
               <h3> {selectedPost.post.like_count} </h3>
             </Grid>
+          </Grid>
+          <Grid xs={12} className='post__comment--wrapper'>
+            <CommentInput
+              onSubmit={async text => {
+                await addComment({ postId: selectedPost.post.id, text });
+                // TODO:  reload comment
+              }}
+              initialText=''
+              isTextareaDisabled={!user}
+              submitLabel='댓글'
+              hasCancelButton={false}
+            />
           </Grid>
         </>
       ) : (

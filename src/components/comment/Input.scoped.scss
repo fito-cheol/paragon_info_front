@@ -1,0 +1,13 @@
+.hidden {
+  display: none;
+}
+.wrapper {
+  padding: 20px;
+  min-width: 1000px;
+  &--light {
+    background-color: #eee;
+  }
+  &--dark {
+    background-color: #222;
+  }
+}
