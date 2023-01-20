@@ -8,22 +8,37 @@ import ImageHeros from 'assets/hero/imagePreloaderHero';
 import ImageHeroTypes from 'assets/hero/imagePreloaderType';
 
 import HeroJson from 'assets/hero/DB_Hero.json';
+import { useNavigate } from 'react-router-dom';
 
 import './FullCard.scoped.scss';
 
 export default function List() {
   const [heroList, setHeroList] = useState<Hero[]>([]);
-  console.log('HeroJson', HeroJson);
-  console.log('ImageHeros', ImageHeros);
   useEffect(() => {
     setHeroList(HeroJson);
   }, []);
+
+  const navigate = useNavigate();
+
+  const handleClick = (event: React.MouseEvent<Element, MouseEvent>, pathname: string) => {
+    console.log('pathname', pathname);
+    if (event.ctrlKey) {
+      window.open(pathname, '_blank');
+    } else {
+      navigate({ pathname });
+    }
+  };
 
   return (
     <>
       <section className='content'>
         {heroList.map(hero => (
-          <Card key={hero.name} className='fullCard' sx={{ maxWidth: 208 }}>
+          <Card
+            key={hero.name}
+            className='fullCard'
+            sx={{ maxWidth: 208 }}
+            onClick={event => handleClick(event, `/hero/${hero.name}`)}
+          >
             <CardMedia
               className='fullCardMedia'
               component='img'

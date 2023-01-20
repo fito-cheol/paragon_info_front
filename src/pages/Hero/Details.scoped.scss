@@ -1,0 +1,176 @@
+.container {
+    position: relative;
+    .title {
+        margin-bottom: 16px;
+        font-size: 52px;
+        font-weight: 700;
+        color: white;
+    }
+    .heroPages  {
+        overflow: hidden;
+        position: relative;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        background: #151515 url(https://sgimage.netmarble.com/mobile/game/overprime/brand/v1/img/108010100357.jpg) no-repeat 50% 0;
+        text-align: left;
+        .heroDetails {
+            position: relative;
+            // bottom: 0;
+            height: 1230px;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            .content {
+                position: relative;
+                padding: 100px;
+            }
+        }
+        .heroImage {
+            position: absolute;
+            bottom: 0;
+            left: calc(50% - 1300px);
+            img {
+                border: 0;
+                vertical-align: top;
+            }
+        }
+        .heroInfoBg {
+            position: absolute;
+            bottom: 0;
+            height: 280px;
+            width: 100%;
+            background: rgb(65,50,69);
+            background: linear-gradient(90deg, rgba(65,50,69,1) 0%, rgba(39,47,75,1) 100%);
+        }
+        
+    }
+    
+    .heroStroy {
+        position: relative;
+        width: 45%;
+        color: white;
+        .rowItem {
+            display: flex;
+            align-items: center;
+            .subTitle {
+                padding: 0 12px;
+                font-size: 36px;
+            }
+        }
+        .description {
+            font-size: 18px;
+            line-height: 1.6;
+            letter-spacing: 0.6px;
+        }
+    }
+    .heroInfo {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 300px;
+        .info {
+            width: 36%;
+            padding: 100px;
+        }
+        .tab {
+            display: flex;
+            justify-content: space-between;
+            margin: 4px;
+            .leftText {
+                font-size: 22px;
+                font-weight: 700;
+                color: #7060ff;
+            }
+            .rightText {
+                font-size: 22px;
+                font-weight: 400;
+                color: #ffffff;
+            }
+        }
+        
+    }
+    .heroSkill {
+        display: flex;
+        flex-direction: column;
+        margin-top: 12px;
+        padding: 50px 100px;
+        .content {
+            display: flex;
+            justify-content: space-between;
+            .tab {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                width: 50%;
+                &__container {
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+                    display: flex;
+                    justify-content: space-around;
+                }
+                &__image {
+                    display: inline-block;
+                    margin-right: 12px;
+                    height: 62px;
+                        &.current {
+                            border: solid 1px $primary-color;
+                            border-radius: 4px;
+                            .pointer__circle {
+                                background-color: $primary-color;
+                            }
+                        }
+                        .pointer__circle {
+                            background-color: #bdbdbd;
+                            width: 12px;
+                            height: 12px;
+                            border-radius: 50%;
+                            margin: 0 auto;
+                            position: relative;
+                            bottom: -12px;
+                        }
+                        &:hover {
+                            border: solid 1px $primary-color;
+                            .pointer__circle {
+                                background-color: $primary-color;
+                            }
+                        }
+                }
+                &__line {
+                    position: relative;
+                    border: solid 0.5px #bdbdbd;
+                    bottom: -88px;
+                }
+                &__content {
+                    display: none;
+                    border: solid 0.5px $primary-color;
+                    box-shadow: rgba(196, 169, 227, 0.15) 0px 48px 100px 0px;
+                    border-radius: 4px;
+                    margin-top: 54px;
+                    padding: 15px;
+                    color: #ffffff;
+                    min-height: 150px;
+                    .title {
+                        padding: 0;
+                        margin: 0;
+                        margin-bottom: 12px;
+                        font-size: 24px;
+                    }
+                    &.current {
+                        display: inline-block;
+                    }
+                }
+            }
+            .skillPlayer {
+                width: 45%;
+                border: solid 1px #bdbdbd;
+                border-radius: 4px;
+                padding: 12px;
+                color: #ffffff;
+            }
+        }
+        
+        // .right {
+        //     width: 80%;
+        // }
+    }
+}

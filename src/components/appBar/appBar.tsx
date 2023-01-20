@@ -52,7 +52,7 @@ export default function ButtonAppBar() {
             </Grid>
             <Grid xs='auto' container className={`link--wrapper`}>
               <Button
-                variant={location.pathname == '/hero' ? 'contained' : undefined}
+                variant={location.pathname.startsWith('/hero') ? 'contained' : undefined}
                 onClick={event => handleClick(event, '/hero')}
               >
                 영웅{' '}
