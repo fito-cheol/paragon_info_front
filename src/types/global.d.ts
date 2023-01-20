@@ -51,6 +51,7 @@ declare global {
     '이미지 path': string;
   };
   interface Hero {
+    [x: string]: ReactNode;
     이름: string;
     name: string;
     category: string;
@@ -91,6 +92,10 @@ declare global {
     RIGHT3: string;
     RIGHT4: string;
     RIGHT5: string;
+    story: string;
+    planet: string;
+    ancestry: string;
+    affiliation: string;
   }
   type SkillTree = 'Q' | 'E' | 'R' | 'Right' | 'None';
   interface Attribute {
