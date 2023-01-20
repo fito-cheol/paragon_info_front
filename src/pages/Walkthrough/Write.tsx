@@ -158,7 +158,7 @@ export default function Write() {
           break;
         }
         if (newSkillTreeArray.filter(x => x == skillType).length > 5) {
-          errorMessage = 'R스킬은 최대 5번 찍을 수 있습니다';
+          errorMessage = '스킬은 최대 5번 찍을 수 있습니다';
           break;
         }
     }

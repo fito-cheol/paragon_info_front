@@ -20,7 +20,6 @@ export default function ButtonAppBar() {
   const user = useAppSelector((state: RootState) => state.user.user);
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.pathname);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, pathname: string) => {
     if (event.ctrlKey) {
