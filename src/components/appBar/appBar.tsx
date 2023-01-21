@@ -47,7 +47,7 @@ export default function ButtonAppBar() {
                 variant={location.pathname == '/item' ? 'contained' : undefined}
                 onClick={event => handleClick(event, '/item')}
               >
-                아이템{' '}
+                아이템
               </Button>
             </Grid>
             <Grid xs='auto' container className={`link--wrapper`}>
@@ -55,7 +55,7 @@ export default function ButtonAppBar() {
                 variant={location.pathname.startsWith('/hero') ? 'contained' : undefined}
                 onClick={event => handleClick(event, '/hero')}
               >
-                영웅{' '}
+                영웅
               </Button>
             </Grid>
             <Grid container xs='auto' xsOffset='auto' alignContent={'center'} padding={3}>

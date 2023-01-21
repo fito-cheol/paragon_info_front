@@ -1,13 +1,15 @@
-.hidden {
-  display: none;
-}
 .wrapper {
-  padding: 20px;
-  min-width: 1000px;
-  &--light {
-    background-color: #eee;
+  width: 100%;
+  padding: 2px;
+}
+
+.comment__input {
+  width: 100%;
+  padding: 5px;
+  &--wrapper {
+    margin: 10px;
   }
-  &--dark {
-    background-color: #222;
-  }
+}
+.button--wrapper {
+  padding: 10px;
 }

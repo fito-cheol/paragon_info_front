@@ -103,11 +103,9 @@ export default function PostTable({ post, content }: Props) {
       <Grid xs={12}>
         {possibleItems.length > 0 ? <ImageItemList itemList={possibleItems} /> : <h3> 아이템 없음 </h3>}
       </Grid>
-      <CustomDivider />
       <Grid xs={12} sx={{ minHeight: '300px', padding: '10px', border: '1px solid grey' }}>
         <EditorRead content={text} />
       </Grid>
-      <CustomDivider />
     </Grid>
   );
 }

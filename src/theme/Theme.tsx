@@ -23,7 +23,7 @@ export const getDesignTokens = (mode: PaletteMode | undefined) =>
               contrastText: '#fff',
             },
 
-            divider: amber[200],
+            divider: palette.light.primary.dark,
             text: {
               primary: grey[900],
               secondary: grey[800],

@@ -12,7 +12,7 @@ type ButtonProps = {
 
 export default function ColoredButton({ canModify, canDelete, onModify, onDelete, onWrite }: ButtonProps) {
   return (
-    <Grid container justifyContent={'end'}>
+    <Grid container justifyContent={'end'} spacing={1}>
       {canModify ? (
         <Grid xs='auto'>
           <Button
@@ -34,6 +34,7 @@ export default function ColoredButton({ canModify, canDelete, onModify, onDelete
             onClick={() => {
               if (onDelete) onDelete();
             }}
+            color='error'
           >
             삭제
           </Button>

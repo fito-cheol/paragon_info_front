@@ -27,7 +27,7 @@ export async function getTotalCount(data: GetCountParam) {
 }
 
 export async function getPost(data: GetPostFormat) {
-  const response = await customAxios.get<{ post: Post; content: Content; user: User }>('/post/getPost', {
+  const response = await customAxios.get<{ post: Post; content: Content; user: UserFull }>('/post/getPost', {
     params: data,
   });
   return response.data;

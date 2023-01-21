@@ -7,7 +7,7 @@ interface PostState {
   loading: boolean;
   error: null | string;
   isSignIn: boolean;
-  user: User | null;
+  user: UserFull | null;
 }
 
 const clientIdInit = cookies.get('clientId');
@@ -45,7 +45,7 @@ const userSlice = createSlice({
       cookies.remove('email');
       cookies.remove('picture');
     },
-    logIn(state, { payload }: PayloadAction<User>) {
+    logIn(state, { payload }: PayloadAction<UserFull>) {
       state.isSignIn = true;
       state.user = payload;
       cookies.set('clientId', payload.clientId);

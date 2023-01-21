@@ -5,7 +5,7 @@ import Divider from '@mui/material/Divider';
 export default function CustomDivider() {
   return (
     <Grid xs={12} sx={{ marginTop: '12px', marginBottom: '12px' }}>
-      <Divider className='divider' variant='middle' />
+      <Divider sx={{ bgcolor: theme => theme.palette.divider }} variant='middle' />
     </Grid>
   );
 }

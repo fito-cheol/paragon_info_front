@@ -17,9 +17,6 @@ export default function PostFilter({ applyFilter, onReset }: Props) {
 
   return (
     <Grid container xs={12}>
-      <Grid xs={12} container>
-        <h1> 공략 </h1>
-      </Grid>
       <CustomDivider />
       <Grid xs={2} container justifyContent={'center'}>
         <h4>영웅 </h4>

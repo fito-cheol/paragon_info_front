@@ -155,19 +155,21 @@ declare global {
     text: string;
   }
 
-  interface User {
+  interface UserCore {
     email: string;
     full_name: string;
+    picture: string;
+  }
+  interface UserFull extends UserCore {
     clientId: string;
     access_token: string;
-    picture: string;
   }
 
   interface Comment {
     id: number;
     post_FK: number;
     user_FK: number;
-    user: User;
+    user: UserCore;
     root: number;
     depth: number;
     level: number;

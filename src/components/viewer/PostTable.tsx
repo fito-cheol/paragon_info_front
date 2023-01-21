@@ -4,6 +4,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 
 import heroImages from 'assets/hero/imagePreloaderHero';
+import { dateParser } from 'utils/parsing';
 import './PostTable.scoped.scss';
 
 interface Props {
@@ -42,14 +43,7 @@ export default function PostTable({ posts, onClick }: Props) {
       </Grid>,
     );
     posts.map((post, index) => {
-      const postDate: Date = new Date(Date.parse(post.create_date));
-
-      let dateString = `${postDate.getHours()}:${postDate.getMinutes()}`;
-      if (isToday(postDate)) {
-        dateString = `${postDate.getHours()}:${postDate.getMinutes()}`;
-      } else {
-        dateString = `${postDate.getMonth() + 1}.${postDate.getDate()}`;
-      }
+      const dateString = dateParser(post.create_date);
 
       newPostElements.push(
         <Grid container xs={12} key={index} className='post__row'>
@@ -89,16 +83,6 @@ export default function PostTable({ posts, onClick }: Props) {
 
     setPostElements(newPostElements);
   }, [posts]);
-
-  function isToday(date: Date) {
-    const today = new Date();
-
-    if (today.toDateString() === date.toDateString()) {
-      return true;
-    }
-
-    return false;
-  }
 
   return <Grid container> {postElements}</Grid>;
 }

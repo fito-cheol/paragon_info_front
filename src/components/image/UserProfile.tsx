@@ -11,7 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import './Item.scoped.scss';
 
 interface ImageItemProps {
-  user: User;
+  user: UserFull;
 }
 
 export default function UserProfile({ user }: ImageItemProps) {

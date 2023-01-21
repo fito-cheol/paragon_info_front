@@ -8,7 +8,7 @@ import type { RootState } from 'redux/store';
 import { useAppSelector } from 'redux/hooks';
 
 import { getTotalCount, list, getPost, deletePost, getDoILikePost, addLike, deleteLike } from 'api/post/index';
-import { addComment } from 'api/comment/index';
+import { addComment, getComment } from 'api/comment/index';
 import { useQuery, useMutation } from 'react-query';
 import { AxiosError } from 'axios';
 
@@ -20,16 +20,19 @@ import PostButtonList from 'components/button/PostButtonList';
 import PostFilter from 'components/filter/PostFilter';
 import SearchBox from 'components/input/SearchBox';
 import CommentInput from 'components/comment/Input';
+import CommentShow from 'components/comment/Show';
+import CustomDivider from 'components/layout/Divider';
 
 import likeImage from 'assets/icon/Like-Button-Transparent.png';
 import likeShineImage from 'assets/icon/Like-Shine-Button-Transparent.png';
 
 import './List.scoped.scss';
+import { Typography } from '@mui/material';
 
 interface PostFullInfo {
   post: Post;
   content: Content;
-  user: User;
+  user: UserFull;
 }
 
 const PageSizeDefault = 10;
@@ -55,6 +58,8 @@ export default function List() {
   const [postList, setPostList] = useState<Post[]>([]);
   const [selectedPost, setSelectedPost] = useState<PostFullInfo | null>(null);
   const [doILikePost, setDoILikePost] = useState<boolean>(false);
+  const [commentText, setCommentText] = useState<string>('');
+  const [commentList, setCommentList] = useState<Comment[]>([]);
 
   const user = useAppSelector((state: RootState) => state.user.user);
 
@@ -86,11 +91,23 @@ export default function List() {
       setDoILikePost(false);
     },
   });
+  const commentMutation = useMutation(getComment, {
+    onSuccess: commentList => {
+      setCommentList(commentList);
+    },
+    onError: () => {
+      setCommentList([]);
+    },
+    onSettled: () => {
+      console.log(commentList);
+    },
+  });
 
   // mounted
   useEffect(() => {
     if (no) {
       postMutation.mutate({ postId: Number(no) });
+      commentMutation.mutate({ postId: Number(no) });
     } else {
       setSelectedPost(null);
     }
@@ -156,6 +173,7 @@ export default function List() {
       window.open(location.pathname + `?${createSearchParams(params)}`, '_blank');
     } else {
       postMutation.mutate({ postId: post.id });
+      commentMutation.mutate({ postId: post.id });
     }
   };
   const writeHandler = () => {
@@ -189,10 +207,16 @@ export default function List() {
       return;
     } else if (!doILikePost) {
       const { success } = await addLike({ postId: selectedPost.post.id });
-      if (success) postMutation.mutate({ postId: selectedPost.post.id });
+      if (success) {
+        postMutation.mutate({ postId: selectedPost.post.id });
+        commentMutation.mutate({ postId: selectedPost.post.id });
+      }
     } else {
       const { success } = await deleteLike({ postId: selectedPost.post.id });
-      if (success) postMutation.mutate({ postId: selectedPost.post.id });
+      if (success) {
+        postMutation.mutate({ postId: selectedPost.post.id });
+        commentMutation.mutate({ postId: selectedPost.post.id });
+      }
     }
   };
   const filterHandler = (heroName: string | null) => {
@@ -208,6 +232,9 @@ export default function List() {
 
   return (
     <Grid container xs={12} className='list__wrapper'>
+      <Grid xs={12} container>
+        <h1> 공략 </h1>
+      </Grid>
       {selectedPost ? (
         <>
           <Grid xs={12} sx={{ marginTop: '12px', marginBottom: '12px' }}>
@@ -237,17 +264,36 @@ export default function List() {
               <h3> {selectedPost.post.like_count} </h3>
             </Grid>
           </Grid>
+          <CustomDivider />
           <Grid xs={12} className='post__comment--wrapper'>
-            <CommentInput
-              onSubmit={async text => {
-                await addComment({ postId: selectedPost.post.id, text });
-                // TODO:  reload comment
-              }}
-              initialText=''
-              isTextareaDisabled={!user}
-              submitLabel='댓글'
-              hasCancelButton={false}
-            />
+            <Grid xs={12} className='comment__text--row'>
+              <Typography variant='h6'> 댓글 갯수: {commentList.length}</Typography>
+            </Grid>
+            {commentList.map(comment => {
+              return (
+                <Grid xs={12} key={comment.id} className='comment__text--row'>
+                  <CommentShow comment={comment} />
+                </Grid>
+              );
+            })}
+            <Grid xs={12} className='comment__input--row'>
+              <CommentInput
+                onSubmit={async text => {
+                  if (!user) {
+                    toast.error('로그인 해주세요');
+                    return;
+                  }
+                  await addComment({ postId: selectedPost.post.id, text });
+                  setCommentText('');
+                  commentMutation.mutate({ postId: selectedPost.post.id });
+                }}
+                text={commentText}
+                onChange={setCommentText}
+                isTextareaDisabled={!commentText}
+                submitLabel='댓글'
+                hasCancelButton={false}
+              />
+            </Grid>
           </Grid>
         </>
       ) : (
