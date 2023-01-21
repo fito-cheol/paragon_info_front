@@ -68,7 +68,7 @@ export default function GoogleLogIn() {
         });
         const { email, family_name, given_name, picture } = res.data;
         const { user } = await googleLogin({
-          full_name: `${family_name}${given_name}`,
+          full_name: `${family_name || ''}${given_name || ''}`,
           email,
           clientId: clientSecret.web.client_id,
           access_token: access_token,
