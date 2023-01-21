@@ -20,7 +20,7 @@ import PostButtonList from 'components/button/PostButtonList';
 import PostFilter from 'components/filter/PostFilter';
 import SearchBox from 'components/input/SearchBox';
 import CommentInput from 'components/comment/Input';
-import CommentShow from 'components/comment/Show';
+import CommentDisplay from 'components/comment/Display';
 import CustomDivider from 'components/layout/Divider';
 
 import likeImage from 'assets/icon/Like-Button-Transparent.png';
@@ -272,7 +272,7 @@ export default function List() {
             {commentList.map(comment => {
               return (
                 <Grid xs={12} key={comment.id} className='comment__text--row'>
-                  <CommentShow comment={comment} />
+                  <CommentDisplay comment={comment} />
                 </Grid>
               );
             })}
