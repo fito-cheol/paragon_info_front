@@ -8,7 +8,7 @@ import type { RootState } from 'redux/store';
 import { useAppSelector } from 'redux/hooks';
 
 import { getTotalCount, list, getPost, deletePost, getDoILikePost, addLike, deleteLike } from 'api/post/index';
-import { addComment, getComment } from 'api/comment/index';
+import { addComment, getComment, deleteComment } from 'api/comment/index';
 import { useQuery, useMutation } from 'react-query';
 import { AxiosError } from 'axios';
 
@@ -22,6 +22,7 @@ import SearchBox from 'components/input/SearchBox';
 import CommentInput from 'components/comment/Input';
 import CommentDisplay from 'components/comment/Display';
 import CustomDivider from 'components/layout/Divider';
+import DialogDelete from 'components/dialog/Delete';
 
 import likeImage from 'assets/icon/Like-Button-Transparent.png';
 import likeShineImage from 'assets/icon/Like-Shine-Button-Transparent.png';
@@ -60,6 +61,8 @@ export default function List() {
   const [doILikePost, setDoILikePost] = useState<boolean>(false);
   const [commentText, setCommentText] = useState<string>('');
   const [commentList, setCommentList] = useState<Comment[]>([]);
+  const [commentToDelete, setCommentToDelete] = useState<Comment | null>(null);
+  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
 
   const user = useAppSelector((state: RootState) => state.user.user);
 
@@ -229,6 +232,13 @@ export default function List() {
     setPage(PageDefault);
     setSearchText(text);
   };
+  const commentDeleteHandler = async (comment: Comment) => {
+    if (selectedPost) {
+      const { root, level } = comment;
+      await deleteComment({ postId: selectedPost.post.id, root, level });
+      commentMutation.mutate({ postId: selectedPost.post.id });
+    }
+  };
 
   return (
     <Grid container xs={12} className='list__wrapper'>
@@ -272,7 +282,13 @@ export default function List() {
             {commentList.map(comment => {
               return (
                 <Grid xs={12} key={comment.id} className='comment__text--row'>
-                  <CommentDisplay comment={comment} />
+                  <CommentDisplay
+                    comment={comment}
+                    onDelete={comment => {
+                      setCommentToDelete(comment);
+                      setDialogOpen(true);
+                    }}
+                  />
                 </Grid>
               );
             })}
@@ -333,6 +349,17 @@ export default function List() {
       <Grid xs={12} sx={{ marginTop: '12px', marginBottom: '12px' }} justifyContent='center' alignContent='center'>
         <SearchBox onEnter={text => searchInputHandler(text)}></SearchBox>
       </Grid>
+      <DialogDelete
+        open={dialogOpen}
+        onCLose={() => setDialogOpen(false)}
+        onConfirm={() => {
+          setDialogOpen(false);
+          console.log(!!commentToDelete, 'DELETE');
+          if (commentToDelete) {
+            commentDeleteHandler(commentToDelete);
+          }
+        }}
+      />
     </Grid>
   );
 }

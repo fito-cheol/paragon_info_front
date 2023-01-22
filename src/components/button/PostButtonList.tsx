@@ -10,7 +10,7 @@ type ButtonProps = {
   onWrite?: () => void;
 };
 
-export default function ColoredButton({ canModify, canDelete, onModify, onDelete, onWrite }: ButtonProps) {
+export default function PostButtonList({ canModify, canDelete, onModify, onDelete, onWrite }: ButtonProps) {
   return (
     <Grid container justifyContent={'end'} spacing={1}>
       {canModify ? (

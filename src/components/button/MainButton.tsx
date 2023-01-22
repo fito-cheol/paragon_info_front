@@ -8,7 +8,7 @@ type ButtonProps = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
-export default function ColoredButton({ children, variant, onClick }: ButtonProps) {
+export default function MainButton({ children, variant, onClick }: ButtonProps) {
   return (
     <Button
       sx={{

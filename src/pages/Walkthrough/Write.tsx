@@ -205,7 +205,10 @@ export default function Write() {
       toast.error('선택된 영웅이 없습니다');
       return false;
     }
-
+    if (!title) {
+      toast.error('제목을 입력해주세요');
+      return false;
+    }
     return true;
   };
   const saveData = async () => {

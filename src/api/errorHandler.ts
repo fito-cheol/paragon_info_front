@@ -12,6 +12,7 @@ interface ResponseData {
 }
 
 function handleError(serverError: ResponseData) {
+  console.log('serverError~~~~~', serverError);
   if (serverError?.data) {
     if (serverError?.data == '토큰 만료') {
       store.dispatch(logOut());
@@ -21,6 +22,8 @@ function handleError(serverError: ResponseData) {
     } else if (serverError?.data == '등록되지 않은 유저입니다') {
       store.dispatch(logOut());
       toast.error(`등록되지 않은 유저입니다. 다시 로그인 해주세요`);
+    } else if (serverError?.data == '권한이 없습니다') {
+      toast.error(`권한이 없습니다`);
     }
   }
 }
