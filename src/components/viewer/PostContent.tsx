@@ -73,7 +73,7 @@ export default function PostTable({ post, content }: Props) {
           <Typography variant='h4'>영웅 정보</Typography>
         </Grid>
         <Grid xs='auto'>
-          <img src={heroImages[hero_FK]} alt={hero_FK} loading='lazy' width={100} height={100} />
+          <img src={heroImages[hero_FK]} alt={hero_FK} loading='lazy' width={100} height={125} />
         </Grid>
         <Grid xs={12}>
           <Typography variant='h5'> {heroDict[hero_FK]['이름']} </Typography>

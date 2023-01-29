@@ -302,7 +302,7 @@ export default function Write() {
       </Grid>
       {selectedHeroInfo ? (
         <Grid xs={12}>
-          <img src={heroImages[selectedHeroInfo?.id]} loading='lazy' width={100} height={100} />
+          <img src={heroImages[selectedHeroInfo?.id]} loading='lazy' width={100} height={125} />
         </Grid>
       ) : (
         <></>

@@ -51,7 +51,7 @@ export default function PostTable({ posts, onClick }: Props) {
             <p className='post__id'>{post.id}</p>
           </Grid>
           <Grid xs={2} container alignContent='center' justifyContent='center'>
-            <img src={heroImages[post.hero_FK]} loading='lazy' width={40} height={40} />
+            <img src={heroImages[post.hero_FK]} loading='lazy' width={48} height={60} />
           </Grid>
           <Grid xs={4} container alignContent='center' justifyContent='start'>
             <p
