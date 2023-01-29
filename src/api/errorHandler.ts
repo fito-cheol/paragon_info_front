@@ -12,7 +12,6 @@ interface ResponseData {
 }
 
 function handleError(serverError: ResponseData) {
-  console.log('serverError~~~~~', serverError);
   if (serverError?.data) {
     if (serverError?.data == '토큰 만료') {
       store.dispatch(logOut());
