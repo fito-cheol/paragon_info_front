@@ -28,36 +28,28 @@ export default function ButtonAppBar() {
       navigate({ pathname });
     }
   };
+  const linkButton = (text: string, path: string) => {
+    return (
+      <Grid xs='auto' container className={`link--wrapper`}>
+        <Button
+          variant={location.pathname == path ? 'contained' : undefined}
+          onClick={event => handleClick(event, path)}
+        >
+          {text}
+        </Button>
+      </Grid>
+    );
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position='static' color='inherit'>
         <Toolbar>
           <Grid container xs={12}>
-            <Grid xs='auto' container className={`link--wrapper`}>
-              <Button
-                variant={location.pathname == '/list' ? 'contained' : undefined}
-                onClick={event => handleClick(event, '/list')}
-              >
-                공략
-              </Button>
-            </Grid>
-            <Grid xs='auto' container className={`link--wrapper`}>
-              <Button
-                variant={location.pathname == '/item' ? 'contained' : undefined}
-                onClick={event => handleClick(event, '/item')}
-              >
-                아이템
-              </Button>
-            </Grid>
-            <Grid xs='auto' container className={`link--wrapper`}>
-              <Button
-                variant={location.pathname.startsWith('/hero') ? 'contained' : undefined}
-                onClick={event => handleClick(event, '/hero')}
-              >
-                영웅
-              </Button>
-            </Grid>
+            {linkButton('공략', '/list')}
+            {linkButton('티어 리스트', '/tier')}
+            {linkButton('아이템', '/item')}
+            {linkButton('영웅', '/hero')}
             <Grid container xs='auto' xsOffset='auto' alignContent={'center'} padding={3}>
               <ToggleColorMode />
             </Grid>

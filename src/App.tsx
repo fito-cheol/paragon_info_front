@@ -6,7 +6,7 @@ import ItemList from './pages/Item/List';
 import HeroList from './pages/Hero/List';
 import HeroDetails from './pages/Hero/Details';
 import TestPage from './pages/Test';
-import MainPage from './pages/Home/Main';
+import TierHeroes from 'pages/Tier/Heroes';
 import RedirectPage from './pages/Redirect/Google';
 import Write from './pages/Walkthrough/Write';
 import List from './pages/Walkthrough/List';
@@ -93,7 +93,7 @@ function App() {
                   <Route path='list' element={<List />} />
                   <Route path='test' element={<TestPage />} />
                   <Route path='redirect' element={<RedirectPage />} />
-                  <Route path='contact' element={<RedirectPage />} />
+                  <Route path='tier' element={<TierHeroes />} />
                   <Route path='*' element={<Navigate to='/list' replace />} />
                 </Routes>
               </div>

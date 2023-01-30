@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 
-import heroImages from 'assets/hero/imagePreloaderHero';
+import ImageHero from 'components/image/Hero';
+
 import { dateParser } from 'utils/parsing';
 import './PostTable.scoped.scss';
 
@@ -51,7 +52,7 @@ export default function PostTable({ posts, onClick }: Props) {
             <p className='post__id'>{post.id}</p>
           </Grid>
           <Grid xs={2} container alignContent='center' justifyContent='center'>
-            <img src={heroImages[post.hero_FK]} loading='lazy' width={48} height={60} />
+            <ImageHero heroName={post.hero_FK} />
           </Grid>
           <Grid xs={4} container alignContent='center' justifyContent='start'>
             <p

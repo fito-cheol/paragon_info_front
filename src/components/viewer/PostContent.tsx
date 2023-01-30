@@ -7,7 +7,8 @@ import SkillTree from 'components/image/SkillTree';
 import ImageItemList from 'components/image/ItemList';
 import CustomDivider from 'components/layout/Divider';
 
-import heroImages from 'assets/hero/imagePreloaderHero';
+import ImageHero from 'components/image/Hero';
+
 import heroDict from 'assets/hero/heroDict';
 
 import './PostContent.scoped.scss';
@@ -73,7 +74,7 @@ export default function PostTable({ post, content }: Props) {
           <Typography variant='h4'>영웅 정보</Typography>
         </Grid>
         <Grid xs='auto'>
-          <img src={heroImages[hero_FK]} alt={hero_FK} loading='lazy' width={100} height={125} />
+          <ImageHero heroName={hero_FK} big />
         </Grid>
         <Grid xs={12}>
           <Typography variant='h5'> {heroDict[hero_FK]['이름']} </Typography>

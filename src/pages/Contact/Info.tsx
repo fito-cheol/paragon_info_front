@@ -15,7 +15,7 @@ export default function ContactInfo() {
             <img
               style={{ marginTop: 'auto', marginBottom: 'auto' }}
               className='contact__img'
-              alt='discord'
+              title='discord'
               src={discordLogoImage}
               width={30}
               height={30}

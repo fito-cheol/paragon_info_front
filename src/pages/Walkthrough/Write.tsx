@@ -26,7 +26,7 @@ import { upload } from 'api/post/index';
 
 import heroList from 'assets/hero/DB_Hero.json';
 import itemDict from 'assets/item/itemDict';
-import heroImages from 'assets/hero/imagePreloaderHero';
+import ImageHero from 'components/image/Hero';
 import './Write.scoped.scss';
 
 export default function Write() {
@@ -302,7 +302,7 @@ export default function Write() {
       </Grid>
       {selectedHeroInfo ? (
         <Grid xs={12}>
-          <img src={heroImages[selectedHeroInfo?.id]} loading='lazy' width={100} height={125} />
+          <ImageHero heroName={selectedHeroInfo?.id} big />
         </Grid>
       ) : (
         <></>
