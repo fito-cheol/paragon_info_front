@@ -13,6 +13,7 @@ import List from './pages/Walkthrough/List';
 import AppBar from './components/appBar/appBar';
 import CssBaseline from '@mui/material/CssBaseline';
 import LoadingBar from 'react-top-loading-bar';
+import ContactInfo from 'pages/Contact/Info';
 import { toast } from 'react-toastify';
 
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
@@ -92,10 +93,12 @@ function App() {
                   <Route path='list' element={<List />} />
                   <Route path='test' element={<TestPage />} />
                   <Route path='redirect' element={<RedirectPage />} />
+                  <Route path='contact' element={<RedirectPage />} />
                   <Route path='*' element={<Navigate to='/list' replace />} />
                 </Routes>
               </div>
             </div>
+            <ContactInfo />
             <ToastContainer />
           </BrowserRouter>
         </QueryClientProvider>

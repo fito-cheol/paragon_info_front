@@ -354,7 +354,6 @@ export default function List() {
         onCLose={() => setDialogOpen(false)}
         onConfirm={() => {
           setDialogOpen(false);
-          console.log(!!commentToDelete, 'DELETE');
           if (commentToDelete) {
             commentDeleteHandler(commentToDelete);
           }
