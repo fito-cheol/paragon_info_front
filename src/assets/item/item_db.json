@@ -1333,7 +1333,7 @@
   },
   {
     "이름": "단단한 전투복",
-    "name": "OPTINIUM MACE",
+    "name": "STURDY COMBAT SUIT",
     "카테고리A": "희귀",
     "일회성": "FALSE",
     "가격": 850,
@@ -1481,7 +1481,7 @@
   },
   {
     "이름": "파괴자의 비수",
-    "name": "BLEEDING EPAULET",
+    "name": "DESTROYER'S DAGGER",
     "카테고리A": "희귀",
     "일회성": "FALSE",
     "가격": 900,
@@ -1518,7 +1518,7 @@
   },
   {
     "이름": "출혈 견장",
-    "name": "DESTROYER'S DAGGER",
+    "name": "BLEEDING EPAULET",
     "카테고리A": "희귀",
     "일회성": "FALSE",
     "가격": 900,
@@ -1592,7 +1592,7 @@
   },
   {
     "이름": "옵티늄 철퇴",
-    "name": "STURDY COMBAT SUIT",
+    "name": "OPTINIUM MACE",
     "카테고리A": "희귀",
     "일회성": "FALSE",
     "가격": 950,
