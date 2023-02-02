@@ -2,18 +2,8 @@ import React, { useEffect, useState, useMemo } from 'react';
 import merge from 'ts-deepmerge';
 import { AxiosError } from 'axios';
 
-import ItemList from './pages/Item/List';
-import HeroList from './pages/Hero/List';
-import HeroDetails from './pages/Hero/Details';
-import TestPage from './pages/Test';
-import TierHeroes from 'pages/Tier/Heroes';
-import RedirectPage from './pages/Redirect/Google';
-import Write from './pages/Walkthrough/Write';
-import List from './pages/Walkthrough/List';
-import AppBar from './components/appBar/appBar';
 import CssBaseline from '@mui/material/CssBaseline';
 import LoadingBar from 'react-top-loading-bar';
-import ContactInfo from 'pages/Contact/Info';
 import { toast } from 'react-toastify';
 
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
@@ -30,6 +20,19 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { createTheme, ThemeProvider, responsiveFontSizes, Theme } from '@mui/material/styles';
 import { getDesignTokens, getThemedComponents } from './theme/Theme';
 import { ColorModeContext } from './context/ColorModeContext';
+
+import AppBar from './components/appBar/appBar';
+
+import ItemList from './pages/Item/List';
+import HeroList from './pages/Hero/List';
+import HeroDetails from './pages/Hero/Details';
+import TestPage from './pages/Test';
+import TierHeroes from 'pages/Tier/Heroes';
+import RedirectPage from './pages/Redirect/Google';
+import Write from './pages/Walkthrough/Write';
+import List from './pages/Walkthrough/List';
+import ContactInfo from 'pages/Contact/Info';
+import VideoList from 'pages/Video/List';
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
@@ -94,6 +97,7 @@ function App() {
                   <Route path='test' element={<TestPage />} />
                   <Route path='redirect' element={<RedirectPage />} />
                   <Route path='tier' element={<TierHeroes />} />
+                  <Route path='youtube' element={<VideoList />} />
                   <Route path='*' element={<Navigate to='/list' replace />} />
                 </Routes>
               </div>

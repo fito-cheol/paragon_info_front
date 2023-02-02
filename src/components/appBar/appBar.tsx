@@ -48,6 +48,7 @@ export default function ButtonAppBar() {
           <Grid container xs={12}>
             {linkButton('공략', '/list')}
             {linkButton('티어 리스트', '/tier')}
+            {linkButton('유튜브', '/youtube')}
             {linkButton('아이템', '/item')}
             {linkButton('영웅', '/hero')}
             <Grid container xs='auto' xsOffset='auto' alignContent={'center'} padding={3}>

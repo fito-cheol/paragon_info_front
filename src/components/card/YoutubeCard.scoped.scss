@@ -1,0 +1,13 @@
+.youtube__card {
+  cursor: pointer;
+}
+.youtube__title {
+  @include textNotOverflowTwoLine;
+}
+
+.youtube__description {
+  @include textNotOverflowTwoLine;
+
+  -webkit-line-clamp: 3;
+  color: rgb(118, 63, 251);
+}
