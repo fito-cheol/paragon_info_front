@@ -14,6 +14,7 @@ import UserProfile from 'components/image/UserProfile';
 import type { RootState } from 'redux/store';
 import { useAppSelector } from 'redux/hooks';
 
+import bearFoot from 'assets/icon/bear_foot.png';
 import './appBar.scoped.scss';
 
 export default function ButtonAppBar() {
@@ -46,6 +47,18 @@ export default function ButtonAppBar() {
       <AppBar position='static' color='inherit'>
         <Toolbar>
           <Grid container xs={12}>
+            <Grid container xs='auto' xsOffset='auto' alignContent={'center'} padding={3}>
+              <button
+                type='button'
+                className='btm_image'
+                id='img_btn'
+                onClick={event => handleClick(event, '/')}
+                style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}
+              >
+                <img src={bearFoot} width={50} height={50} />
+              </button>
+              {/* <img src={bearFoot} width={50} height={50} onClick={event => handleClick(event, '/')} /> */}
+            </Grid>
             {linkButton('공략', '/list')}
             {linkButton('티어 리스트', '/tier')}
             {linkButton('유튜브', '/youtube')}

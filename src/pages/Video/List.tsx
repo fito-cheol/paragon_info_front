@@ -35,9 +35,8 @@ export default function VideoList() {
     select: res => res.totalCount,
     placeholderData: { totalCount: 0 },
   });
-  const postListMutation = useMutation(list, {
+  const videoListMutation = useMutation(list, {
     onSuccess: youtubeList => {
-      console.log(youtubeList);
       setYoutubeList(youtubeList);
     },
   });
@@ -65,10 +64,10 @@ export default function VideoList() {
       page,
       pageSize,
     };
-    postListMutation.mutate(pageInfo);
+    videoListMutation.mutate(pageInfo);
   };
 
-  const clickHandler = async () => {
+  const addYoutube = async () => {
     const id = getYoutubeId(text);
     console.log(id);
     if (!id) return;
@@ -93,11 +92,11 @@ export default function VideoList() {
   };
 
   return (
-    <Grid container>
+    <Grid container justifyContent={'center'}>
       {user && user.email.startsWith('dmsghs92@') ? (
         <Grid xs={12}>
           <input type='text' className='comment__input' value={text} onChange={e => setText(e.target.value)} />
-          <button onClick={() => clickHandler()}> 유튜브 업로드 </button>
+          <button onClick={() => addYoutube()}> 유튜브 업로드 </button>
         </Grid>
       ) : (
         <></>

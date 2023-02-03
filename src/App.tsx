@@ -33,6 +33,7 @@ import Write from './pages/Walkthrough/Write';
 import List from './pages/Walkthrough/List';
 import ContactInfo from 'pages/Contact/Info';
 import VideoList from 'pages/Video/List';
+import Main from 'pages/Home/Main';
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
@@ -98,7 +99,8 @@ function App() {
                   <Route path='redirect' element={<RedirectPage />} />
                   <Route path='tier' element={<TierHeroes />} />
                   <Route path='youtube' element={<VideoList />} />
-                  <Route path='*' element={<Navigate to='/list' replace />} />
+                  <Route path='' element={<Main />} />
+                  <Route path='*' element={<Navigate to='/' replace />} />
                 </Routes>
               </div>
             </div>

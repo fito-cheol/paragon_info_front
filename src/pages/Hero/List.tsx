@@ -10,7 +10,7 @@ import ImageHeroTypes from 'assets/hero/imagePreloaderType';
 import HeroJson from 'assets/hero/DB_Hero.json';
 import { useNavigate } from 'react-router-dom';
 
-import './FullCard.scoped.scss';
+import './List.scoped.scss';
 
 export default function List() {
   const [heroList, setHeroList] = useState<Hero[]>([]);
