@@ -16,13 +16,13 @@ interface Props {
 export default function YoutubeCard({ youtubeData }: Props) {
   return (
     <Card
-      sx={{ width: 320, height: 380 }}
+      sx={{ width: 270, height: 340 }}
       onClick={() => {
         window.open(youtubeData.url, '_blank', 'scrollbars=yes,status=yes');
       }}
       className='youtube__card'
     >
-      <CardMedia component='img' height={180} image={youtubeData.thumbnailUrl} />
+      <CardMedia component='img' height={155} image={youtubeData.thumbnailUrl} />
       <CardContent>
         <Typography className='youtube__title' gutterBottom variant='subtitle1' component='div'>
           {youtubeData.title}

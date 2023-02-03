@@ -20,26 +20,26 @@ export default function PostTable({ posts, onClick }: Props) {
     const newPostElements: JSX.Element[] = [];
     newPostElements.push(
       <Grid container xs={12} key='Header' className='table__header--row'>
-        <Grid className='' xs={1} container alignContent='center' justifyContent='center'>
-          <Typography variant='h6'>번호</Typography>
-        </Grid>
-        <Grid className='' xs={2} container alignContent='center' justifyContent='center'>
-          <Typography variant='h6'>영웅</Typography>
-        </Grid>
-        <Grid xs={4} container alignContent='center' justifyContent='center'>
-          <Typography variant='h6'>제목</Typography>
+        <Grid xs={1} container alignContent='center' justifyContent='center'>
+          <Typography variant='subtitle1'>번호</Typography>
         </Grid>
         <Grid xs={2} container alignContent='center' justifyContent='center'>
-          <Typography variant='h6'>작성자</Typography>
+          <Typography variant='subtitle1'>영웅</Typography>
+        </Grid>
+        <Grid xs={4} container alignContent='center' justifyContent='center'>
+          <Typography variant='subtitle1'>제목</Typography>
+        </Grid>
+        <Grid xs={2} container alignContent='center' justifyContent='center'>
+          <Typography variant='subtitle1'>작성자</Typography>
         </Grid>
         <Grid xs={1} container alignContent='center' justifyContent='center'>
-          <Typography variant='h6'>추천수</Typography>
+          <Typography variant='subtitle1'>추천수</Typography>
         </Grid>
         <Grid xs={1} container alignContent='center' justifyContent='center'>
-          <Typography variant='h6'>작성일</Typography>
+          <Typography variant='subtitle1'>작성일</Typography>
         </Grid>
         <Grid xs={1} container alignContent='center' justifyContent='center'>
-          <Typography variant='h6'>조회</Typography>
+          <Typography variant='subtitle1'>조회</Typography>
         </Grid>
       </Grid>,
     );
@@ -85,5 +85,9 @@ export default function PostTable({ posts, onClick }: Props) {
     setPostElements(newPostElements);
   }, [posts]);
 
-  return <Grid container> {postElements}</Grid>;
+  return (
+    <Grid container className='table'>
+      {postElements}
+    </Grid>
+  );
 }

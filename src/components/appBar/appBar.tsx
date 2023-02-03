@@ -47,11 +47,9 @@ export default function ButtonAppBar() {
       <AppBar position='static' color='inherit'>
         <Toolbar>
           <Grid container xs={12}>
-            <Grid container xs='auto' xsOffset='auto' alignContent={'center'} padding={3}>
+            <Grid container xs='auto' alignContent={'center'}>
               <button
-                type='button'
-                className='btm_image'
-                id='img_btn'
+                className='button--image'
                 onClick={event => handleClick(event, '/')}
                 style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}
               >

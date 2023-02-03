@@ -3,11 +3,12 @@
 }
 .youtube__title {
   @include textNotOverflowTwoLine;
+  font-size: medium;
 }
 
 .youtube__description {
   @include textNotOverflowTwoLine;
-
+  font-size: small;
   -webkit-line-clamp: 3;
   color: rgb(118, 63, 251);
 }
