@@ -86,7 +86,7 @@ export default function PostTable({ posts, onClick }: Props) {
   }, [posts]);
 
   return (
-    <Grid container className='table'>
+    <Grid container xs={12} className='table'>
       {postElements}
     </Grid>
   );

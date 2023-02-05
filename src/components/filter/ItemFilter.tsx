@@ -100,6 +100,8 @@ export default function ItemFilter({ onUpdate, filterValue }: ItemFilterProps) {
           {itemChecker('TENACITY', '군중 제어 저항')}
           {itemChecker('COOLDOWN REDUCTION', '재사용 대기 시간 감소')}
           {itemChecker('MOVEMENT SPEED', '이동 속도')}
+          {itemChecker('HEALING REDUCTION', '치유량 감소')}
+          {itemChecker('SLOW', '둔화')}
         </Grid>
       </Grid>
     </Grid>

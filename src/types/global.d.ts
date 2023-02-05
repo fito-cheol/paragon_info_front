@@ -47,6 +47,8 @@ declare global {
     '재사용 대기 시간 감소': number | string;
     '이동 속도': number | string;
     '골드 가치': number;
+    '치유량 감소': number | string;
+    둔화: number | string;
     하위템_List: string;
     '이미지 path': string;
   };

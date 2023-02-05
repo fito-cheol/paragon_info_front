@@ -82,5 +82,13 @@
   {
     "attribute_en": "MOVEMENT SPEED",
     "attribute_kr": "이동 속도"
+  },
+  {
+    "attribute_en": "HEALING REDUCTION",
+    "attribute_kr": "치유량 감소"
+  },
+  {
+    "attribute_en": "SLOW",
+    "attribute_kr": "둔화"
   }
 ]
