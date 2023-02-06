@@ -21,25 +21,25 @@ export default function PostTable({ posts, onClick }: Props) {
     newPostElements.push(
       <Grid container xs={12} key='Header' className='table__header--row'>
         <Grid xs={1} container alignContent='center' justifyContent='center'>
-          <Typography variant='subtitle1'>번호</Typography>
+          <p className='post__header post__header--text'>번호</p>
         </Grid>
         <Grid xs={2} container alignContent='center' justifyContent='center'>
-          <Typography variant='subtitle1'>영웅</Typography>
+          <p className='post__header post__header--text'>영웅</p>
         </Grid>
         <Grid xs={4} container alignContent='center' justifyContent='center'>
-          <Typography variant='subtitle1'>제목</Typography>
+          <p className='post__header post__header--text'>제목</p>
         </Grid>
         <Grid xs={2} container alignContent='center' justifyContent='center'>
-          <Typography variant='subtitle1'>작성자</Typography>
+          <p className='post__header post__header--text'>작성자</p>
         </Grid>
         <Grid xs={1} container alignContent='center' justifyContent='center'>
-          <Typography variant='subtitle1'>추천수</Typography>
+          <p className='post__header post__header--text'>추천수</p>
         </Grid>
         <Grid xs={1} container alignContent='center' justifyContent='center'>
-          <Typography variant='subtitle1'>작성일</Typography>
+          <p className='post__header post__header--text'>작성일</p>
         </Grid>
         <Grid xs={1} container alignContent='center' justifyContent='center'>
-          <Typography variant='subtitle1'>조회</Typography>
+          <p className='post__header post__header--text'>조회</p>
         </Grid>
       </Grid>,
     );
@@ -49,7 +49,7 @@ export default function PostTable({ posts, onClick }: Props) {
       newPostElements.push(
         <Grid container xs={12} key={index} className='post__row'>
           <Grid xs={1} container alignContent='center' justifyContent='center'>
-            <p className='post__id'>{post.id}</p>
+            <p className='post__text post__text--id'>{post.id}</p>
           </Grid>
           <Grid xs={2} container alignContent='center' justifyContent='center'>
             <ImageHero heroName={post.hero_FK} />
@@ -61,22 +61,22 @@ export default function PostTable({ posts, onClick }: Props) {
                   onClick(event, post);
                 }
               }}
-              className='post__title'
+              className='post__text post__text--title'
             >
               {post.title}
             </p>
           </Grid>
           <Grid xs={2} container alignContent='center' justifyContent='center'>
-            <p className='post__nickname'>{post.full_name}</p>
+            <p className='post__text post__text--nickname'>{post.full_name}</p>
           </Grid>
           <Grid xs={1} container alignContent='center' justifyContent='center'>
-            <p className='post__date'>{post.like_count}</p>
+            <p className='post__text post__text--likeCount'>{post.like_count}</p>
           </Grid>
           <Grid xs={1} container alignContent='center' justifyContent='center'>
-            <p className='post__date'>{dateString}</p>
+            <p className='post__text post__text--date'>{dateString}</p>
           </Grid>
           <Grid xs={1} container alignContent='center' justifyContent='center'>
-            <p className='post__click_count'>{post.click_count}</p>
+            <p className='post__text post__text--clickCount'>{post.click_count}</p>
           </Grid>
         </Grid>,
       );

@@ -1,7 +1,26 @@
+.logo__button--image {
+  width: 50px;
+  height: 50px;
+  @include mobile {
+    width: 30px;
+    height: 30px;
+  }
+}
 .link {
-  &--wrapper {
+  &__text {
+    font-size: large;
+    font-weight: bold;
+    @include mobile {
+      font-size: medium;
+    }
+  }
+  &__wrapper {
     padding: 5px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+
+    @include mobile {
+      padding: 0px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+    }
   }
 }

@@ -10,6 +10,8 @@ import Grid from '@mui/material/Unstable_Grid2';
 import PostTable from 'components/viewer/PostTable';
 import YoutubeCard from 'components/card/YoutubeCard';
 
+import './Main.scoped.scss';
+
 const PageSizeDefault = 10;
 const PageDefault = 1;
 
@@ -47,7 +49,7 @@ export default function Main() {
       <Grid xs={11} container xsOffset={1}>
         <h1> 공략 </h1>
       </Grid>
-      <Grid xs={12} container sx={{ marginTop: '12px', marginBottom: '12px', width: 1160 }}>
+      <Grid xs={12} container className='table__wrapper'>
         <PostTable
           posts={postList}
           onClick={(event, post) => {

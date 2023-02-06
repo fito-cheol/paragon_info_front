@@ -1,0 +1,10 @@
+.table__wrapper {
+  margin-top: '12px';
+  margin-bottom: '12px';
+  @include mobile {
+    width: 90%;
+  }
+  @include desktop {
+    width: 1160px;
+  }
+}

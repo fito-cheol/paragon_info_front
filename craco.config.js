@@ -12,6 +12,7 @@ module.exports = {
           @import "src/assets/scss/_mixins.scss";
           @import "src/assets/scss/font/index.scss";
           @import "src/assets/scss/_reset.scss";
+          @import "src/assets/scss/_mediaQueries.scss";
         `,
       },
     },

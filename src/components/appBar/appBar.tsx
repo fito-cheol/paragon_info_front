@@ -31,12 +31,12 @@ export default function ButtonAppBar() {
   };
   const linkButton = (text: string, path: string) => {
     return (
-      <Grid xs='auto' container className={`link--wrapper`}>
+      <Grid xs='auto' container className='link__wrapper'>
         <Button
           variant={location.pathname == path ? 'contained' : undefined}
           onClick={event => handleClick(event, path)}
         >
-          {text}
+          <p className='link__text'>{text} </p>
         </Button>
       </Grid>
     );
@@ -49,13 +49,12 @@ export default function ButtonAppBar() {
           <Grid container xs={12}>
             <Grid container xs='auto' alignContent={'center'}>
               <button
-                className='button--image'
+                className='logo__button'
                 onClick={event => handleClick(event, '/')}
                 style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}
               >
-                <img src={bearFoot} width={50} height={50} />
+                <img className='logo__button--image' src={bearFoot} />
               </button>
-              {/* <img src={bearFoot} width={50} height={50} onClick={event => handleClick(event, '/')} /> */}
             </Grid>
             {linkButton('공략', '/list')}
             {linkButton('티어 리스트', '/tier')}

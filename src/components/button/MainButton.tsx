@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import Button from '@mui/material/Button';
-import { text } from 'stream/consumers';
+import './MainButton.scoped.scss';
 
 type ButtonProps = {
   children: ReactNode;
@@ -11,19 +11,9 @@ type ButtonProps = {
 export default function MainButton({ children, variant, onClick }: ButtonProps) {
   return (
     <Button
+      className='button'
       sx={{
-        display: 'flex',
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
         color: theme => `${variant == 'contained' ? theme.palette.primary.contrastText : theme.palette.text.primary}`,
-        borderRadius: 2,
-        cursor: 'pointer',
-        fontSize: 24,
-        fontWeight: 700,
-        ':hover': {
-          backgroundColor: 'grey',
-        },
       }}
       variant={variant}
       onClick={event => {

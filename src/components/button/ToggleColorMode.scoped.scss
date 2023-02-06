@@ -1,9 +1,26 @@
 .button__wrapper {
   @include disableTxtDrag;
-  width: auto;
-  padding-left: 9px;
+  font-weight: bold;
+
   width: 200px;
   height: 50px;
   font-size: 19px;
   border-radius: 10px;
+  padding-left: 9px;
+
+  @include mobile {
+    width: 120px;
+    height: 35px;
+    font-size: 12px;
+    border-radius: 5px;
+    padding-left: 4px;
+  }
+
+  @include desktop {
+    width: 200px;
+    height: 50px;
+    font-size: 19px;
+    border-radius: 10px;
+    padding-left: 9px;
+  }
 }

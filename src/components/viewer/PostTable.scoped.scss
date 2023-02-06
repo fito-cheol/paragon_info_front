@@ -1,27 +1,34 @@
-.table {
-  font-size: medium;
-}
-
 .table__header--row {
   border-top: 4px solid #273272;
   border-bottom: 4px solid #273272;
-  font-weight: bold;
 }
+
 .post__row {
   border-bottom: 1px solid rgba(100, 100, 200, 0.5);
 }
-
-.post__title {
-  @include textNotOverflow;
-  cursor: pointer;
-
-  &:hover {
-    text-decoration: underline;
-  }
-  &:active {
-    color: rgba(100, 100, 200, 1);
+.post__header--text {
+  font-weight: bold;
+  font-size: large;
+  @include mobile {
+    font-size: small;
   }
 }
-.post__nickname {
-  @include textNotOverflow;
+.post__text {
+  @include mobile {
+    font-size: small;
+  }
+  &--title {
+    @include textNotOverflow;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+    &:active {
+      color: rgba(100, 100, 200, 1);
+    }
+  }
+  &--nickname {
+    @include textNotOverflow;
+  }
 }

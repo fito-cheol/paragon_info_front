@@ -1,7 +1,14 @@
 .list__wrapper {
-  width: 1160px;
   margin: auto;
+
+  @include mobile {
+    width: 90%;
+  }
+  @include desktop {
+    width: 1160px;
+  }
 }
+
 .post__like--button {
   background-color: transparent;
   border: none;
