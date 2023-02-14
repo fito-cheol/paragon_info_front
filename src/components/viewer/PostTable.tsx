@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import Grid from '@mui/material/Unstable_Grid2';
-import Typography from '@mui/material/Typography';
 
 import ImageHero from 'components/image/Hero';
 
@@ -10,10 +9,9 @@ import './PostTable.scoped.scss';
 
 interface Props {
   posts: Post[];
-  onClick?: (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>, post: Post) => void;
 }
 
-export default function PostTable({ posts, onClick }: Props) {
+export default function PostTable({ posts }: Props) {
   const [postElements, setPostElements] = useState<JSX.Element[]>();
 
   useEffect(() => {
@@ -55,16 +53,9 @@ export default function PostTable({ posts, onClick }: Props) {
             <ImageHero heroName={post.hero_FK} />
           </Grid>
           <Grid xs={4} container alignContent='center' justifyContent='start'>
-            <p
-              onClick={event => {
-                if (onClick) {
-                  onClick(event, post);
-                }
-              }}
-              className='post__text post__text--title'
-            >
+            <a href={`/list?no=${post.id}`} className='post__text post__text--title'>
               {post.title}
-            </p>
+            </a>
           </Grid>
           <Grid xs={2} container alignContent='center' justifyContent='center'>
             <p className='post__text post__text--nickname'>{post.full_name}</p>

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import { useNavigate } from 'react-router-dom';
-
 import { list } from 'api/post/index';
 import { list as getYoutubeList } from 'api/youtube/index';
 import { useMutation } from 'react-query';
@@ -16,8 +14,6 @@ const PageSizeDefault = 10;
 const PageDefault = 1;
 
 export default function Main() {
-  const navigate = useNavigate();
-
   const [postList, setPostList] = useState<Post[]>([]);
   const [youtubeList, setYoutubeList] = useState<YoutubeFormat[]>([]);
 
@@ -50,18 +46,7 @@ export default function Main() {
         <h1> 공략 </h1>
       </Grid>
       <Grid xs={12} container className='table__wrapper'>
-        <PostTable
-          posts={postList}
-          onClick={(event, post) => {
-            const pathname = `/list`;
-            const search = `?no=${post.id}`;
-            if (event.ctrlKey) {
-              window.open(pathname + search, '_blank');
-            } else {
-              navigate({ pathname, search });
-            }
-          }}
-        />
+        <PostTable posts={postList} />
       </Grid>
       <Grid xs={12} container xsOffset={1}>
         <h1> 유튜브 </h1>
