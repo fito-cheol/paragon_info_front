@@ -59,8 +59,6 @@
   },
   "scripts": {
     "start": "craco start",
-    "winstart": "set \"GENERATE_SOURCEMAP=false\" && craco start",
-    "macstart": "GENERATE_SOURCEMAP=false craco start",
     "build": "craco build",
     "build:dev": "env-cmd -f .env.development npm run build",
     "test": "craco test",
