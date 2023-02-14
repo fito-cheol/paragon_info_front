@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 import Grid from '@mui/material/Unstable_Grid2';
 import { dateParser } from 'utils/parsing';

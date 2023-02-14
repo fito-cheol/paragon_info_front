@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import ImageHero from 'components/image/Hero';
 import bearFoot from 'assets/icon/bear_foot.png';

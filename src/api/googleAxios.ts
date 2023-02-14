@@ -1,5 +1,4 @@
 import axios, { AxiosInstance } from 'axios';
-import cookies from 'js-cookie';
 
 const SERVER_ADDRESS = 'https://www.googleapis.com';
 
