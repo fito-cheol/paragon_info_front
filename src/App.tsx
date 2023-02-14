@@ -10,7 +10,7 @@ import { useAppSelector, useAppDispatch } from 'redux/hooks';
 import type { RootState } from 'redux/store';
 import { completeProgress } from 'redux/module/progress';
 
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider, QueryCache } from 'react-query';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -22,18 +22,8 @@ import { getDesignTokens, getThemedComponents } from './theme/Theme';
 import { ColorModeContext } from './context/ColorModeContext';
 
 import AppBar from './components/appBar/appBar';
-
-import ItemList from './pages/Item/List';
-import HeroList from './pages/Hero/List';
-import HeroDetails from './pages/Hero/Details';
-import TestPage from './pages/Test';
-import TierHeroes from 'pages/Tier/Heroes';
-import RedirectPage from './pages/Redirect/Google';
-import Write from './pages/Walkthrough/Write';
-import List from './pages/Walkthrough/List';
 import ContactInfo from 'pages/Contact/Info';
-import VideoList from 'pages/Video/List';
-import Main from 'pages/Home/Main';
+import Router from 'router/Router';
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
@@ -88,20 +78,7 @@ function App() {
             <AppBar />
             <div className='container'>
               <div className={`labeling__wrapper labeling__wrapper--${theme.palette.mode}`}>
-                <Routes>
-                  <Route path='item' element={<ItemList />} />
-                  <Route path='hero' element={<HeroList />} />
-                  <Route path='hero/:name' element={<HeroDetails />} />
-                  <Route path='write' element={<Write />} />
-                  <Route path='modify/:no' element={<Write />} />
-                  <Route path='list' element={<List />} />
-                  <Route path='test' element={<TestPage />} />
-                  <Route path='redirect' element={<RedirectPage />} />
-                  <Route path='tier' element={<TierHeroes />} />
-                  <Route path='youtube' element={<VideoList />} />
-                  <Route path='' element={<Main />} />
-                  <Route path='*' element={<Navigate to='/' replace />} />
-                </Routes>
+                <Router />
               </div>
             </div>
             <ContactInfo />

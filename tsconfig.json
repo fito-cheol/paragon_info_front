@@ -24,6 +24,6 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src",
+    "src", "src/router/sitemap-generator.js",
   ]
 }
