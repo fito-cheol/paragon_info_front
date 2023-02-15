@@ -33,6 +33,7 @@ export default function ImageItem({ item, size, onClick }: ImageItemProps) {
         onMouseLeave={handlePopoverClose}
         src={itemImages[item.name]}
         loading='lazy'
+        alt={item.name}
         width={size || 40}
         height={size || 40}
         onClick={() => {

@@ -255,6 +255,8 @@ export default function List() {
                 <img
                   src={doILikePost ? likeShineImage : likeImage}
                   className='post__like--image'
+                  loading='lazy'
+                  alt='like'
                   width={60}
                   height={60}
                   onClick={() => likeHandler()}

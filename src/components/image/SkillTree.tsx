@@ -15,6 +15,7 @@ export default function SkillTreeImage({ type, size, onClick }: SKILL_TREE_IMAGE
       className={`skillTree__img skillTree__img--${type}`}
       src={images[type]}
       loading='lazy'
+      alt={`skill_${type}`}
       width={size || 24}
       height={size || 24}
       onClick={() => {

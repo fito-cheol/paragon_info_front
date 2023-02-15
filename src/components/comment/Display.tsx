@@ -33,7 +33,14 @@ export default function CommentShow({ comment, onClick, onDelete }: Props) {
       sx={{ paddingTop: 1, paddingBottom: 1, borderBottom: '1px solid', borderColor: 'rgba(100,100,100,0.5)' }}
     >
       <Grid xs='auto' container sx={{ marginRight: 2 }}>
-        <img src={comment.user.picture} width={50} height={50} style={{ borderRadius: '50%', cursor: 'pointer' }}></img>
+        <img
+          src={comment.user.picture}
+          width={50}
+          height={50}
+          style={{ borderRadius: '50%', cursor: 'pointer' }}
+          loading='lazy'
+          alt={`user_picture_${comment.user.full_name}`}
+        ></img>
       </Grid>
       <Grid xs container>
         <Grid xs={12}>

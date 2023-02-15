@@ -53,7 +53,7 @@ export default function ButtonAppBar() {
                 onClick={event => handleClick(event, '/')}
                 style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}
               >
-                <img className='logo__button--image' src={bearFoot} />
+                <img className='logo__button--image' src={bearFoot} loading='lazy' alt='forwin_logo' />
               </button>
             </Grid>
             {linkButton('공략', '/list')}

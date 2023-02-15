@@ -35,7 +35,7 @@ export default function TierHeroes() {
     <Grid container justifyContent={'center'}>
       <Grid container xs={12}>
         <Grid container xs='auto' alignContent='center'>
-          <img src={bearFoot} width={50} height={50} />
+          <img src={bearFoot} width={50} height={50} loading='lazy' alt='bearFoot' />
         </Grid>
         <Grid xs={8}>
           <h1 style={{ width: '1280px' }}>곰표 티어 리스트</h1>

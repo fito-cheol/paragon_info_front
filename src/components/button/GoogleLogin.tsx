@@ -99,7 +99,7 @@ export default function GoogleLogIn() {
     <React.Fragment>
       <button className='button__login--button'>
         <div className='button__login--row' onClick={() => oAuthHandler()}>
-          <img className='button__login--img' src={googleLogoImage} />
+          <img className='button__login--img' src={googleLogoImage} loading='lazy' alt='google_logo' />
           <p className='button__login--text'>구글 로그인</p>
         </div>
       </button>

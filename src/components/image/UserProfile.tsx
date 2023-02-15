@@ -48,6 +48,8 @@ export default function UserProfile({ user }: ImageItemProps) {
         height={50}
         style={{ borderRadius: '50%', cursor: 'pointer' }}
         onClick={handlePopoverOpen}
+        loading='lazy'
+        alt={`user_picture_${user.full_name}`}
       ></img>
       <Menu
         id='menu-appbar'

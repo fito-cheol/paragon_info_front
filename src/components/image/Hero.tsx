@@ -18,6 +18,7 @@ export default function ImageHero({ heroName, big }: Props) {
     <img
       src={heroImages[heroName]}
       title={heroDict[heroName].이름}
+      alt={heroDict[heroName].이름}
       loading='lazy'
       width={size.width}
       height={size.height}

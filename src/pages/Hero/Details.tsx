@@ -29,14 +29,14 @@ export default function Details() {
             <div className='heroDetails'>
               <div className='heroInfoBg'></div>
               <div className='heroImage'>
-                <img src={ImageHeroBg[hero.name]} />
+                <img src={ImageHeroBg[hero.name]} loading='lazy' alt={hero.name} />
               </div>
               <div className='content'>
                 <div className='heroStroy'>
                   <h1 className='title'>{hero.이름}</h1>
                   <hr />
                   <div className='rowItem'>
-                    <img src={ImageHeroTypes[hero.category]} width={52} />
+                    <img src={ImageHeroTypes[hero.category]} width={52} loading='lazy' alt={hero.category} />
                     <h3 className='subTitle'>{hero.category}</h3>
                   </div>
                   <span className='description'>{hero.story}</span>
@@ -66,23 +66,33 @@ export default function Details() {
                   <div className='tab__line'></div>
                   <ul className='tab__container'>
                     <li className={index === 0 ? 'tab__image current' : 'tab__image'} onClick={() => setIndex(0)}>
-                      <img width={62} src={ImageHeroSkill[`${hero.name}_Q`]} />
+                      <img width={62} src={ImageHeroSkill[`${hero.name}_Q`]} loading='lazy' alt={`${hero.name}_Q`} />
                       <div className='pointer__circle'></div>
                     </li>
                     <li className={index === 1 ? 'tab__image current' : 'tab__image'} onClick={() => setIndex(1)}>
-                      <img width={62} src={ImageHeroSkill[`${hero.name}_E`]} />
+                      <img width={62} src={ImageHeroSkill[`${hero.name}_E`]} loading='lazy' alt={`${hero.name}_E`} />
                       <div className='pointer__circle'></div>
                     </li>
                     <li className={index === 2 ? 'tab__image current' : 'tab__image'} onClick={() => setIndex(2)}>
-                      <img width={62} src={ImageHeroSkill[`${hero.name}_R`]} />
+                      <img width={62} src={ImageHeroSkill[`${hero.name}_R`]} loading='lazy' alt={`${hero.name}_R`} />
                       <div className='pointer__circle'></div>
                     </li>
                     <li className={index === 3 ? 'tab__image current' : 'tab__image'} onClick={() => setIndex(3)}>
-                      <img width={62} src={ImageHeroSkill[`${hero.name}_RIGHT`]} />
+                      <img
+                        width={62}
+                        src={ImageHeroSkill[`${hero.name}_RIGHT`]}
+                        loading='lazy'
+                        alt={`${hero.name}_RIGHT`}
+                      />
                       <div className='pointer__circle'></div>
                     </li>
                     <li className={index === 4 ? 'tab__image current' : 'tab__image'} onClick={() => setIndex(4)}>
-                      <img width={62} src={ImageHeroSkill[`${hero.name}_LEFT`]} />
+                      <img
+                        width={62}
+                        src={ImageHeroSkill[`${hero.name}_LEFT`]}
+                        loading='lazy'
+                        alt={`${hero.name}_LEFT`}
+                      />
                       <div className='pointer__circle'></div>
                     </li>
                   </ul>
