@@ -20,7 +20,7 @@ export default function YoutubeCard({ youtubeData }: Props) {
       }}
       className='youtube__card'
     >
-      <CardMedia component='img' height={155} image={youtubeData.thumbnailUrl} />
+      <CardMedia component='img' height={155} image={youtubeData.thumbnailUrl} alt={youtubeData.title} loading='lazy' />
       <CardContent>
         <Typography className='youtube__title' gutterBottom variant='subtitle1' component='div'>
           {youtubeData.title}
