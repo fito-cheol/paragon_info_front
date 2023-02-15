@@ -3,8 +3,10 @@
   margin-bottom: '12px';
   @include mobile {
     width: 90%;
+    min-height: 550px;
   }
   @include desktop {
     width: 1160px;
+    min-height: 677px;
   }
 }
