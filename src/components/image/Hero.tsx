@@ -9,9 +9,9 @@ interface Props {
 }
 
 export default function ImageHero({ heroName, big }: Props) {
-  let size = { width: 48, height: 60 };
+  let size = { width: 41, height: 60 };
   if (big) {
-    size = { width: 100, height: 125 };
+    size = { width: 81, height: 125 };
   }
 
   return (
