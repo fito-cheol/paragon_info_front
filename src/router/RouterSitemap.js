@@ -16,7 +16,5 @@ export default (
     <Route path='test' />
     <Route path='tier' />
     <Route path='youtube' />
-    <Route path='' />
-    <Route />
   </Route>
 );
