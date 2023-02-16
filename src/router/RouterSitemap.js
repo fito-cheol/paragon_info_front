@@ -13,7 +13,6 @@ export default (
     <Route path='write' />
     <Route path='modify/:no' />
     <Route path='list' />
-    <Route path='test' />
     <Route path='tier' />
     <Route path='youtube' />
   </Route>
