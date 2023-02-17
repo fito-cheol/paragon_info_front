@@ -29,7 +29,7 @@ export default function Details() {
             <div className='heroDetails'>
               <div className='heroInfoBg'></div>
               <div className='heroImage'>
-                <img src={ImageHeroBg[hero.name]} loading='lazy' alt={hero.name} />
+                <img src={ImageHeroBg[hero.name]} alt={hero.name} />
               </div>
               <div className='content'>
                 <div className='heroStroy'>
