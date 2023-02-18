@@ -12,6 +12,4 @@ function importAll(imageContext: __WebpackModuleApi.RequireContext) {
 
 const images = importAll(require.context('./HERO_PROFILE', false, /.webp/));
 
-console.log('images', images);
-
 export default images;

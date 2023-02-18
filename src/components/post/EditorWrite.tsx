@@ -14,6 +14,7 @@ import '@toast-ui/editor/dist/i18n/ko-kr';
 import '@toast-ui/editor/dist/theme/toastui-editor-dark.css';
 
 import { uploadImage } from 'api/s3/index';
+import { blobToWebp } from 'utils/imageConverter';
 
 interface Props {
   value?: string;
@@ -81,11 +82,13 @@ export default function EditorWrite({ value, onChange }: Props) {
               toast.error('이미지 파일 크기가 20MB가 넘습니다');
               return;
             }
+            const webpBlob = await blobToWebp(blob);
             try {
-              const result = await uploadImage({ file: blob });
-              callback(result.data.Location, '');
+              const result = await uploadImage({ file: webpBlob });
+              callback(result.Location, '');
             } catch (error) {
               toast.error('이미지 첨부에 실패했습니다');
+              console.log(error);
             }
           },
         }}

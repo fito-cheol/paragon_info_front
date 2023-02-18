@@ -9,6 +9,6 @@ export async function uploadImage(data: UploadFormat) {
   formData.append('file', data.file);
   const axoisFileConfig = { headers: { 'Content-Type': 'multipart/form-data' } };
 
-  const response = await customAxios.post('/s3/uploadImage', formData, axoisFileConfig);
+  const response = await customAxios.post('/s3/uploadWebpImage', formData, axoisFileConfig);
   return response.data;
 }
