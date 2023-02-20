@@ -1,27 +1,55 @@
-import React from 'react';
-import Grid from '@mui/material/Unstable_Grid2';
+import React, { useEffect, useRef, useState } from 'react';
+import io, { Socket } from 'socket.io-client';
 
-import ReactQuerySample from 'components/reactQuerySample';
-import { getVideo } from 'api/google/youtube';
+const socket: Socket = io('http://localhost:3000');
 
-export default function Test() {
-  const clickHandler = async () => {
-    const result = await getVideo({
-      part: 'snippet',
-      id: 'hfcpJx8J4Bk',
-      locale: '대한민국',
-      key: 'AIzaSyBGQ9PIYkwxk6iCSstQ5o-Pvt9CPeevzno',
+export default function Chatting() {
+  const [messages, setMessages] = useState<string[]>(['1', 'abd']);
+  const [inputValue, setInputValue] = useState<string>('');
+
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    socket.on('message', (message: string) => {
+      console.log(message, 'recieved');
+      setMessages([...messages, message]);
     });
-    // The request is missing a valid API key
-    console.log('getVideo', result);
+  }, [messages]);
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
   };
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (inputValue.trim() !== '') {
+      console.log('emit', inputValue);
+      socket.emit('message', inputValue);
+      setInputValue('');
+    }
+  };
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
+
   return (
-    <Grid container>
-      <Grid xs={12}>
-        <ReactQuerySample />
-        <button onClick={() => clickHandler()}> 유튜브 </button>
-      </Grid>
-    </Grid>
+    <div className='App'>
+      <h1>Chat App</h1>
+      <div className='messages-container'>
+        {messages.map((message, index) => (
+          <div key={index} className='message'>
+            {message}
+          </div>
+        ))}
+        <div ref={messagesEndRef} />
+      </div>
+      <form onSubmit={handleSubmit}>
+        <input type='text' value={inputValue} onChange={handleInputChange} />
+        <button type='submit'>Send</button>
+      </form>
+    </div>
   );
 }
