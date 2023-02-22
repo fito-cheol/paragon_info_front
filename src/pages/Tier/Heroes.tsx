@@ -27,7 +27,7 @@ const TierHeroSample: TierHero = {
   ],
   무난: ['Kwang', 'Khaimera', 'Feng Mao', 'Twinblast', 'Sparrow'],
   구림: ['Serath', 'Phase', 'Shinbi', 'Dekker'],
-  트롤: ['Wraith', 'Wukong'],
+  트롤: ['Wraith', 'Wukong', 'Iggy & Scorch'],
 };
 
 export default function TierHeroes() {
