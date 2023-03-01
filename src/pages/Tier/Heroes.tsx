@@ -10,8 +10,8 @@ type TierHero = {
   [key in Tier]: string[];
 };
 const TierHeroSample: TierHero = {
-  멍꿀: ['Gadget', 'Grux', 'Countess', 'Dekker'],
-  좋음: ['Kwang', 'Gideon', 'Howitzer', 'Narbash', 'Muriel', 'Murdock', 'Sevarog', 'Aurora', 'Zena', 'Sparrow'],
+  멍꿀: ['Gideon', 'Gadget', 'Grux', 'Countess', 'Dekker', 'Sparrow'],
+  좋음: ['Kwang', 'Howitzer', 'Narbash', 'Muriel', 'Murdock', 'Sevarog', 'Aurora', 'Zena', 'Crunch'],
   무난: ['Belica', 'Rampage', 'Steel', 'Kallari', 'Khaimera', 'Feng Mao', 'Twinblast', 'Shinbi'],
   구림: ['The Fey', 'Serath', 'Phase'],
   트롤: ['Revenant', 'Wraith', 'Wukong', 'Iggy & Scorch'],
