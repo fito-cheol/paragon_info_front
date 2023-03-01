@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import io, { Socket } from 'socket.io-client';
 
+import MapGoogle from 'components/map/Google';
+
 const socket: Socket = io('http://localhost:3000');
 
 export default function Chatting() {
@@ -50,6 +52,7 @@ export default function Chatting() {
         <input type='text' value={inputValue} onChange={handleInputChange} />
         <button type='submit'>Send</button>
       </form>
+      <MapGoogle />
     </div>
   );
 }
