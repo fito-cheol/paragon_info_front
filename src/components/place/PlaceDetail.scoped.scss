@@ -1,0 +1,7 @@
+.place__name--text {
+  cursor: pointer;
+  &:hover {
+    background-color: 'grey';
+    text-decoration: underline;
+  }
+}

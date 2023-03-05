@@ -339,7 +339,7 @@ export default function List() {
       </Grid>
       <DialogDelete
         open={dialogOpen}
-        onCLose={() => setDialogOpen(false)}
+        onClose={() => setDialogOpen(false)}
         onConfirm={() => {
           setDialogOpen(false);
           if (commentToDelete) {

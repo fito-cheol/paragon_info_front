@@ -8,7 +8,7 @@
       "esnext"
     ],
     "types": ["node", "webpack-env"],
-    "typeRoots": ["./node_modules/@types", "./src/types/global.d.ts"],
+    "typeRoots": ["node_modules/@types", "./src/types/global.d.ts"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,

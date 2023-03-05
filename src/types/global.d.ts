@@ -5,6 +5,7 @@
 // Add types or interfaces that need to be globally accessible.
 // Make the file a module by using export {}.
 import attributeLanguage from 'assets/item/attribute_language.json';
+import '@types/google.maps';
 
 const attributeList: string[] = [];
 for (const attribueObject of attributeLanguage) {

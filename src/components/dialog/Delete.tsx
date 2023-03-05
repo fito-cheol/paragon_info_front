@@ -9,14 +9,14 @@ import DialogTitle from '@mui/material/DialogTitle';
 interface Props {
   open: boolean;
   onConfirm: () => void;
-  onCLose: () => void;
+  onClose: () => void;
 }
 
-export default function DialogDelete({ open, onConfirm, onCLose }: Props) {
+export default function DialogDelete({ open, onConfirm, onClose }: Props) {
   return (
     <Dialog
       open={open}
-      onClose={onCLose}
+      onClose={onClose}
       aria-labelledby='alert-dialog-title'
       aria-describedby='alert-dialog-description'
     >
@@ -28,7 +28,7 @@ export default function DialogDelete({ open, onConfirm, onCLose }: Props) {
         <Button variant='contained' size='small' color='error' onClick={onConfirm} autoFocus>
           확인
         </Button>
-        <Button variant='outlined' size='small' onClick={onCLose}>
+        <Button variant='outlined' size='small' onClick={onClose}>
           취소
         </Button>
       </DialogActions>
