@@ -73,12 +73,11 @@ export default function MapGoogle() {
       const center: google.maps.LatLngLiteral = { lat: 37.5334253, lng: 127.0749127 };
       const map = new google.maps.Map(node as HTMLElement, {
         center,
-        zoom: 18,
+        zoom: 16,
       });
       const infoWindow = new google.maps.InfoWindow({ pixelOffset: new google.maps.Size(0, -30) });
       setMapObject(() => map);
       setInfoWindow(() => infoWindow);
-      moveCurrentLocation(map, infoWindow);
 
       if (nodeButton) {
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(nodeButton);
@@ -104,7 +103,9 @@ export default function MapGoogle() {
       }
     }
   }, [loading, error]);
-
+  useEffect(() => {
+    if (mapObject && infoWindow) moveCurrentLocation(mapObject, infoWindow);
+  }, [mapObject]);
   useEffect(() => {
     const filteredPlaceList = placeList.filter(result => {
       const { rating, user_ratings_total } = result;
@@ -219,17 +220,21 @@ export default function MapGoogle() {
     });
     setCenterMarker(newMarker);
 
-    const request = {
+    const request: google.maps.places.TextSearchRequest = {
       bounds: map.getBounds(),
       query: 'restaurant food',
+      location: map.getCenter(),
+      radius: 3000,
     };
     const bounds = map.getBounds();
     dispatch(startProgress());
     let timeout = setTimeout(() => {
       dispatch(completeProgress());
-    }, 2000);
+    }, 3000);
+
     const service = new google.maps.places.PlacesService(map);
     service.textSearch(request, callback);
+
     function callback(
       placeResults: google.maps.places.PlaceResult[] | null,
       status: google.maps.places.PlacesServiceStatus,
@@ -237,7 +242,12 @@ export default function MapGoogle() {
     ) {
       if (placeResults && status == google.maps.places.PlacesServiceStatus.OK) {
         const inboundPlace = placeResults.filter(place => {
-          return place.geometry?.location ? bounds?.contains(place.geometry?.location) : false;
+          if (bounds && place.geometry?.location) {
+            const isInbound = bounds?.contains(place.geometry?.location);
+            return isInbound;
+          } else {
+            return true;
+          }
         });
         setPlaceList(previousValue => {
           return [...previousValue, ...inboundPlace];
@@ -246,7 +256,7 @@ export default function MapGoogle() {
         clearTimeout(timeout);
         timeout = setTimeout(() => {
           dispatch(completeProgress());
-        }, 2000);
+        }, 3000);
       } else {
         dispatch(completeProgress());
         toast.error('검색 실패');
@@ -374,9 +384,6 @@ export default function MapGoogle() {
         })}
       </Grid>
       <div ref={refMap} className='map'>
-        {/* <button ref={refButton} className='custom-map-control-button' onClick={() => getStoresInMap(mapObject!)}>
-          주변 가게 검색
-        </button> */}
         <Button variant='contained' size='small' ref={refButton} onClick={() => getStoresInMap(mapObject!)}>
           주변 가게 검색
         </Button>
