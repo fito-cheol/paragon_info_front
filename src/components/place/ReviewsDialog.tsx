@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -23,6 +23,22 @@ interface Props {
 }
 
 export default function ReviewsDialog({ open, onClose, reviews, photos, name, openingHour, address }: Props) {
+  const [openStatus, setOpenStatus] = useState<string>('영업중');
+
+  useEffect(() => {
+    getOpenStatus();
+  }, [openingHour]);
+
+  async function getOpenStatus() {
+    if (openingHour) {
+      const isOpen = openingHour.open_now;
+      if (isOpen) {
+        setOpenStatus('영업중');
+      } else {
+        setOpenStatus('영업종료');
+      }
+    }
+  }
   return (
     <Dialog
       open={open}
@@ -30,9 +46,7 @@ export default function ReviewsDialog({ open, onClose, reviews, photos, name, op
       aria-labelledby='alert-dialog-title'
       aria-describedby='alert-dialog-description'
     >
-      <DialogTitle id='alert-dialog-title'>{`${name} - ${
-        openingHour ? (openingHour.isOpen() ? '영업중' : '영업종료') : ''
-      }`}</DialogTitle>
+      <DialogTitle id='alert-dialog-title'>{`${name} - ${openStatus}`}</DialogTitle>
       <DialogContent>
         <Grid container style={{ minWidth: 540 }}>
           {photos ? (
@@ -69,6 +83,16 @@ export default function ReviewsDialog({ open, onClose, reviews, photos, name, op
         </Grid>
       </DialogContent>
       <DialogActions>
+        <Button
+          variant='contained'
+          size='small'
+          onClick={() => {
+            window.navigator.clipboard.writeText(name);
+            toast.info('가게 이름 복사 완료');
+          }}
+        >
+          가게 이름 복사
+        </Button>
         <Button
           variant='contained'
           size='small'
