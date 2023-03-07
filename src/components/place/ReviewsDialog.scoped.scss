@@ -1,0 +1,12 @@
+.dialog__content {
+  min-width: 540px;
+  @include mobile {
+    min-width: 300px;
+  }
+}
+.dialog__gallery {
+  min-height: 400px;
+  @include mobile {
+    min-height: 200px;
+  }
+}

@@ -26,32 +26,38 @@ const PlaceDetails = ({ placeInfo, onClick, onHover, onHoverEnd }: Props) => {
       {placeInfo.photos ? (
         <CardMedia
           component='img'
-          height={200}
           image={placeInfo.photos[0].getUrl()}
           alt={placeInfo.name}
           loading='lazy'
+          className='card__image'
         />
       ) : (
         <></>
       )}
 
       <CardContent>
-        <Grid container spacing={1}>
+        <Grid
+          container
+          spacing={2}
+          justifyContent='center'
+          onClick={() => {
+            if (onClick) {
+              onClick(placeInfo);
+            }
+          }}
+          className='place__name--row'
+        >
           <Grid xs='auto'>
-            <p
-              className='place__name--text'
-              onClick={() => {
-                if (onClick) {
-                  onClick(placeInfo);
-                }
-              }}
-            >
-              {placeInfo.name}
-            </p>
+            <p className='place__name--text'>{placeInfo.name}</p>
           </Grid>
-          <Grid xs='auto'>
-            <p>
-              <img width={14} height={14} src='https://maps.gstatic.com/consumer/images/icons/2x/ic_star_rate_14.png' />
+          <Grid xs='auto' alignItems='center' sx={{ display: 'flex' }}>
+            <p className='place__name--rating' style={{ textAlign: 'center' }}>
+              <img
+                className='img--star'
+                width={14}
+                height={14}
+                src='https://maps.gstatic.com/consumer/images/icons/2x/ic_star_rate_14.png'
+              />
               {placeInfo.rating} ({placeInfo.user_ratings_total})
             </p>
           </Grid>

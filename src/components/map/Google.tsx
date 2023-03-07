@@ -291,7 +291,13 @@ export default function MapGoogle() {
   if (error) return <p>오류!</p>;
   if (loading) return <p>로딩 중 ...</p>;
   return (
-    <>
+    <div className='map__container'>
+      <div ref={refMap} className='map'>
+        <Button variant='contained' size='small' ref={refButton} onClick={() => getStoresInMap(mapObject!)}>
+          주변 가게 검색
+        </Button>
+        <input ref={refInput} id={'google_autocomplete'} className='map__autocomplete'></input>
+      </div>
       <Grid container className='place__container'>
         <Grid xs={6} padding={2}>
           <FormControl size='small'>
@@ -383,12 +389,6 @@ export default function MapGoogle() {
           );
         })}
       </Grid>
-      <div ref={refMap} className='map'>
-        <Button variant='contained' size='small' ref={refButton} onClick={() => getStoresInMap(mapObject!)}>
-          주변 가게 검색
-        </Button>
-        <input ref={refInput} id={'google_autocomplete'} className='map__autocomplete'></input>
-      </div>
 
       <ReviewsDialog
         open={reviewDialogOpen}
@@ -401,7 +401,7 @@ export default function MapGoogle() {
         openingHour={selectedPlace?.opening_hours}
         address={addressToString(selectedPlace?.address_components || []) || ''}
       />
-    </>
+    </div>
   );
 }
 

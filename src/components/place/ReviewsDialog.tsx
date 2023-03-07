@@ -3,14 +3,13 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Grid from '@mui/material/Unstable_Grid2';
 import { toast } from 'react-toastify';
 
 import Gallery from 'components/image/ImageGallery';
 import Reviews from './Reviews';
-import { minHeight } from '@mui/system';
+import './ReviewsDialog.scoped.scss';
 
 interface Props {
   open: boolean;
@@ -48,9 +47,9 @@ export default function ReviewsDialog({ open, onClose, reviews, photos, name, op
     >
       <DialogTitle id='alert-dialog-title'>{`${name} - ${openStatus}`}</DialogTitle>
       <DialogContent>
-        <Grid container style={{ minWidth: 540 }}>
+        <Grid container className='dialog__content'>
           {photos ? (
-            <Grid xs={12} style={{ minHeight: 540 }}>
+            <Grid xs={12} className='dialog__gallery'>
               <Gallery images={photos} />
             </Grid>
           ) : (
@@ -59,7 +58,7 @@ export default function ReviewsDialog({ open, onClose, reviews, photos, name, op
             </Grid>
           )}
           {openingHour ? (
-            <Grid xs={12}>
+            <Grid xs={12} margin={2}>
               {openingHour.weekday_text?.map((text, index) => {
                 return <li key={index}> {text}</li>;
               })}

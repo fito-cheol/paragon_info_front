@@ -1,5 +1,11 @@
+.place__name--row {
+  &:hover {
+    background-color: grey;
+  }
+}
 .place__name--text {
   cursor: pointer;
+  font-size: 18px;
   &:hover {
     background-color: 'grey';
     text-decoration: underline;

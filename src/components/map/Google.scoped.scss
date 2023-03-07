@@ -1,14 +1,28 @@
+.map__container {
+  position: relative;
+}
 .place__container {
   position: absolute;
   width: 470px;
   height: 600px;
   overflow: auto;
+  top: 0px;
+  @include mobile {
+    width: 100%;
+    height: 300px;
+    top: 400px;
+  }
 }
 .map {
   margin-left: 470px;
   width: calc(-470px + 100%);
   height: 600px;
   color: black;
+  @include mobile {
+    margin-left: 0px;
+    width: 100%;
+    height: 400px;
+  }
 }
 .map__autocomplete {
   width: 220px;
