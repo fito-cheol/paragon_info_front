@@ -47,7 +47,7 @@ export default function ButtonAppBar() {
       <AppBar position='static' color='inherit'>
         <Toolbar>
           <Grid container xs={12}>
-            <Grid container xs='auto' alignContent={'center'}>
+            <Grid xs='auto' alignContent='center' sx={{ display: 'flex' }}>
               <button
                 className='logo__button'
                 onClick={event => handleClick(event, '/')}
@@ -61,6 +61,7 @@ export default function ButtonAppBar() {
             {linkButton('유튜브', '/youtube')}
             {linkButton('아이템', '/item')}
             {linkButton('영웅', '/hero')}
+            {linkButton('맛집공략', '/food')}
             <Grid container xs='auto' xsOffset='auto' alignContent={'center'} padding={3}>
               <ToggleColorMode />
             </Grid>

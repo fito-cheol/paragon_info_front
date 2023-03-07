@@ -13,6 +13,7 @@ const List = lazy(() => import('pages/Walkthrough/List'));
 
 const VideoList = lazy(() => import('pages/Video/List'));
 const Main = lazy(() => import('pages/Home/Main'));
+const GoogleMapRestaurant = lazy(() => import('pages/GoogleMap/Restaurant'));
 
 const renderLoader = () => <p>Loading</p>;
 
@@ -30,6 +31,7 @@ export default function Router() {
         <Route path='redirect' element={<RedirectPage />} />
         <Route path='tier' element={<TierHeroes />} />
         <Route path='youtube' element={<VideoList />} />
+        <Route path='food' element={<GoogleMapRestaurant />} />
         <Route path='' element={<Main />} />
         <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
