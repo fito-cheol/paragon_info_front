@@ -1,13 +1,13 @@
 .container {
   display: flex;
   justify-content: center;
-  background-color: #aab;
   min-height: 100vh;
+  @include mobile {
+    width: 100%;
+  }
 }
 .labeling__wrapper {
   width: 100%;
-  min-width: 30rem;
-  padding: 1rem;
   min-height: 100%;
   &--light {
     background-color: #eee;

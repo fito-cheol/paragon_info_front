@@ -76,10 +76,8 @@ function App() {
             <CssBaseline />
             <LoadingBar color='#a1d9b6' progress={progress} onLoaderFinished={() => dispatch(completeProgress())} />
             <AppBar />
-            <div className='container'>
-              <div className={`labeling__wrapper labeling__wrapper--${theme.palette.mode}`}>
-                <Router />
-              </div>
+            <div className={`labeling__wrapper labeling__wrapper--${theme.palette.mode}`}>
+              <Router />
             </div>
             <ContactInfo />
             <ToastContainer />

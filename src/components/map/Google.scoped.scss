@@ -32,4 +32,7 @@
   box-shadow: 0 1px 6px 0 #171717;
   border-color: rgba(223, 225, 229, 0);
   font-size: 14px;
+  @include mobile {
+    width: 110px;
+  }
 }
