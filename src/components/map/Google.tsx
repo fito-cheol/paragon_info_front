@@ -80,7 +80,7 @@ export default function MapGoogle() {
       setInfoWindow(() => infoWindow);
 
       if (nodeButton) {
-        map.controls[google.maps.ControlPosition.TOP_CENTER].push(nodeButton);
+        map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(nodeButton);
       }
       if (nodeInput) {
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(nodeInput);

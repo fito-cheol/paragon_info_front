@@ -9,4 +9,7 @@
   &:hover {
     background-color: 'grey';
   }
+  @include mobile {
+    height: 40px;
+  }
 }

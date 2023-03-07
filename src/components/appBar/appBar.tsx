@@ -31,7 +31,7 @@ export default function ButtonAppBar() {
   };
   const linkButton = (text: string, path: string) => {
     return (
-      <Grid xs='auto' container className='link__wrapper'>
+      <Grid xs='auto' container className='link__wrapper' sx={{ display: 'flex' }} alignItems={'center'}>
         <Button
           variant={location.pathname == path ? 'contained' : undefined}
           onClick={event => handleClick(event, path)}
@@ -43,7 +43,7 @@ export default function ButtonAppBar() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, display: 'flex' }}>
       <AppBar position='static' color='inherit'>
         <Toolbar>
           <Grid container xs={12}>
@@ -62,10 +62,10 @@ export default function ButtonAppBar() {
             {linkButton('아이템', '/item')}
             {linkButton('영웅', '/hero')}
             {linkButton('맛집공략', '/food')}
-            <Grid container xs='auto' xsOffset='auto' alignContent={'center'} padding={3}>
+            <Grid xs='auto' xsOffset='auto' sx={{ display: 'flex' }} alignItems={'center'}>
               <ToggleColorMode />
             </Grid>
-            <Grid container xs='auto' alignContent={'center'}>
+            <Grid xs='auto' alignItems={'center'} sx={{ display: 'flex' }}>
               {user ? <UserProfile user={user} /> : <GoogleLogIn />}
             </Grid>
           </Grid>
