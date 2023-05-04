@@ -118,7 +118,7 @@ export default function Details() {
                     <span className='description'>{hero.DETAIL_LEFT_SIMPLE}</span>
                   </div>
                 </div>
-                <div className='skillPlayer'>skillPlayer</div>
+                <div className='skillPlayer'></div>
               </div>
             </div>
           </div>

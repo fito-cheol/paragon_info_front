@@ -13,7 +13,7 @@ for (const attribueObject of attributeLanguage) {
 }
 
 declare global {
-  type Item = {
+  interface Item {
     [index: string]: number | string; // 참고: https://soopdop.github.io/2020/12/01/index-signatures-in-typescript/
     이름: string;
     name: string;
@@ -52,7 +52,7 @@ declare global {
     둔화: number | string;
     하위템_List: string;
     '이미지 path': string;
-  };
+  }
   interface Hero {
     [x: string]: ReactNode;
     이름: string;
