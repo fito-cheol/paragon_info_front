@@ -13,6 +13,7 @@ env:
   AWS_REGION: ap-northeast-2
   CODEDEPLOY_APPLICATION: paragon-distributor
   CODEDEPLOY_GROUP: paragon-front
+  REACT_APP_GOOGLE_MAP_KEY: ${{ secrets.REACT_APP_GOOGLE_MAP_KEY }}
 
 jobs:
   build:
@@ -34,11 +35,9 @@ jobs:
       - name: Install server dependencies
         run: npm install
         # Github Repository Secrets를 통해 환경 변수 파일을 생성합니다.
-      - name: Generate Environment Variables File for Production
+      - name: Add Environment Variable for Production
         run: |
-          echo "REACT_APP_GOOGLE_MAP_KEY" >> .env.production
-        env:
-          REACT_APP_GOOGLE_MAP_KEY: ${{ secrets.REACT_APP_GOOGLE_MAP_KEY }}
+          echo "REACT_APP_GOOGLE_MAP_KEY=$REACT_APP_GOOGLE_MAP_KEY" >> .env.production
 
       # - run: npm test --if-present
 
