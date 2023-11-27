@@ -23,7 +23,6 @@ export default function ContactInfo() {
               height={30}
             />
             <p> 배부른곰이#2803 </p>
-            
           </div>
           <div>
             <p> release version: 0.2.0 </p>
