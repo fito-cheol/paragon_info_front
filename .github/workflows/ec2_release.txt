@@ -1,4 +1,4 @@
-name: cloud_front_release
+name: ec2_release
 
 on:
   push:
@@ -9,9 +9,10 @@ on:
   workflow_dispatch:
 
 env:
-  S3_BUCKET_NAME: paragons3front
+  S3_BUCKET_NAME: aufebucket
   AWS_REGION: ap-northeast-2
-  CLOUD_FRONT_ID: d246zl2i9382ql.cloudfront.net
+  CODEDEPLOY_APPLICATION: paragon-distributor
+  CODEDEPLOY_GROUP: paragon-front
   REACT_APP_GOOGLE_MAP_KEY: ${{ secrets.REACT_APP_GOOGLE_MAP_KEY }}
 
 jobs:
@@ -55,11 +56,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: upload binary to S3
-        run:  aws s3 rm s3://${{ env.S3_BUCKET_NAME }} --recursive |
-          aws s3 cp --recursive --region ap-northeast-2 ./out s3://${{ env.S3_BUCKET_NAME }}
-          
-      - name: Clear Cache to Cloudfront
-        run: aws cloudfront create-invalidation --distribution-id {{CLOUD_FRONT_ID}} --paths "/*"
+      - name: upload to S3
+        run: aws s3 cp --region ap-northeast-2 ./front.zip s3://${{env.S3_BUCKET_NAME}}/front_build/front.zip
 
-      
+      - name: Code Deploy
+        run: aws deploy create-deployment
+          --application-name ${{ env.CODEDEPLOY_APPLICATION }}
+          --deployment-config-name CodeDeployDefault.AllAtOnce
+          --deployment-group-name ${{ env.CODEDEPLOY_GROUP }}
+          --s3-location bucket=${{ env.S3_BUCKET_NAME }},bundleType=zip,key=front_build/front.zip
