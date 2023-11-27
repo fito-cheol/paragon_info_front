@@ -23,6 +23,7 @@ export default function ContactInfo() {
               height={30}
             />
             <p> 배부른곰이#2803 </p>
+            <p> 0.1.0 </p>
           </div>
         </Grid>
         <Grid className='contact__row' xs={12}></Grid>
