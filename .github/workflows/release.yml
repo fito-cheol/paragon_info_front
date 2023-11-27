@@ -11,7 +11,7 @@ on:
 env:
   S3_BUCKET_NAME: paragons3front
   AWS_REGION: ap-northeast-2
-  CLOUD_FRONT_ID: d246zl2i9382ql.cloudfront.net
+  CLOUD_FRONT_ID: E1BH7EI7H8L4D0
   REACT_APP_GOOGLE_MAP_KEY: ${{ secrets.REACT_APP_GOOGLE_MAP_KEY }}
 
 jobs:
