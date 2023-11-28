@@ -56,11 +56,12 @@ export default function ButtonAppBar() {
                 <img className='logo__button--image' src={bearFoot} loading='lazy' alt='forwin_logo' />
               </button>
             </Grid>
-            {linkButton('공략', '/list')}
+            {linkButton('공식 공략', '/walkthrough')}
+            {linkButton('유저 공략', '/list')}
             {linkButton('티어 리스트', '/tier')}
             {linkButton('유튜브', '/youtube')}
-            {linkButton('아이템', '/item')}
-            {linkButton('영웅', '/hero')}
+            {linkButton('아이템 정보', '/item')}
+            {linkButton('영웅 정보', '/hero')}
             {linkButton('맛집공략', '/food')}
             <Grid xs='auto' xsOffset='auto' sx={{ display: 'flex' }} alignItems={'center'}>
               <ToggleColorMode />

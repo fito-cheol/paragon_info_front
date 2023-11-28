@@ -7,21 +7,13 @@ import './notion.css';
 import { useTheme } from '@mui/material/styles';
 import { NotionRenderer } from 'react-notion';
 
-type NotionDict = {
-  [index: string]: string;
-};
-const notionId: NotionDict = {
-  adel: '57a2825734c146559f763fa42c64a583',
-};
 export default function NotionHero() {
   const theme = useTheme();
   const [response, setResponse] = useState({});
-  const { name } = useParams();
+  const { notionId } = useParams();
 
   useEffect(() => {
-    // 두번째 방법
-    const NOTION_PAGE_ID = '57a2825734c146559f763fa42c64a583';
-    fetch(`https://notion-api.splitbee.io/v1/page/${NOTION_PAGE_ID}`)
+    fetch(`https://notion-api.splitbee.io/v1/page/${notionId}`)
       .then(res => res.json())
       .then(resJson => {
         setResponse(resJson);
@@ -29,12 +21,12 @@ export default function NotionHero() {
   }, []);
   const divStyle = {
     WebkitTextFillColor: "white",
-    backgroundColor:"none" 
+    backgroundColor:"none",
+    minHeight:"100vh"
   };
   return (
-    <div className='App' style={theme.palette.mode === 'dark' ? divStyle: {}}>
+    <div className='App' style={theme.palette.mode === 'dark' ? divStyle: {minHeight:"100vh"}}>
       <NotionRenderer
-        // blockMap={staticResponse}
         blockMap={response}
         fullPage={true}
       />
