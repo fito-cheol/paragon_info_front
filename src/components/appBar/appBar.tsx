@@ -33,7 +33,7 @@ export default function ButtonAppBar() {
     return (
       <Grid xs='auto' container className='link__wrapper' sx={{ display: 'flex' }} alignItems={'center'}>
         <Button
-          variant={location.pathname == path ? 'contained' : undefined}
+          variant={location.pathname.includes(path) ? 'contained' : undefined}
           onClick={event => handleClick(event, path)}
         >
           <p className='link__text'>{text} </p>
