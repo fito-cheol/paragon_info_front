@@ -1,3 +1,5 @@
+import NotionHero from 'pages/Notion/Hero';
+import NotionList from 'pages/Notion/List';
 import React, { lazy, Suspense } from 'react';
 
 import { Routes, Route, Navigate } from 'react-router-dom';
@@ -32,7 +34,9 @@ export default function Router() {
         <Route path='tier' element={<TierHeroes />} />
         <Route path='youtube' element={<VideoList />} />
         <Route path='food' element={<GoogleMapRestaurant />} />
-        <Route path='' element={<Main />} />
+        <Route path='walkthrough' element={<NotionList />} />
+        <Route path='walkthrough/:notionId' element={<NotionHero />} />
+        <Route path='' element={<NotionList />} />
         <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
     </Suspense>

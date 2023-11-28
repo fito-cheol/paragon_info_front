@@ -21,7 +21,6 @@ export default function List() {
   const navigate = useNavigate();
 
   const handleClick = (event: React.MouseEvent<Element, MouseEvent>, pathname: string) => {
-    console.log('pathname', pathname);
     if (event.ctrlKey) {
       window.open(pathname, '_blank');
     } else {
