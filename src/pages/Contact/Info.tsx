@@ -25,7 +25,7 @@ export default function ContactInfo() {
             <p> 배부른곰이#2803 </p>
           </div>
           <div>
-            <p> release version: 0.2.1 </p>
+            <p> release version: 0.2.2 </p>
           </div>
         </Grid>
         <Grid className='contact__row' xs={12}></Grid>
