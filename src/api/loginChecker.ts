@@ -1,7 +1,7 @@
-import { AxiosRequestConfig } from 'axios';
+import { InternalAxiosRequestConfig  } from 'axios';
 import cookies from 'js-cookie';
 
-export const checkLogin = async (config: AxiosRequestConfig) => {
+export const checkLogin = async (config: InternalAxiosRequestConfig ) => {
   const clientId = cookies.get('clientId');
   const email = cookies.get('email');
   const access_token = cookies.get('access_token');
@@ -13,11 +13,9 @@ export const checkLogin = async (config: AxiosRequestConfig) => {
       config.headers['access_token'] = null;
       return config;
     } else {
-      config.headers = {
-        clientId: null,
-        access_token: null,
-        email: null,
-      };
+      config.headers['email'] = null;
+      config.headers['clientId'] = null;
+      config.headers['access_token'] = null;
       return config;
     }
   }

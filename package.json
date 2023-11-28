@@ -39,7 +39,7 @@
     "@types/react": "^17.0.44",
     "@types/redux-logger": "^3.0.9",
     "@types/webpack-env": "^1.18.0",
-    "axios": "^1.2.0",
+    "axios": "^1.6.2",
     "craco-alias": "^3.0.1",
     "craco-plugin-scoped-css": "^1.1.1",
     "env-cmd": "^10.1.0",
