@@ -29,29 +29,12 @@ export default function NotionList() {
       navigate({ pathname });
     }
   };
-  console.log(heroDictByPosition['top'])
-  // return (
-  //   <>
-  //     <section className='content'>
-        
-  //       <div>
-  //         <h2> {position_kr_list[0]} </h2>
-  //         <section className='content'> 
-  //           {heroDictByPosition['top'].map((hero:Hero) => {
-  //             return <HeroCard hero={hero} key={hero.name} onClick={(event, path) => handleClick(event, path)} />
-  //           })}
-  //         </section>
-  //       </div>
-        
-  //     </section>
-  //   </>
-  // );
   return (
     <>
       <section className='content'>
         {position_key_list.map((position_key, index) => (
           <div key={position_key}>
-            <h2> {position_kr_list[index]} </h2>
+            <h1 style={{paddingLeft:"10px"}}> {position_kr_list[index]} </h1>
             <section className='content'> 
               {heroDictByPosition[position_key].map((hero:Hero) => {
                 return <HeroCard hero={hero} key={hero.name} onClick={(event, path) => handleClick(event, path)} />
@@ -75,14 +58,12 @@ function HeroCard({hero, onClick}:HeroCardProps){
           <Card
             key={hero.name}
             className='fullCard'
-            sx={{ maxWidth: 208 }}
+            sx={{ maxWidth: 170 }}
             onClick={event => onClick(event, `/walkthrough/${notionId}`)}
           >
             <CardMedia
               className='fullCardMedia'
               component='img'
-              width='208'
-              height='320'
               image={ImageHeros[hero.name]}
               alt={hero.이름}
             />
